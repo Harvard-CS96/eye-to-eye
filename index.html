@@ -1,0 +1,59 @@
+<html>
+  
+<head>
+ <! — title for the html page on tab -->
+ <title>Chat with socket.io and node.js</title>
+</head>
+				       
+<body>
+ <! — where the messages will apend in -->
+ <div id="chat" style="height:250px"></div>
+
+ <! — form and input box to submit messages -->
+ <form id="send-message">
+   <input size="35" id="message"></input>
+   <input type="submit"></input>
+ </form>
+ 
+  <! — import jquery -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+  <! — import socketio for the front end -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.1/socket.io.min.js"></script>
+
+  <! — front end javasctipt and using jQuery -->
+  <script type="text/javascript">
+  // load when jquery and page has be loaded
+  $(document).ready(function () {
+    jQuery(function(){
+
+      // connect to socket on server
+      var socket = io.connect();
+      var $messageForm = $("#send-message");
+      var $messageBox = $("#message");
+      var $chat = $("#chat");
+ 
+      // when the submit button is clicked “e” is the event
+      $messageForm.submit(function(e){
+
+        // prevent the default setting of page refreshing
+        e.preventDefault();
+
+        // send the message input to the server
+        socket.emit("send message", $messageBox.val());
+
+        // clear out the input box
+        $messageBox.val("");
+      })
+
+      // when socket emit a message to each user
+      socket.on("new message", function(data){
+        // append the message into the “chat” div
+        $chat.append(data + '</br>')
+      })
+    })
+  })
+  </script>
+  
+</body>
+</html>
