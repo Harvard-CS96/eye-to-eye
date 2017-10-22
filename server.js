@@ -15,8 +15,8 @@ var server = require("http").createServer(app);
 // to use our socket.io module
 var io = require("socket.io").listen(server);
 
-// to listen to port 80
-server.listen(80)
+// to listen to port 3000
+server.listen(3000)
 
 // to serve the index.html file
 app.get("/", function(req, res){
