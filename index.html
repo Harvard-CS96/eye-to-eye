@@ -1,9 +1,9 @@
 <html>
-  
+
 <head>
  <title>Chat with socket.io and node.js</title>
 </head>
-				       
+
 <body>
  <! — where the messages will apend in -->
  <div id="chat" style="height:250px"></div>
@@ -13,9 +13,9 @@
    <input size="35" id="message"></input>
    <input type="submit"></input>
  </form>
- 
+
   <! — import jquery -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
   <! — import socketio for the front end -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.1/socket.io.min.js"></script>
@@ -31,7 +31,7 @@
       var $messageForm = $("#send-message");
       var $messageBox = $("#message");
       var $chat = $("#chat");
- 
+
       // when the submit button is clicked “e” is the event
       $messageForm.submit(function(e){
 
@@ -53,6 +53,6 @@
     })
   })
   </script>
-  
+
 </body>
 </html>
