@@ -4,9 +4,6 @@
  *
  */
 
-// auto install all required packages
-require('autoinstall')
-
 // to use the express module
 var express = require("express");
 
