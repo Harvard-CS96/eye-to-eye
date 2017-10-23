@@ -18,7 +18,6 @@
             <div class="row text-center">
                 <div class="col-md-12" style="height:100%;">
                     <h1>Textroulette</h1>
-                    <p id="status">Waiting for a partner...</p>
                     <p id="identity"></p>
                     <!-- where the messages will apend in -->
                     <div id="chat" class="border bg-light text-left p-3" style="height:20em;overflow:scroll;">
@@ -29,7 +28,6 @@
                         <div class="form-row">
                             <div class="form-group col-md-10">
                                 <input type="text" class="form-control" id="message" aria-describedby="messageHelp" placeholder="Type a Message">
-                                <small id="messageHelp" class="form-text text-muted">Your message will be sent if your partner is currently online.</small>
                             </div>
                             <div class="form-group col-md-2">
                                 <input type="submit" value="Send" class="btn btn-primary" style="width:100%;"></input>
@@ -57,7 +55,6 @@
                     var $messageForm = $("#send-message");
                     var $messageBox = $("#message");
                     var $chat = $("#chat");
-                    var $status = $("#status");
                     var $identity = $("#identity");
                     // when the submit button is clicked “e” is the event
                     $messageForm.submit(function(e) {
@@ -71,16 +68,21 @@
                     // when socket emit a message to each user
                     socket.on("new message", function(data) {
                         // append the message into the “chat” div
-                        $chat.append(data + '</br>')
+                        $chat.append(data + '<br />')
                     })
-                    socket.on("status", function(data) {
-                      // append the message into the “chat” div
-                      // $chat.append('<em>' + data + '</em>' + '</br>')
-                      $status.text(data);
+                    socket.on("waiting", () => {
+                        $chat.append("<em>Waiting for a partner...</em><br />")
+                    })
+                    socket.on("pairing", function(data) {
+                        $chat.text("")
+                        $chat.append("<em>You are now talking to " + data + "</em><br />")
+                    })
+                    socket.on("disconnected", function(data) {
+                        $chat.append("<em>" + data + " has disconnected.</em><br />")
                     })
                     let username =  prompt("What is your name?")
                     socket.emit("set username", username);
-                    $identity.text("You are " + username);
+                    $identity.text("Hello, " + username);
                 })
             })
         </script>

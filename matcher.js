@@ -3,7 +3,7 @@
  * A wrapper around a dictionary to simplify matching connections
  */
 const { CONN_STATUS } = require('./constants')
-const { WAITING, PAIRING } = CONN_STATUS;
+const { WAITING, PAIRING, DISCONNECTED } = CONN_STATUS;
 
 class Matcher {
     constructor(setStatus) {
@@ -37,24 +37,32 @@ class Matcher {
 
     // Remove an id from the connection pool
     disconnect(id) {
+        
+        // If a conenction with the given id doesn't exist, don't do anything
+        if (this.connections[id] === undefined) {
+            return;
+        }
+
         // Find the partner of the connected id, if it exists
         const { partner } = this.connections[id];
-
-        // Delete the connection from the pool
-        delete this.connections[id];
-        console.log(`Matcher: Disconnected ${id}`)
 
         // If the partner existed, set it to single
         if (partner !== null) {
             this.connections[partner].partner = null; 
             console.log(`Matcher: ${id} partner ${partner} is now single`)
 
+            this._setStatus(partner, DISCONNECTED, id)
             this._setStatus(partner, WAITING)
 
             // Check for a partner for the newly single ex-partner
             this.checkForMatches(partner);
         }
+
+        // Delete connection from the pool        
+        delete this.connections[id];
+        console.log(`Matcher: Disconnected ${id}`)
         
+        this._setStatus(id, DISCONNECTED, partner);
         this._setStatus(id, WAITING);
     }
 
