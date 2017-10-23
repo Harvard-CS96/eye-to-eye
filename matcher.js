@@ -12,7 +12,7 @@ class Matcher {
     }
 
     // Add a new id into the connection pool
-    connect(id) {
+    connect(id, username = +new Date()) {
         // If id is empty, don't try to add it
         if (id === undefined || id === "") {
             return;
@@ -24,7 +24,8 @@ class Matcher {
 
         // Set the connection in the dictionary to null partner (single)
         this.connections[id] = {
-            partner: null
+            partner: null,
+            username
         }
         console.log(`Matcher: Connected ${id}`)
 
@@ -32,9 +33,6 @@ class Matcher {
 
         // Check if we can match a partner for the new connection
         this.checkForMatches(id);
-        
-
-        this.prettyPrint()
     }
 
     // Remove an id from the connection pool
@@ -58,8 +56,6 @@ class Matcher {
         }
         
         this._setStatus(id, WAITING);
-
-        this.prettyPrint()
     }
 
     // Attempt to find new single match for given id
@@ -126,21 +122,46 @@ class Matcher {
         return this.connections[id].partner
     }
 
+    // Set username of a given id
+    setUsername(id, username) {
+        if (this.connections[id] === undefined) {
+            return;
+        }
+        this.connections[id].username = username || +new Date();
+    }
+
+    // Get username of a given id
+    getUsername(id) {
+        if (this.connections[id] === undefined) {
+            // TODO: handle nonexistant id
+            return "";
+        }
+        return this.connections[id].username;
+    }
+
     // Utility function to print all connections
     prettyPrint() {
+        let string = '';
         const ids = Object.keys(this.connections)
         const { length } = ids;
-        console.log('\n')
+        const printed = []
         for (let i = 0; i < length; i++) {
             const key = ids[i]
-            const { partner } = this.connections[key];
-            if (partner !== null) {
-                console.log(`        ${key} <--> ${partner}`)
-            } else {
-                console.log(`        ${key} ----`)
+            if (printed.indexOf(key) !== -1) {
+                continue;
             }
+            const { partner } = this.connections[key];
+            const keyUsername = this.getUsername(key) || key;
+            const partnerUsername = this.getUsername(partner) || partner;
+            if (partner !== null) {
+                string += `${keyUsername} <--> ${partnerUsername}`
+                printed.push(partner)
+            } else {
+                string += `${keyUsername} ----`
+            }
+            string += '\n'
         } 
-        console.log('\n')
+        return string;
     }
 }
 

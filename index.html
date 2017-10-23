@@ -44,6 +44,11 @@
         // append the message into the “chat” div
         $chat.append(data + '</br>')
       })
+      socket.on("status", function(data){
+        // append the message into the “chat” div
+        $chat.append('<em>' + data + '</em>' + '</br>')
+      })
+      socket.emit("set username", window.location.search.slice(1) || +new Date());
     })
   })
   </script>

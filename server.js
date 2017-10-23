@@ -30,6 +30,7 @@ app.get("/", function (req, res) {
   res.sendfile(__dirname + "/index.html")
 })
 
+
 const Matcher = require('./matcher');
 let matcher = new Matcher((id, status, partner = "") => {
   switch (status) {
@@ -41,6 +42,7 @@ let matcher = new Matcher((id, status, partner = "") => {
     case PAIRING:
       {
         // io.sockets.emit("meta", `${id} is pairing to ${partner}`)
+        io.to(id).emit("status", "You are now talking to " + matcher.getUsername(partner));
         break;
       }
     default:
@@ -56,19 +58,27 @@ io.sockets.on("connection", function (socket) {
   // when socket receives a message from a user, the (data) parameter
   // is the message the user send
 
-  matcher.connect(socket.id);
 
   socket.on("send message", function (data) {
 
     // socket will send messages to every single user
     // io.sockets.emit("new message", `${socket.id}: ${data}`);
     socket.emit("new message", `You said: ${data}`)
-    socket.broadcast.to(matcher.getPartner(socket.id)).emit("new message", `Your partner says: ${data}`)
+    socket.broadcast.to(matcher.getPartner(socket.id)).emit("new message", `${matcher.getUsername(socket.id)} says: ${data}`)
 
+  })
+
+  socket.on("set username", username => {
+    matcher.connect(socket.id, username);
+    
   })
 
   socket.on("disconnect", () => {
     matcher.disconnect(socket.id);
   })
 
+})
+
+app.get('/connections', (req, res) => {
+  res.end(matcher.prettyPrint())
 })
