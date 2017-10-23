@@ -80,7 +80,10 @@
                     socket.on("disconnected", function(data) {
                         $chat.append("<em>" + data + " has disconnected.</em><br />")
                     })
-                    let username =  prompt("What is your name?")
+                    let username = prompt("What is your name?")
+                    while(username.trim() === '') {
+                        username = prompt("Please enter your name.")
+                    }
                     socket.emit("set username", username);
                     $identity.text("Hello, " + username);
                 })
