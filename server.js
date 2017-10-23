@@ -4,7 +4,6 @@
  *
  */
 
-
 const {
   CONN_STATUS
 } = require('./constants')
@@ -14,6 +13,8 @@ const {
   DISCONNECTED
 } = CONN_STATUS;
 
+const uuid = require('uuid');
+
 // to use the express module
 var app = require("express")();
 
@@ -22,6 +23,21 @@ var server = require("http").createServer(app);
 
 // to use our socket.io module
 var io = require("socket.io").listen(server);
+
+const session = require("express-session")({
+  secret: "my-secret",
+  resave: true,
+  saveUninitialized: true
+});
+
+const sharedsession = require("express-socket.io-session");
+
+app.use(session);
+
+io.use(sharedsession(session, {
+  autoSave:true
+})); 
+
 
 // to listen to port 3000
 server.listen(process.env.PORT || 3000)
@@ -64,6 +80,18 @@ io.sockets.on("connection", function (socket) {
   // when socket receives a message from a user, the (data) parameter
   // is the message the user send
 
+  let { user_id, username } = socket.handshake.session;
+  if (!username) {
+    socket.emit('request username')
+  } else {
+    socket.emit('recall username', username)
+    matcher.connect(socket.id, username, user_id);
+    
+  }
+  if (!user_id) {
+    socket.handshake.session.user_id = uuid();
+    socket.handshake.session.save();
+  }
 
   socket.on("send message", function (data) {
 
@@ -75,8 +103,10 @@ io.sockets.on("connection", function (socket) {
   })
 
   socket.on("set username", username => {
-    matcher.connect(socket.id, username);
-    
+    matcher.connect(socket.id, username, socket.handshake.session.user_id);
+    socket.handshake.session.username = username;
+    socket.handshake.session.save();
+    socket.emit('recall username', username)    
   })
 
   socket.on("disconnect", () => {

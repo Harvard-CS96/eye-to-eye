@@ -12,9 +12,9 @@ class Matcher {
     }
 
     // Add a new id into the connection pool
-    connect(id, username = +new Date()) {
+    connect(id, username = +new Date(), user_id) {
         // If id is empty, don't try to add it
-        if (id === undefined || id === "") {
+        if (id === undefined || id === "" || user_id === undefined) {
             return;
         }
         // If a connection with given id exists, don't try to add it
@@ -25,7 +25,8 @@ class Matcher {
         // Set the connection in the dictionary to null partner (single)
         this.connections[id] = {
             partner: null,
-            username
+            username,
+            user_id
         }
         console.log(`Matcher: Connected ${id}`)
 
