@@ -35,12 +35,12 @@ let matcher = new Matcher((id, status, partner = "") => {
   switch (status) {
     case WAITING:
       {
-        io.sockets.emit("new message", `${id} is waiting`)
+        // io.sockets.emit("meta", `${id} is waiting`)
         break;
       }
     case PAIRING:
       {
-        io.sockets.emit("new message", `${id} is pairing to ${partner}`)
+        // io.sockets.emit("meta", `${id} is pairing to ${partner}`)
         break;
       }
     default:
@@ -61,7 +61,9 @@ io.sockets.on("connection", function (socket) {
   socket.on("send message", function (data) {
 
     // socket will send messages to every single user
-    io.sockets.emit("new message", `${socket.id}: ${data}`);
+    // io.sockets.emit("new message", `${socket.id}: ${data}`);
+    socket.emit("new message", `You said: ${data}`)
+    socket.broadcast.to(matcher.getPartner(socket.id)).emit("new message", `Your partner says: ${data}`)
 
   })
 
