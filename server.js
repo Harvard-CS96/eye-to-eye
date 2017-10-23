@@ -14,9 +14,7 @@ const {
 } = CONN_STATUS;
 
 // to use the express module
-var express = require("express");
-
-var app = express();
+var app = require("express")();
 
 // to make an http server object
 var server = require("http").createServer(app);
