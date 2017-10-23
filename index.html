@@ -19,6 +19,7 @@
                 <div class="col-md-12" style="height:100%;">
                     <h1>Textroulette</h1>
                     <p id="status">Waiting for a partner...</p>
+                    <p id="identity"></p>
                     <!-- where the messages will apend in -->
                     <div id="chat" class="border bg-light text-left p-3" style="height:20em;overflow:scroll;">
                     </div>
@@ -57,6 +58,7 @@
                     var $messageBox = $("#message");
                     var $chat = $("#chat");
                     var $status = $("#status");
+                    var $identity = $("#identity");
                     // when the submit button is clicked “e” is the event
                     $messageForm.submit(function(e) {
                         // prevent the default setting of page refreshing
@@ -76,7 +78,9 @@
                       // $chat.append('<em>' + data + '</em>' + '</br>')
                       $status.text(data);
                     })
-                    socket.emit("set username", window.location.search.slice(1) || +new Date());
+                    let username =  window.location.search.slice(1) || +new Date()
+                    socket.emit("set username", username);
+                    $identity.text("You are " + username);
                 })
             })
         </script>
