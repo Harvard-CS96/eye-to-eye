@@ -25,26 +25,20 @@
   // load when jquery and page has be loaded
   $(document).ready(function () {
     jQuery(function(){
-
       // connect to socket on server
       var socket = io.connect();
       var $messageForm = $("#send-message");
       var $messageBox = $("#message");
       var $chat = $("#chat");
-
       // when the submit button is clicked “e” is the event
       $messageForm.submit(function(e){
-
         // prevent the default setting of page refreshing
         e.preventDefault();
-
         // send the message input to the server
         socket.emit("send message", $messageBox.val());
-
         // clear out the input box
         $messageBox.val("");
       })
-
       // when socket emit a message to each user
       socket.on("new message", function(data){
         // append the message into the “chat” div
