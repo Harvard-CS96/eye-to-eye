@@ -78,7 +78,7 @@
                       // $chat.append('<em>' + data + '</em>' + '</br>')
                       $status.text(data);
                     })
-                    let username =  window.location.search.slice(1) || +new Date()
+                    let username =  prompt("What is your name?")
                     socket.emit("set username", username);
                     $identity.text("You are " + username);
                 })
