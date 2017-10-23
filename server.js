@@ -25,13 +25,13 @@ app.get("/", function(req, res){
 
 // when a user connects to the socket
 io.sockets.on("connection", function(socket){
-
+    console.log(`Connected to ${socket.id}`);
     // when socket receives a message from a user, the (data) parameter
     // is the message the user send
     socket.on("send message", function(data){
 
-    // socket will send messages to every single user
-    io.sockets.emit("new message", data);
+      // socket will send messages to every single user
+      io.sockets.emit("new message", `${socket.id}: ${data}`);
 
   })
 
