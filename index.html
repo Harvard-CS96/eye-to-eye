@@ -90,6 +90,10 @@
                     socket.on("recall username", username => {
                       $identity.text("Hello, " + username);
                     })
+                    socket.on("duplicate", username => {
+                      alert("You already have a window open!");
+                      document.body.innerHTML = "";
+                    })
                     
                 })
             })

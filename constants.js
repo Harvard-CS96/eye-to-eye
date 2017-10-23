@@ -3,6 +3,7 @@ module.exports = {
         WAITING: 'WAITING',
         PAIRING: 'PAIRING',
         PAIRED: 'PAIRED',
-        DISCONNECTED: 'DISCONNECTED'
+        DISCONNECTED: 'DISCONNECTED',
+        DUPLICATE: 'DUPLICATE'
     }
 }

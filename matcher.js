@@ -3,7 +3,7 @@
  * A wrapper around a dictionary to simplify matching connections
  */
 const { CONN_STATUS } = require('./constants')
-const { WAITING, PAIRING, DISCONNECTED } = CONN_STATUS;
+const { WAITING, PAIRING, DISCONNECTED, DUPLICATE } = CONN_STATUS;
 
 class Matcher {
     constructor(setStatus) {
@@ -19,6 +19,11 @@ class Matcher {
         }
         // If a connection with given id exists, don't try to add it
         if (this.connections[id] !== undefined) {
+            return;
+        }
+
+        if (this.checkForUserID(user_id) === true) {
+            this._setStatus(id, DUPLICATE);
             return;
         }
 
@@ -93,6 +98,7 @@ class Matcher {
             // If we find an entry that's single and also not the given, connect
             if (
                 key !== id &&
+                this.connections[key].user_id !== this.connections[id].user_id &&
                 this.connections[key].partner === null
             ) {
                 this.setPartner(id, key);
@@ -146,6 +152,18 @@ class Matcher {
             return "";
         }
         return this.connections[id].username;
+    }
+
+    checkForUserID(user_id) {
+        const ids = Object.keys(this.connections)
+        const { length } = ids;
+        for (let i = 0; i < length; i++) {
+            const key = ids[i];
+            if (this.connections[key].user_id === user_id) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Utility function to print all connections

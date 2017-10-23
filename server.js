@@ -10,7 +10,8 @@ const {
 const {
   WAITING,
   PAIRING,
-  DISCONNECTED
+  DISCONNECTED,
+  DUPLICATE
 } = CONN_STATUS;
 
 const uuid = require('uuid');
@@ -67,6 +68,10 @@ let matcher = new Matcher((id, status, partner = null) => {
       {
         io.to(id).emit("disconnected", matcher.getUsername(partner))  
       }  
+    case DUPLICATE:
+      {
+        io.to(id).emit("duplicate")  
+      }  
     default:
       {
         break;
@@ -86,7 +91,6 @@ io.sockets.on("connection", function (socket) {
   } else {
     socket.emit('recall username', username)
     matcher.connect(socket.id, username, user_id);
-    
   }
   if (!user_id) {
     socket.handshake.session.user_id = uuid();
