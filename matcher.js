@@ -3,7 +3,7 @@
  * A wrapper around a dictionary to simplify matching connections
  */
 const { CONN_STATUS } = require('./constants')
-const { WAITING, PAIRING, DISCONNECTED, DUPLICATE } = CONN_STATUS;
+const { WAITING, PAIRING, DISCONNECTED } = CONN_STATUS;
 
 class Matcher {
     constructor(setStatus) {

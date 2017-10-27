@@ -1,3 +1,9 @@
+const path = require('path');
+
+const ROOT_DIR = process.cwd();
+
+const PUBLIC_DIR = path.join(ROOT_DIR, 'public');
+
 module.exports = {
     CONN_STATUS: {
         WAITING: 'WAITING',
@@ -5,5 +11,9 @@ module.exports = {
         PAIRED: 'PAIRED',
         DISCONNECTED: 'DISCONNECTED',
         DUPLICATE: 'DUPLICATE'
+    },
+    DIR: {
+        ROOT: ROOT_DIR,
+        PUBLIC: PUBLIC_DIR
     }
 }
