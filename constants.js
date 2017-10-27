@@ -8,8 +8,7 @@ module.exports = {
     CONN_STATUS: {
         WAITING: 'WAITING',
         PAIRING: 'PAIRING',
-        PAIRED: 'PAIRED',
-        DUPLICATE: 'DUPLICATE'
+        PAIRED: 'PAIRED'
     },
     DIR: {
         ROOT: ROOT_DIR,
