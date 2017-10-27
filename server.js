@@ -43,12 +43,6 @@ io.use(sharedsession(session, {
 // to listen to port 3000
 server.listen(process.env.PORT || 3000)
 
-// to serve the index.html file
-app.get("/", function (req, res) {
-  res.sendfile(__dirname + "/index.html")
-})
-
-
 const Matcher = require('./matcher');
 let matcher = new Matcher((id, status, partner = null) => {
   switch (status) {
@@ -122,3 +116,11 @@ io.sockets.on("connection", function (socket) {
 app.get('/connections', (req, res) => {
   res.end(matcher.prettyPrint())
 })
+
+// Require our routes
+const mainRoute = require('./routes/main')
+app.use('/', mainRoute);
+
+const createUtilRoute = require('./routes/util');
+const utilRoute = createUtilRoute(matcher)
+app.use('/util', utilRoute);
