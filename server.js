@@ -10,8 +10,7 @@ const {
 const {
   WAITING,
   PAIRING,
-  DISCONNECTED,
-  DUPLICATE
+  DISCONNECTED
 } = CONN_STATUS;
 
 const uuid = require('uuid');
@@ -61,10 +60,6 @@ let matcher = new Matcher((id, status, partner = null) => {
     case DISCONNECTED:
       {
         io.to(id).emit("disconnected", matcher.getUsername(partner))  
-      }  
-    case DUPLICATE:
-      {
-        io.to(id).emit("duplicate")  
       }  
     default:
       {

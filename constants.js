@@ -9,7 +9,6 @@ module.exports = {
         WAITING: 'WAITING',
         PAIRING: 'PAIRING',
         PAIRED: 'PAIRED',
-        DISCONNECTED: 'DISCONNECTED',
         DUPLICATE: 'DUPLICATE'
     },
     DIR: {
