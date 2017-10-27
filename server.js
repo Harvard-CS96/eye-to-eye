@@ -113,10 +113,6 @@ io.sockets.on("connection", function (socket) {
 
 })
 
-app.get('/connections', (req, res) => {
-  res.end(matcher.prettyPrint())
-})
-
 // Require our routes
 const mainRoute = require('./routes/main')
 app.use('/', mainRoute);
