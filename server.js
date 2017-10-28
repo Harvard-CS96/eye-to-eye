@@ -15,6 +15,9 @@ const {
 
 const uuid = require('uuid');
 
+// to connect to the database and instantiate the data models
+var db = require('./db/connect');
+
 // to use the express module
 var app = require("express")();
 
@@ -36,7 +39,7 @@ app.use(session);
 
 io.use(sharedsession(session, {
   autoSave:true
-})); 
+}));
 
 
 // to listen to port 3000
@@ -55,19 +58,21 @@ let matcher = new Matcher((id, status, partner = null) => {
       {
         // io.sockets.emit("meta", `${id} is pairing to ${partner}`)
         io.to(id).emit("pairing", matcher.getUsername(partner));
+        // log the chat -- THIS PRODUCES TWO LOGS PER CONNECTION
+        var chat = new db.models.Chat({uid1: id, uid2: partner});
+        chat.save().catch(console.log);
         break;
       }
     case DISCONNECTED:
       {
-        io.to(id).emit("disconnected", matcher.getUsername(partner))  
-      }  
+        io.to(id).emit("disconnected", matcher.getUsername(partner))
+      }
     default:
       {
         break;
       }
   }
 })
-
 
 // when a user connects to the socket
 io.sockets.on("connection", function (socket) {
@@ -99,7 +104,7 @@ io.sockets.on("connection", function (socket) {
     matcher.connect(socket.id, username, socket.handshake.session.user_id);
     socket.handshake.session.username = username;
     socket.handshake.session.save();
-    socket.emit('recall username', username)    
+    socket.emit('recall username', username)
   })
 
   socket.on("disconnect", () => {
