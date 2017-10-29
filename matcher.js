@@ -90,9 +90,9 @@ class Matcher {
         const { length } = ids;
         for (let i = 0; i < length; i++) {
             const key = ids[i]
-            // If we find an entry that's single and also not the given, connect
+            // If we find an entry that's single and also not the same user, connect
             if (
-                key !== id &&
+                this.connections[key].user_id !== this.connections[id].user_id &&
                 this.connections[key].partner === null
             ) {
                 this.setPartner(id, key);
