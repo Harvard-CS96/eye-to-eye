@@ -26,11 +26,14 @@
                     <!-- form and input box to submit messages -->
                     <form id="send-message" class="mt-5">
                         <div class="form-row">
-                            <div class="form-group col-md-10">
+                            <div class="form-group col-md-8">
                                 <input type="text" class="form-control" id="message" aria-describedby="messageHelp" placeholder="Type a Message">
                             </div>
                             <div class="form-group col-md-2">
                                 <input type="submit" value="Send" class="btn btn-primary" style="width:100%;"></input>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <input id="end-conversation" type="button" value="End Conversation" class="btn btn-danger" style="width:100%;"></input>
                             </div>
                         </div>
                     </form>
@@ -56,6 +59,7 @@
                     var $messageBox = $("#message");
                     var $chat = $("#chat");
                     var $identity = $("#identity");
+                    var $endConversation = $("#end-conversation");
 
                     // when the submit button is clicked “e” is the event
                     $messageForm.submit(function(e) {
@@ -70,6 +74,10 @@
 	                }
                         // clear out the input box
                         $messageBox.val("");
+                    })
+
+                    $endConversation.onClick(() => {
+                        socket.emit("hangup");
                     })
 
                     // when socket emit a message to each user
