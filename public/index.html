@@ -30,10 +30,10 @@
                                 <input type="text" class="form-control" id="message" aria-describedby="messageHelp" placeholder="Type a Message">
                             </div>
                             <div class="form-group col-md-2">
-                                <input type="submit" value="Send" class="btn btn-primary" style="width:100%;"></input>
+                                <input id="send-message-button" type="submit" value="Send" class="btn btn-primary disabled" style="width:100%;"></input>
                             </div>
                             <div class="form-group col-md-2">
-                                <input id="end-conversation" type="button" value="End Conversation" class="btn btn-danger" style="width:100%;"></input>
+                                <input id="end-conversation" type="button" value="End Conversation" class="btn btn-danger disabled" style="width:100%;"></input>
                             </div>
                         </div>
                     </form>
@@ -56,6 +56,7 @@
                     // connect to socket on server
                     var socket = io.connect();
                     var $messageForm = $("#send-message");
+                    var $sendMessageButton = $("#send-message-button");
                     var $messageBox = $("#message");
                     var $chat = $("#chat");
                     var $identity = $("#identity");
@@ -89,19 +90,27 @@
                     })
                     socket.on("waiting", () => {
                         $chat.append("<em>Waiting for a partner...</em><br />")
+                        $endConversation.addClass('disabled');
+                        $messageBox.addClass('disabled');
+                        $sendMessageButton.addClass('disabled');
                     })
                     socket.on("pairing", function(data) {
                         var $newEm = $("<em />");
                         $newEm.text("You are now talking to " + data);
                         var $newDiv = $("<div />");
                         $newDiv.append($newEm)
+                        $chat.text("");
                         $chat.append($newDiv)
+                        $sendMessageButton.removeClass('disabled');
+                        $messageBox.removeClass('disabled');
+                        $endConversation.removeClass('disabled');
                     })
                     socket.on("disconnected", function(data) {
                         var $newEm = $("<em />");
                         $newEm.text(data + " has disconnected");
                         var $newDiv = $("<div />");
                         $newDiv.append($newEm)
+                        $chat.text("");
                         $chat.append($newDiv)
                     })
                     socket.on("request username", () => {
