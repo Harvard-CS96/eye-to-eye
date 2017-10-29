@@ -110,6 +110,10 @@ io.sockets.on("connection", function (socket) {
     matcher.disconnect(socket.id);
   })
 
+  socket.on("hangup", () => {
+    matcher.hangup(socket.id);
+  })
+
 })
 
 // Require our routes

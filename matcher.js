@@ -36,8 +36,8 @@ class Matcher {
         this.checkForMatches(id);
     }
 
-    // Remove an id from the connection pool
-    disconnect(id) {
+    // Unpair two still-connected users.
+    unpair(id) {
 
         // If a conenction with the given id doesn't exist, don't do anything
         if (this.connections[id] === undefined) {
@@ -48,7 +48,7 @@ class Matcher {
         const { partner } = this.connections[id];
 
         // If the partner existed, set it to single
-        if (partner !== null) {
+        if (partner !== null && this.connections[partner]) {
             this.connections[partner].partner = null;
             console.log(`Matcher: ${id} partner ${partner} is now single`)
 
@@ -59,13 +59,29 @@ class Matcher {
             this.checkForMatches(partner);
         }
 
+        this._setStatus(id, DISCONNECTED, partner);
+        
+        this.connections[id].partner = null;
+    }
+
+    // Remove an id from the connection pool
+    disconnect(id) {
+        // Same procedure as hanging up a call between still-connected users.
+        this.hangup(id);
+
         // Delete connection from the pool
         delete this.connections[id];
         console.log(`Matcher: Disconnected ${id}`)
-
-        this._setStatus(id, DISCONNECTED, partner);
-        this._setStatus(id, WAITING);
     }
+
+    // Hangup a still-connected user.
+    hangup(id) {
+        this.unpair(id)
+
+        this._setStatus(id, WAITING);
+        this.checkForMatches(id);
+    }
+    
 
     // Attempt to find new single match for given id
     checkForMatches(id) {
@@ -153,18 +169,13 @@ class Matcher {
         let string = '';
         const ids = Object.keys(this.connections)
         const { length } = ids;
-        const printed = []
         for (let i = 0; i < length; i++) {
             const key = ids[i]
-            if (printed.indexOf(key) !== -1) {
-                continue;
-            }
             const { partner } = this.connections[key];
             const keyUsername = this.getUsername(key) || key;
             const partnerUsername = this.getUsername(partner) || partner;
             if (partner !== null) {
-                string += `${keyUsername} <--> ${partnerUsername}`
-                printed.push(partner)
+                string += `${keyUsername} ---> ${partnerUsername}`
             } else {
                 string += `${keyUsername} ----`
             }
