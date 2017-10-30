@@ -6,9 +6,10 @@ const { CONN_STATUS } = require('./constants')
 const { WAITING, PAIRING, DISCONNECTED } = CONN_STATUS;
 
 class Matcher {
-    constructor(setStatus) {
+    constructor(setStatus, maxBlacklist = 1) {
         this.connections = {}
         this._setStatus = setStatus;
+        this._maxBlacklist = maxBlacklist;
     }
 
     // Add a new id into the connection pool
@@ -26,7 +27,8 @@ class Matcher {
         this.connections[id] = {
             partner: null,
             username,
-            user_id
+            user_id,
+            blacklist: []
         }
         console.log(`Matcher: Connected ${id}`)
 
@@ -61,7 +63,6 @@ class Matcher {
 
         this._setStatus(id, DISCONNECTED, partner);
         
-        this.connections[id].partner = null;
     }
 
     // Remove an id from the connection pool
@@ -77,9 +78,15 @@ class Matcher {
     // Hangup a still-connected user.
     hangup(id) {
         this.unpair(id)
-
+        this.addBlacklist(id, this.connections[id].partner)
+        this.connections[id].partner = null;
         this._setStatus(id, WAITING);
         this.checkForMatches(id);
+    }
+
+    addBlacklist(id, blacklisted) {
+        this.connections[id].blacklist.push(blacklisted)
+        this.connections[id].blacklist = this.connections[id].blacklist.slice(-1 * this._maxBlacklist);
     }
     
 
