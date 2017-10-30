@@ -114,6 +114,13 @@ io.sockets.on("connection", function (socket) {
     matcher.hangup(socket.id);
   })
 
+  socket.on("logout", () => {
+    delete socket.handshake.session.user_id;
+    delete socket.handshake.session.username;
+    socket.handshake.session.save()
+    matcher.disconnect(socket.id)
+  })
+
 })
 
 // Require our routes
