@@ -116,7 +116,9 @@ class Matcher {
             // If we find an entry that's single and also not the same user, connect
             if (
                 this.connections[key].user_id !== this.connections[id].user_id &&
-                this.connections[key].partner === null
+                this.connections[key].partner === null &&
+                this.connections[key].blacklist.indexOf(id) === -1 &&
+                this.connections[id].blacklist.indexOf(key) === -1
             ) {
                 this.setPartner(id, key);
                 break;
