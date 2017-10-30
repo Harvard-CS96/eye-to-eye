@@ -67,7 +67,7 @@ class Matcher {
     // Remove an id from the connection pool
     disconnect(id) {
         // Same procedure as hanging up a call between still-connected users.
-        this.hangup(id);
+        this.unpair(id);
 
         // Delete connection from the pool
         delete this.connections[id];
