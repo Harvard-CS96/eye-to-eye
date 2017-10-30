@@ -94,9 +94,6 @@ io.sockets.on("connection", function (socket) {
   }
 
   socket.on("send message", function (data) {
-
-    // socket will send messages to every single user
-    // io.sockets.emit("new message", `${socket.id}: ${data}`);
     socket.emit("new message", `You said: ${data}`)
     socket.broadcast.to(matcher.getPartner(socket.id)).emit("new message", `${matcher.getUsername(socket.id)} says: ${data}`)
 
@@ -111,6 +108,17 @@ io.sockets.on("connection", function (socket) {
 
   socket.on("disconnect", () => {
     matcher.disconnect(socket.id);
+  })
+
+  socket.on("hangup", () => {
+    matcher.hangup(socket.id);
+  })
+
+  socket.on("logout", () => {
+    delete socket.handshake.session.user_id;
+    delete socket.handshake.session.username;
+    socket.handshake.session.save()
+    matcher.disconnect(socket.id)
   })
 
 })
