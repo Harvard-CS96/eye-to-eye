@@ -4,6 +4,14 @@
  */
 const { CONN_STATUS } = require('./constants')
 const { WAITING, PAIRING, DISCONNECTED } = CONN_STATUS;
+const path = require('path');
+const DIR = require('./constants.js').DIR
+
+var users = require(path.join(DIR.ROOT, 'controllers/users'));
+var questions = require(path.join(DIR.ROOT, 'controllers/questions'));
+
+
+// End example
 
 class Matcher {
     constructor(setStatus, maxBlacklist = 1) {
@@ -112,8 +120,12 @@ class Matcher {
 
     // Attempt to find new single match for given id
     checkForMatches(id) {
+
         // Make sure the id is a string
         id = id + "";
+
+        // so that callbacks can access the this variable
+        var referenceToThis = this;
 
         // If the connection doesn't exist, don't do anything
         if (this.connections[id] === undefined) {
@@ -128,6 +140,29 @@ class Matcher {
         }
         console.log(`Matcher: Checking for matches for ${id}...`)
 
+        users.findAll(function(userData){ 
+            console.log(userData[0].questions_answered)
+            console.log(userData[0].uuid)
+            console.log(referenceToThis.connections)
+            questions.findActive(function(questionData){ 
+                referenceToThis.findMatch(userData, questionData, id); 
+            });
+        });
+    }
+
+
+    findMatch(userData, questionData, id){
+        // get user data from id 
+        var user1ID = this.connections[id].user_id;
+        var userData1 = getUserDataOfID(userData, user1ID);
+        var Questions1 = getAvailableUserQuestions(userData1, questionData);
+
+
+        // randomly sort questions so that user does not always get matched on same question
+        var Questions1IDS = Questions1.map(function (obj) {
+                                    return obj.id;
+                                });
+
         // Iterate over all connections
         const ids = Object.keys(this.connections)
         const { length } = ids;
@@ -140,14 +175,39 @@ class Matcher {
                 this.connections[key].blacklist.indexOf(id) === -1 &&
                 this.connections[id].blacklist.indexOf(key) === -1
             ) {
-                this.setPartner(id, key);
-                break;
+                
+
+                // get second user data from key
+                var user2ID = this.connections[key].user_id;
+                var userData2 = getUserDataOfID(userData, user2ID);
+                var Questions2 = getAvailableUserQuestions(userData2, questionData);
+                var Questions2IDs = Questions2.map(function (obj) {
+                                        return obj.id;
+                                    });
+
+                for (let i = 0; i < Questions1.length; i++) {
+                    var question1 = Questions1[i];
+                    var Question2Index = Questions2IDs.indexOf(question1.id)
+                    if (Question2Index >= 0) {
+                        if (isDifferentOpinion(question1.response,Questions2[Question2Index].response)) {
+                            // set partner on conversation about question with this id
+                            //this.setPartner(id, key);
+                            // eventually will want to send over question id as well
+                            var questionTitle = getQuestionByID(question1.id, questionData);
+                            console.log(questionTitle);
+                            this.setPartner(id, key, {text: questionTitle, id: question1.id});
+                            break;
+                        }
+                    }
+                }
             }
         }
+
     }
+        
 
     // Set two ids to be each others' partners
-    setPartner(id1, id2) {
+    setPartner(id1, id2, question) {
         // If either is nonsingle, do nothing
         if (
             this.connections[id1].partner !== null ||
@@ -161,6 +221,8 @@ class Matcher {
         // Set each id's partner to the other
         this.connections[id1].partner = id2;
         this.connections[id2].partner = id1;
+
+        console.log("Users will discuss the question: " + question.text);
 
         this._setStatus(id1, PAIRING, id2);
         this._setStatus(id2, PAIRING, id1);
@@ -213,6 +275,62 @@ class Matcher {
         }
         return string;
     }
+
+    logAll() {
+        return JSON.stringify(this)
+    }
+}
+
+// HELPER FUNCTIONS
+
+function getUserDataOfID(userData, id){
+    for (var i=0, iLen=userData.length; i < iLen; i++) {
+        if (userData[i].uuid == id) return userData[i];
+    }
+}
+
+// return a list of questions the user wants to talk about
+function getAvailableUserQuestions(userData, questionData){
+    var ChosenQuestions = [];
+    var questionsAnswered = userData.questions_answered;
+    console.log("QUESTIONS ANSWERED");
+    console.log(questionsAnswered);
+    for (let i = 0; i < questionsAnswered.length; i++) {
+        var responseData = questionsAnswered[i].response_data;
+        console.log("RESPONSE DATA");
+        console.log(responseData);
+        if (responseData[responseData.length - 1] != null) {
+            var el = {response: responseData[responseData.length - 1].response, id: questionsAnswered[i].question_id}
+            ChosenQuestions.push(el)
+        }
+    }
+    return ChosenQuestions;
+}
+
+function getQuestionByID(id, questionData){
+    for (var i=0; i < questionData.length ; ++i){
+        if (questionData[i].id == id){
+            console.log(questionData[i]);
+            return questionData[i].text;
+        }
+    }
+    throw "Question id not found in questionData";
+}
+
+function isDifferentOpinion(a, b){
+    return (a != b)
+}
+
+/**
+ * Shuffles array in place. ES6 version
+ * @param {Array} a items An array containing the items.
+ */
+function shuffleArray(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
 }
 
 module.exports = Matcher

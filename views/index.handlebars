@@ -43,6 +43,7 @@
                         </div>
                     </div>
                 </form>
+                <a href="updatePreferences">Update Your Stances</a>
             </div>
         </div>
     </div>
@@ -59,6 +60,10 @@
     <!-- front end javasctipt and using jQuery -->
     <script type="text/javascript">
         // load when jquery and page has be loaded
+
+        const isAuthenticated = {{ isAuthenticated }}
+        const user = {{{ user }}}
+        
         $(document).ready(function () {
             jQuery(function () {
                 // connect to socket on server
@@ -92,7 +97,7 @@
 
                 $logout.click(() => {
                     socket.emit("logout");
-                    window.location = window.location;
+                    window.location.href = '/logout';
                 })
 
                 // when socket emit a message to each user
@@ -127,19 +132,19 @@
                     $chat.text("");
                     $chat.append($newDiv)
                 })
-                socket.on("request username", () => {
-                    let username = prompt("What is your name?")
-                    while (username.trim() === '') {
-                        username = prompt("Please enter your name.")
-                    }
-                    socket.emit("set username", username);
+                socket.emit("set user", {
+                    username: user.facebook.name,
+                    fb_id: user.uuid
                 })
                 socket.on("recall username", username => {
                     $identity.text("Hello, " + username);
                 })
+                socket.emit("set user id", user.uuid)
 
             })
         })
+
+        
     </script>
 </body>
 
