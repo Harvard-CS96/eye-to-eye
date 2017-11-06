@@ -106,7 +106,7 @@ class Matcher {
     // Hangup a still-connected user.
     hangup(id) {
         this.unpair(id)
-        this.addBlacklist(id, this.connections[id].partner)
+        this.addBlacklist(id, this.connections[id].partner);
         this.connections[id].partner = null;
         this._setStatus(id, WAITING);
         this.checkForMatches(id);
