@@ -103,7 +103,8 @@ const devMiddleware = webpackDevMiddleware(compiler, {
         const shortHash = hash.slice(0, 6);
         const duration = endTime - startTime;
         const { fileTimestamps } = compilation;
-        const changedFiles = Object.entries(fileTimestamps)
+        const changedFiles = Object.keys(fileTimestamps)
+            .map(key => ([key, fileTimestamps[key]]))    
             .filter(([fname, ts]) => (ts > startTime))
             .map(([fname]) => path.relative(compiler.options.entry[compiler.options.entry.length - 1] + "/..", fname))
             
