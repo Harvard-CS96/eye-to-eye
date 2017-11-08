@@ -2,10 +2,10 @@ import { connect } from 'react-redux';
 import _App from '../components/App';
 import { selectors as userSelectors } from '../modules/user';
 
-const { isLoggedIn } = userSelectors;
+const { isAuthenticated } = userSelectors;
 
 const mapStateToProps = (state, ownProps) => ({
-    isLoggedIn: isLoggedIn(state)
+    isAuthenticated: isAuthenticated(state)
 })
 
 

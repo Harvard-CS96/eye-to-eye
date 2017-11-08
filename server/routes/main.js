@@ -89,6 +89,11 @@ router.get('/login', (req, res) => {
     res.render("login")
 })
 
+router.get('/logout', (req, res) => {
+    req.session.destroy()
+    res.redirect('/');
+})
+
 // route for facebook authentication and login
 router.get('/auth/facebook', passport.authenticate('facebook'));
 

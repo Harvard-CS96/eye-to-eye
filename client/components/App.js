@@ -5,9 +5,9 @@ import Logout from '../containers/Logout';
 
 class App extends React.Component {
     render() {
-        const { children, isLoggedIn } = this.props;
+        const { children, isAuthenticated } = this.props;
 
-        const content = isLoggedIn === true ?
+        const content = isAuthenticated === true ?
             [
                 children,
                 <Logout />,
