@@ -91,6 +91,7 @@ app.use((req, res, next) => {
 
 // Add webpack middlewares
 const devMiddleware = webpackDevMiddleware(compiler, {
+    index: false,
     noInfo: true,
     reporter: info => {
         const { stats } = info;
