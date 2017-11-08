@@ -20,9 +20,9 @@ const logBuildError = debug('build:error');
 
 // Initialize express app
 const app = express();
-const server = require('http').createServer(app)
+const httpServer = require('http').createServer(app)
 // Set app to listen on specified port
-server.listen(PORT, function() {
+httpServer.listen(PORT, function() {
     console.log("Now listening on port " + PORT + " :)");
 });
 
@@ -57,7 +57,7 @@ serverWatch.on('ready', () => {
     // Load the server for the first time
     loadServer()
         .then(() => {
-            socketio.listen(server)
+            socketio.listen(httpServer)
         })
 
     // Reload the server on any change
@@ -70,7 +70,7 @@ serverWatch.on('ready', () => {
         }
         loadServer()
             .then(() => {
-                socketio.listen(server)
+                socketio.listen(httpServer)
             })    
             .catch(e => {
                 logBuildError("Failed to reload server: " + e.toString())
