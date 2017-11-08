@@ -28,21 +28,15 @@ var passport = require('passport');
 
 // Parsing post requests
 var bodyParser = require('body-parser');
-var multer = require('multer');
+var multer = require('multer'); 
 
-var config = require('getconfig'),
-    fs = require('fs'),
-    sockets = require('./sockets'),
-    express = require('express');
-
-var app = express();
+// to use our socket.io module
 var socketio = require("socket.io")()
 
 // to use the handlebars templating engine
 var exphbs = require('express-handlebars');
 router.engine('handlebars', exphbs({defaultLayout: 'main'}));
 router.set('view engine', 'handlebars');
-
 
 const session = require("express-session")({
   secret: "my-secret",
@@ -69,6 +63,7 @@ router.use(passport.session());
 socketio.use(sharedsession(session, {
   autoSave:true
 }));
+
 
 // to listen to port 3000
 // server.listen(process.env.PORT || 3000)
@@ -100,39 +95,54 @@ let matcher = new Matcher((id, status, partner = null) => {
 })
 
 // add callbacks to matcher
-// <<<<<<< 3eca27f48de8f31d8fd7f603aa20cf1cbd8d7faf:server.js
-const chat = require('./controllers/chats');
-matcher.addCallback(PAIRING,      chat.logConnection);
-matcher.addCallback(DISCONNECTED, chat.logDisconnection);
-// =======
-// const logging = require('./controllers/logging');
-// matcher.addCallback(PAIRING,      logging.logConnection);
-// matcher.addCallback(DISCONNECTED, logging.logDisconnection);
+const logging = require('./controllers/logging');
+matcher.addCallback(PAIRING,      logging.logConnection);
+matcher.addCallback(DISCONNECTED, logging.logDisconnection);
 
 // when a user connects to the socket
-// socketio.sockets.on("connection", function (socket) {
+socketio.sockets.on("connection", function (socket) {
   // when socket receives a message from a user, the (data) parameter
   // is the message the user send
 
-  // let { user_id, username } = socket.handshake.session;
-  // if (!username) {
-  //   socket.emit('request username')
-  // } else {
-  //   socket.emit('recall username', username)
-  //   matcher.connect(socket.id, username, user_id);
-  // }
+  let { user_id, username } = socket.handshake.session;
+  if (!username) {
+    socket.emit('request username')
+  } else {
+    socket.emit('recall username', username)
+    matcher.connect(socket.id, username, user_id);
+  }
 
-  // socket.on("send message", function (data) {
-  //   socket.emit("new message", `You said: ${data}`)
-  //   socket.broadcast.to(matcher.getPartner(socket.id)).emit("new message", 
-  //     `${matcher.getUsername(socket.id)} says: ${data}`
-  //     )
+  socket.on("send message", function (data) {
+    socket.emit("new message", `You said: ${data}`)
+    socket.broadcast.to(matcher.getPartner(socket.id)).emit("new message", 
+      `${matcher.getUsername(socket.id)} says: ${data}`
+      )
 
-  // })
-// >>>>>>> Added react webpack in client:server/index.js
+  })
 
+  socket.on("set user", ({ username, user_id }) => {
+    matcher.connect(socket.id, username, user_id);
+    socket.handshake.session.username = username;
+    socket.handshake.session.save();
+    socket.emit('recall username', username)
+  })
 
-sockets(socketio, matcher, config);
+  socket.on("disconnect", () => {
+    matcher.disconnect(socket.id);
+  })
+
+  socket.on("hangup", () => {
+    matcher.hangup(socket.id);
+  })
+
+  socket.on("logout", () => {
+    delete socket.handshake.session.user_id;
+    delete socket.handshake.session.username;
+    socket.handshake.session.save()
+    matcher.disconnect(socket.id)
+  })
+
+})
 
 // Require our routes
 const mainRoute = require('./routes/main')

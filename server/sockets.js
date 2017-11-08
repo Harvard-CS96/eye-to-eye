@@ -123,7 +123,7 @@ module.exports = function(io, matcher, config) {
                 safeCb(cb)('taken');
             } else {
                 join(name);
-                safeCb(cb)(null, name);
+            safeCb(cb)(null, name);
             }
         });
 
