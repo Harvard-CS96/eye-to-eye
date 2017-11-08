@@ -1,0 +1,20 @@
+{
+    "HelloWorld": {
+        "body": "Hello World! Here's a counter.",
+        "link": "About"
+    },
+    "About": {
+        "body": "This site is built with node.js, express, react, redux, react-router, SCSS, and webpack.",
+        "link": "Back to Home"
+    },
+    "Login": {
+        "link": "Please log in here."
+    },
+    "Logout": {
+        "link": "Logout!"
+    },
+    "Counter": {
+        "increment": "+",
+        "decrement": "-"
+    }
+}

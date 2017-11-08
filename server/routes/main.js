@@ -12,7 +12,7 @@ var users = require(path.join(DIR.ROOT, 'controllers/users'));
 
 const router = express.Router();
 
-router.get('/', isLoggedIn, (req, res) => {
+router.get('/home', isLoggedIn, (req, res) => {
     const hbsData = req.isAuthenticated() === true ?
         {
             isAuthenticated: 'true',

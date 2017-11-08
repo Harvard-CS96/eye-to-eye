@@ -1,6 +1,6 @@
 const path = require('path');
 
-const ROOT_DIR = process.cwd();
+const ROOT_DIR = path.join(process.cwd(), 'server');
 
 const PUBLIC_DIR = path.join(ROOT_DIR, 'public');
 
