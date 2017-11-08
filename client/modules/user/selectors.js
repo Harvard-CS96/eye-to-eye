@@ -1,7 +1,9 @@
-const isLoggedIn = state => state.user.isLoggedIn === true
+const isAuthenticated = state => state.user.isAuthenticated === true
 const getUserId = state => state.user.id;
+const getUserName = state => state.user.name;
 
 export {
-    isLoggedIn,
-    getUserId
+    isAuthenticated,
+    getUserId,
+    getUserName
 }
