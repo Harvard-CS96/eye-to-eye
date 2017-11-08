@@ -1,7 +1,7 @@
 var uuid = require('node-uuid'),
     crypto = require('crypto');
 
-module.exports = function(server, io, matcher, config) {
+module.exports = function(io, matcher, config) {
 
     io.sockets.on('connection', function(client) {
 
