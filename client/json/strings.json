@@ -16,5 +16,8 @@
     "Counter": {
         "increment": "+",
         "decrement": "-"
+    },
+    "Feedback": {
+        "body": "How was your conversation?"
     }
 }
