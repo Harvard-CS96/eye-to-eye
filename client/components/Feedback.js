@@ -16,7 +16,7 @@ class Feedback extends React.Component {
                     starCount={5}
                     value={3}
                 />
-            <BadgeSet badgesDisplayed={['1','2','3']}/>
+            <BadgeSet badgesDisplayed={['01','02','03']}/>
         </div>
     }
 }
