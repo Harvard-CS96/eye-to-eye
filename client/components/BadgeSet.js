@@ -10,7 +10,7 @@ class BadgeSet extends React.Component {
             rows.push(<Badge badgeId={badgesDisplayed[i]}/>)
         }
         return <div id="BadgeSet">
-            <h1>BadgeSet</h1>
+            <h2>BadgeSet</h2>
             {rows}
         </div>
     }
