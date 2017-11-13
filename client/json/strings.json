@@ -19,13 +19,14 @@
         "decrement": "-"
     },
     "Feedback": {
-        "body": "How was your conversation?"
+        "body": "How was your conversation?",
+        "link": "Feedback"
     },
     "Profile": {
         "body": "Welcome to your profile!",
         "link": "Back to Home"
     },
-    "ReportAbuse": {
+    "ReportAbuseButton": {
         "link": "Report abuse."
     }
 }
