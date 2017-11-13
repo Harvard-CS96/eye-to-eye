@@ -9,13 +9,14 @@ class App extends React.Component {
 
         const content = isAuthenticated === true ?
             [
-                children,
                 <Logout />,
+                children
             ] :
             <Login />
 
         return <div id="App">
-            <h1>App</h1>
+            {/* TODO: BETTER NAME */}
+            <h1>VideoRoulette</h1>
             { content }
         </div>
     }

@@ -23,9 +23,9 @@
     },
     "Feedback": {
         "body": "How was your conversation?",
-        "link": "Back to Home"
+        "link": "Feedback"
     },
-    "ReportAbuse": {
+    "ReportAbuseButton": {
         "link": "Report abuse."
     }
 }
