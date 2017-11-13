@@ -10,7 +10,7 @@ class CriticismSet extends React.Component {
             rows.push(<Criticism criticismId={criticismsDisplayed[i]}/>)
         }
         return <div id="CriticismSet">
-            <h2>CriticismSet</h2>
+            <h3>CriticismSet</h3>
             {rows}
         </div>
     }
