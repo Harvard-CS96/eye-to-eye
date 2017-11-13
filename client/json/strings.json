@@ -24,5 +24,8 @@
     "Feedback": {
         "body": "How was your conversation?",
         "link": "Back to Home"
+    },
+    "ReportAbuse": {
+        "link": "Report abuse."
     }
 }
