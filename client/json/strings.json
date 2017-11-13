@@ -25,7 +25,6 @@
         "decrement": "-"
     },
     "Feedback": {
-<<<<<<< bfd2f88c7e0ff0984d0ecb09001eca1de46c9bb4
         "body": "How was your conversation?",
         "link": "Feedback"
     },
@@ -40,12 +39,7 @@
         "link": "Start conversation"
     },
     "SubmitFeedbackButton": {
-        "link": "Submit Feedback"
-=======
+        "link": "Submit Feedback",
         "body": "How was your conversation?"
-    },
-    "Profile": {
-        "body": "Welcome to your profile!"
->>>>>>> add profile
     }
 }
