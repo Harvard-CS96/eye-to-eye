@@ -5,6 +5,7 @@ import Feedback from '../containers/Feedback';
 import Profile from '../containers/Profile'
 
 import Strings from '../json/strings.json';
+import ReportAbuse from '../containers/ReportAbuse';
 
 class HelloWorld extends React.Component {
     render() {
