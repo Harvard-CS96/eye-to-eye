@@ -18,6 +18,7 @@
         "decrement": "-"
     },
     "Feedback": {
-        "body": "How was your conversation?"
+        "body": "How was your conversation?",
+        "link": "Back to Home"
     }
 }
