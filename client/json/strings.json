@@ -22,6 +22,7 @@
         "body": "How was your conversation?"
     },
     "Profile": {
-        "body": "Welcome to your profile!"
+        "body": "Welcome to your profile!",
+        "link": "Back to Home"
     }
 }

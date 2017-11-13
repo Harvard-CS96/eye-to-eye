@@ -1,6 +1,7 @@
 import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
 import BadgeSet from '../containers/BadgeSet';
+import CriticismSet from '../containers/CriticismSet'
 
 import strings from '../json/strings.json';
 
@@ -16,6 +17,7 @@ class Feedback extends React.Component {
                     starCount={5}
                 />
             <BadgeSet badgesDisplayed={['01','02','03']}/>
+            <CriticismSet criticismsDisplayed={['Impolite', 'Too much hairgel']}/>
         </div>
     }
 }
