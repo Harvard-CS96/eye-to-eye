@@ -24,5 +24,8 @@
     "Profile": {
         "body": "Welcome to your profile!",
         "link": "Back to Home"
+    },
+    "ReportAbuse": {
+        "link": "Report abuse."
     }
 }

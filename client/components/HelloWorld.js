@@ -5,6 +5,7 @@ import Feedback from '../containers/Feedback';
 import Profile from '../containers/Profile'
 
 import Strings from '../json/strings.json';
+import ReportAbuse from '../containers/ReportAbuse';
 
 class HelloWorld extends React.Component {
     render() {
@@ -12,6 +13,7 @@ class HelloWorld extends React.Component {
             <Feedback />
             <Link to="/about">{Strings.HelloWorld.link}</Link>
             {Strings.HelloWorld.body}
+            <ReportAbuse />
             <br />
             <Link to="/profile">{Strings.HelloWorld.link2}</Link>
             <br />
