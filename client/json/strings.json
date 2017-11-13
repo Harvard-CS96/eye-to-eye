@@ -20,5 +20,8 @@
     },
     "Profile": {
         "body": "Welcome to your profile!"
+    },
+    "Feedback": {
+        "body": "How was your conversation?"
     }
 }
