@@ -1,7 +1,8 @@
 {
     "HelloWorld": {
         "body": "Hello World! Here's a counter.",
-        "link": "About"
+        "link1": "About",
+        "link2": "Profile"
     },
     "About": {
         "body": "This site is built with node.js, express, react, redux, react-router, SCSS, and webpack.",
@@ -19,5 +20,8 @@
     },
     "Feedback": {
         "body": "How was your conversation?"
+    },
+    "Profile": {
+        "body": "Welcome to your profile!"
     }
 }
