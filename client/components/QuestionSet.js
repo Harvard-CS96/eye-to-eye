@@ -2,14 +2,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import strings from '../json/strings.json';
-import Question from '../components/Question.js'
+import DiscreteQuestion from '../containers/DiscreteQuestion.js'
 
 class QuestionSet extends React.Component {
-    render() {
-        return <div id="QuestionSet">
-	        <Question questionId="Should NFL players be forced to stand?" />
-	        <Question questionId="Should we enact more gun regulation?" />
+    renderQuestion = question => {
+        const { _id, text, answer_type, answer_options, answer } = question;
 
+        switch (answer_type) {
+            case "discrete": {
+                return <DiscreteQuestion key={_id} id={_id} text={text} options={answer_options} answer={answer} />
+            }
+            default: {
+                return null;
+            }    
+        }
+    }
+    render() {
+        const { questions } = this.props;
+        const { renderQuestion } = this;
+        const renderedQuestions = questions.map(renderQuestion);
+        return <div id="QuestionSet">
+	        { renderedQuestions }
         </div>
     }
 }

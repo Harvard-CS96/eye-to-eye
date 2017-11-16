@@ -17,7 +17,7 @@ class App extends React.Component {
         return <div id="App">
             {/* TODO: BETTER NAME */}
             <h1>VideoRoulette</h1>
-            { content }
+            { content.map((x, i) => ({...x, key: i})) }
         </div>
     }
 }
