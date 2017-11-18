@@ -11,7 +11,7 @@ class CriticismSet extends React.Component {
         }
         return <div id="CriticismSet">
             <h3>CriticismSet</h3>
-            {rows}
+            { rows.map((x, i) => ({...x, key: i})) }
         </div>
     }
 }
