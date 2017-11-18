@@ -12,7 +12,9 @@ class App extends React.Component {
                 <Logout />,
                 children
             ] :
-            <Login />
+            [
+                <Login />
+            ]
 
         return <div id="App">
             {/* TODO: BETTER NAME */}
