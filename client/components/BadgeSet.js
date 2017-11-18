@@ -11,11 +11,7 @@ class BadgeSet extends React.Component {
         }
         return <div id="BadgeSet">
             <h3>BadgeSet</h3>
-<<<<<<< 0341f52a0760043172870e9cfc4eb3ebc89519bb
             { rows.map((x, i) => ({...x, key: i})) }
-=======
-            {rows}
->>>>>>> Removed counter and HelloWorld default messages.
         </div>
     }
 }
