@@ -14,8 +14,8 @@ var options = {
 
 var app = express();
 
-var server = https.createServer(options, app).listen(port, function(){
-  console.log("Express server listening on port " + port);
+var server = https.createServer(options, app).listen(port, function() {
+    console.log("Express server listening on port " + port);
 });
 
 sockets(server, config);
@@ -23,4 +23,3 @@ sockets(server, config);
 console.log('signal master is running at: ' + "https://localhost:" + port);
 
 app.use(express.static('public'))
-

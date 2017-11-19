@@ -1,25 +1,44 @@
 {
-  "name": "signal-master",
-  "description": "Simple signaling server for SimpleWebRTC",
-  "version": "1.0.1",
+  "name": "textroulette",
+  "version": "1.0.0",
+  "description": "CS96 Dev Team first project -- a text-based communication tool, driven by Node.js",
+  "main": "server.js",
   "dependencies": {
     "getconfig": "2.1.0",
     "node-uuid": "1.2.0",
     "socket.io": "1.3.7",
-    "yetify": "0.0.1"
+    "yetify": "0.0.1",
+    "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
+    "express-socket.io-session": "^1.3.2",
+    "fb": "^2.0.0",
+    "mongod": "^2.0.0",
+    "mongoose": "^4.12.4",
+    "mongoose-uuid2": "^2.0.1",
+    "multer": "^1.3.0",
+    "nodemon": "^1.12.1",
+    "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
+    "socket.io": "^2.0.4",
+    "uuid": "^3.1.0",
+    "webpack": "^3.8.1"
   },
-  "main": "server.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
   "repository": {
     "type": "git",
-    "url": "git@github.com:andyet/signal-master.git"
+    "url": "git+https://github.com/Harvard-CS96/textroulette.git"
   },
-  "devDependencies": {
-    "socket.io-client": "1.3.7",
-    "precommit-hook": "0.3.10",
-    "tape": "^2.13.1"
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Harvard-CS96/textroulette/issues"
   },
-  "license": "MIT",
-  "scripts": {
-    "test": "node test.js"
-  }
+  "homepage": "https://github.com/Harvard-CS96/textroulette#readme"
 }
