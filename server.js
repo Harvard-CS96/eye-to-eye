@@ -7,7 +7,8 @@
 require('dotenv').config();
 
 const {
-  CONN_STATUS
+  CONN_STATUS,
+  DIR
 } = require('./constants')
 const {
   WAITING,
