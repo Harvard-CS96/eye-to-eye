@@ -21,6 +21,13 @@ module.exports = function(server, io, matcher, config) {
 
         })
 
+        client.on("set user", ({ username, user_id }) => {
+          matcher.connect(client.id, username, user_id);
+          client.handshake.session.username = username;
+          client.handshake.session.save();
+          client.emit('recall username', username)
+        })
+
         client.resources = {
             screen: false,
             video: true,
