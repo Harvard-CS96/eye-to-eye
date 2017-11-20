@@ -11,7 +11,9 @@ class Feedback extends React.Component {
     constructor() {
         super();
         this.state = {
-            rating: null
+            rating: null,
+            selectedBadges: [],
+            selectedCriticisms: []
         };
     }
     onStarClick(nextValue, prevValue, name) {
