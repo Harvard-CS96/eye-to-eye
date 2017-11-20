@@ -126,8 +126,6 @@ matcher.addCallback(DISCONNECTED, logging.logDisconnection);
 
 sockets(server, io, matcher, config);
 
-console.log('signal master is running at: ' + "https://localhost:" + port);
-
 // Require our routes
 const mainRoute = require('./routes/main')
 app.use('/', mainRoute);
