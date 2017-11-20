@@ -65,7 +65,7 @@ var exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-/*
+
 const session = require("express-session")({
   secret: "my-secret",
   resave: true,
@@ -91,7 +91,6 @@ app.use(passport.session());
 io.use(sharedsession(session, {
   autoSave:true
 }));
-*/
 
 
 sockets(server, config);
