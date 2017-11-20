@@ -1,0 +1,22 @@
+version: 0.0
+os: linux
+files:
+   - source: /
+     destination: /var/www/html
+permissions:
+   - object: /var/www/html
+     pattern: "**"
+     owner: nginx
+     group: nginx
+     mode: 755
+     type:
+       - file
+hooks:
+   BeforeInstall:
+    - location: scripts/installnginx.sh
+      runas: root
+    - location: scripts/startnginx.sh
+      runas: root
+   AfterInstall:
+    - location: scripts/restartnginx.sh
+      runas: root
