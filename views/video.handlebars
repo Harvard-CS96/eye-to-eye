@@ -3,18 +3,23 @@
 
 <head>
     <script src="https://simplewebrtc.com/latest-v2.js"></script>
+    <style>
+        video {
+            width: 49%;
+        }
+    </style>
 </head>
 
 <body>
     <video height="300" id="localVideo"></video>
-    <div id="remotesVideos"></div>
+    <div id="remoteVideos" style="display:inline;"></div>
 </body>
 <script>
     var webrtc = new SimpleWebRTC({
         // the id/element dom element that will hold "our" video
         localVideoEl: 'localVideo',
         // the id/element dom element that will hold remote videos
-        remoteVideosEl: 'remotesVideos',
+        remoteVideosEl: 'remoteVideos',
         // immediately ask for camera access
         autoRequestMedia: true,
         // set signaling server
