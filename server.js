@@ -70,7 +70,7 @@ const session = require("express-session")({
   resave: true,
   saveUninitialized: true
 });
-
+/*
 const sharedsession = require("express-socket.io-session");
 
 app.use(require('cookie-parser')());
@@ -90,7 +90,7 @@ app.use(passport.session());
 io.use(sharedsession(session, {
   autoSave:true
 }));
-
+*/
 
 const Matcher = require('./matcher');
 let matcher = new Matcher((id, status, partner = null) => {
