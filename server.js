@@ -118,6 +118,11 @@ let matcher = new Matcher((id, status, partner = null) => {
   }
 })
 
+// add callbacks to matcher
+const logging = require('./controllers/logging');
+matcher.addCallback(PAIRING,      logging.logConnection);
+matcher.addCallback(DISCONNECTED, logging.logDisconnection);
+
 
 sockets(server, io, matcher, config);
 
