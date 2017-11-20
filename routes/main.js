@@ -22,7 +22,20 @@ router.get('/', isLoggedIn, (req, res) => {
             isAuthenticated: 'false',
             user: JSON.stringify({}),
         }
-    res.render("index", hbsData)
+    res.render("video", hbsData)
+})
+
+router.get('/text', isLoggedIn, (req, res) => {
+    const hbsData = req.isAuthenticated() === true ?
+        {
+            isAuthenticated: 'true',
+            user: JSON.stringify(req.user),
+        } :
+        {
+            isAuthenticated: 'false',
+            user: JSON.stringify({}),
+        }
+    res.render("text", hbsData)
 })
 
 // Either find specific questions or all questions.
