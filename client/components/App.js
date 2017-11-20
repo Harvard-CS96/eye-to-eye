@@ -9,8 +9,8 @@ class App extends React.Component {
 
         const content = isAuthenticated === true ?
             [
-                <Logout />,
-                children
+                children,
+                <Logout />
             ] :
             <Login />
 

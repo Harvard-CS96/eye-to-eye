@@ -9,11 +9,8 @@ class Logout extends React.Component {
     }
     render() {
         const { logout } = this;
-        const { user } = this.props;
-        const { id, name } = user;
         return <div id="Logout">
             <br />
-            <div>Hello, { name }!</div>
             <div className="button" children={strings.Logout.link} onClick={logout} />
         </div>
     }

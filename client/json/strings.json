@@ -27,5 +27,8 @@
     },
     "ReportAbuseButton": {
         "link": "Report abuse."
+    },
+    "StartConversationButton": {
+        "link": "Start conversation"
     }
 }
