@@ -55,7 +55,7 @@ var server = https.createServer(options, app).listen(port, function() {
 
 var io = socketIO.listen(server);
 
-sockets(server, io config);
+sockets(server, io, config);
 
 console.log('signal master is running at: ' + "https://localhost:" + port);
 
