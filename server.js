@@ -7,8 +7,7 @@
 require('dotenv').config();
 
 const {
-  CONN_STATUS,
-  DIR
+  CONN_STATUS
 } = require('./constants')
 const {
   WAITING,
@@ -20,9 +19,6 @@ const uuid = require('uuid');
 
 // to connect to the database and instantiate the data models
 var db = require('./db/connect');
-
-// to use the express module
-var app = require("express")();
 
 var server = require("http").createServer(app);
 
@@ -42,13 +38,16 @@ var config = require('getconfig'),
     fs = require('fs'),
     sockets = require('./sockets'),
     port = parseInt(process.env.PORT || config.server.port, 10),
-    https = require('https');
+    https = require('https'),
+    express = require('express');
 
 // Create an http(s) server instance to that socket.io can listen to
 var options = {
     key: fs.readFileSync(config.server.key),
     cert: fs.readFileSync(config.server.cert),
 };
+
+var app = express();
 
 var server = https.createServer(options, app).listen(port, function() {
     console.log("Express server listening on port " + port);
