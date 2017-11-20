@@ -1,36 +1,58 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <script src="https://simplewebrtc.com/latest-v2.js"></script>
-    <style>
-        video {
-            width: 49%;
-        }
-    </style>
-</head>
+    <head>
+        <title>Textroulette</title>
 
-<body>
-    <video id="localVideo"></video>
-    <div id="remoteVideos" style="display:inline;"></div>
-</body>
-<script>
-    var webrtc = new SimpleWebRTC({
-        // the id/element dom element that will hold "our" video
-        localVideoEl: 'localVideo',
-        // the id/element dom element that will hold remote videos
-        remoteVideosEl: 'remoteVideos',
-        // immediately ask for camera access
-        autoRequestMedia: true,
-        // set signaling server
-        url: 'https://signaling.tk/',
-        debug: true
-    });
-    // we have to wait until it's ready
-    webrtc.on('readyToCall', function() {
-        // you can name it anything
-        webrtc.joinRoom('your awesome room name');
-    });
-</script>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+        <style>
+            video {
+                width: 49%;
+            }
+        </style>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <video id="localVideo"></video>
+        <div id="remoteVideos" style="display:inline;"></div>
+        <input id="room" name="room" type="text">
+        <button id="join" class="btn btn-default">Connect to Peer</button>
+
+        <script src="https://simplewebrtc.com/latest-v2.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+        <script>
+            var webrtc = new SimpleWebRTC({
+                // the id/element dom element that will hold "our" video
+                localVideoEl: 'localVideo',
+                // the id/element dom element that will hold remote videos
+                remoteVideosEl: 'remoteVideos',
+                // immediately ask for camera access
+                autoRequestMedia: true,
+                // set signaling server
+                url: 'https://signaling.tk/',
+                debug: true
+            });
+            // we have to wait until it's ready
+            webrtc.on('readyToCall', function() {
+                $("#join").click(function() {
+                    webrtc.joinRoom($("#room").val());
+                });
+            });
+        </script>
+
+
+    </body>
+
 
 </html>
