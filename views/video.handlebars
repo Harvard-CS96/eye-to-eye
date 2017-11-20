@@ -106,13 +106,30 @@
                     });
                 });
             });
+
+            webrtc.on('videoAdded', function (video, peer) {
+                console.log('video added', peer);
+                var remotes = document.getElementById('remotes');
+                if (remotes) {
+                    var container = document.createElement('div');
+                    container.className = 'videoContainer';
+                    container.id = 'container_' + webrtc.getDomId(peer);
+                    container.appendChild(video);
+
+                    // suppress contextmenu
+                    // video.oncontextmenu = function () { return false; };
+
+                    remotes.appendChild(container);
+                }
+            });
+
             // ALEX'S FACE-TRACKING STUFF
             // Need to move this to somewhere other than onload window;
-            // instead we want to start face tracking when a partner has appeared
+            // instead we want to start face tracking when a partner has appeared - after joined a room
             // (will this take too long? don't want to show unsafe video before blurring has started)
             window.onload = function() {
-              // var vids = $(“#remoteVideos > video”).first();
-              var vids = $(“#remoteVideos”);
+              var vids = $(“#remoteVideos > video”).first();
+              // var vids = $(“#remoteVideos”);
               var video = vids;
               var canvas = document.getElementById('canvas');
               var context = canvas.getContext('2d');
