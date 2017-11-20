@@ -108,7 +108,8 @@
             });
             // ALEX'S FACE-TRACKING STUFF
             window.onload = function() {
-              var video = document.querySelectorAll(“#remoteVideos > video”);
+              var vids = $(“#remoteVideos > video”).first();
+              var video = vids;
               var canvas = document.getElementById('canvas');
               var context = canvas.getContext('2d');
 
