@@ -31,5 +31,8 @@
     },
     "StartConversationButton": {
         "link": "Start conversation"
+    },
+    "SubmitFeedbackButton": {
+        "link": "Submit Feedback"
     }
 }

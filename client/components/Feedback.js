@@ -3,6 +3,7 @@ import StarRatingComponent from 'react-star-rating-component';
 import BadgeSet from '../containers/BadgeSet';
 import CriticismSet from '../containers/CriticismSet'
 import ReportAbuseButton from '../containers/ReportAbuseButton';
+import SubmitFeedbackButton from '../containers/SubmitFeedbackButton';
 
 import strings from '../json/strings.json';
 
@@ -14,12 +15,14 @@ class Feedback extends React.Component {
                 {strings.Feedback.body}
             </div>
             <StarRatingComponent 
-                    name="rate1" 
+                    name="user_star_rating" 
                     starCount={5}
                 />
+            {/* TODO: Get badges and criticisms from database once branch merged. */}
             <BadgeSet badgesDisplayed={['01','02','03']}/>
             <CriticismSet criticismsDisplayed={['Impolite', 'Too much hairgel']}/>
             <ReportAbuseButton/>
+            <SubmitFeedbackButton/>
         </div>
     }
 }
