@@ -3,5 +3,5 @@ const SET_ANSWER = 'questions/set_answer'
 
 export {
     LOAD_QUESTIONS,
-    SET_ANSWER
+    SET_ANSWER,
 }
