@@ -5,6 +5,33 @@ var socketIO = require('socket.io'),
 module.exports = function(server, config) {
     var io = socketIO.listen(server);
 
+    const session = require("express-session")({
+      secret: "my-secret",
+      resave: true,
+      saveUninitialized: true
+    });
+
+    const sharedsession = require("express-socket.io-session");
+
+    app.use(require('cookie-parser')());
+    app.use(bodyParser.json()); // for parsing application/json
+    app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+    app.use(require('express-session')({
+      secret: 'keyboard cat',
+      resave: true,
+      saveUninitialized: true
+    }));
+    app.use(session);
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+
+    io.use(sharedsession(session, {
+      autoSave:true
+    }));
+
+
     const Matcher = require('./matcher');
     let matcher = new Matcher((id, status, partner = null) => { });
 
