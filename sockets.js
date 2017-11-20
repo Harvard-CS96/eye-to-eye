@@ -13,6 +13,14 @@ module.exports = function(server, io, matcher, config) {
           matcher.connect(client.id, username, user_id);
         }
 
+        client.on("send message", function (data) {
+          client.emit("new message", `You said: ${data}`)
+          client.broadcast.to(matcher.getPartner(client.id)).emit("new message",
+            `${matcher.getUsername(client.id)} says: ${data}`
+            )
+
+        })
+
         client.resources = {
             screen: false,
             video: true,
