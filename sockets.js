@@ -4,6 +4,12 @@ var uuid = require('node-uuid'),
 module.exports = function(server, io, matcher, config) {
 
     io.sockets.on('connection', function(client) {
+
+        let { user_id, username } = socket.handshake.session;
+
+
+
+
         client.resources = {
             screen: false,
             video: true,
