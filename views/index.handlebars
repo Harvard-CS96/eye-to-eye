@@ -11,8 +11,6 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
         crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-        crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -49,7 +47,9 @@
     </div>
 
 
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+        
     <!-- import socketio for the front end -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.1/socket.io.min.js"></script>
 
@@ -63,7 +63,7 @@
 
         const isAuthenticated = {{ isAuthenticated }}
         const user = {{{ user }}}
-        
+
         $(document).ready(function () {
             jQuery(function () {
                 // connect to socket on server
@@ -144,7 +144,7 @@
             })
         })
 
-        
+
     </script>
 </body>
 
