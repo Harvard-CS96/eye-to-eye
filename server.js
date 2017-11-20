@@ -93,7 +93,7 @@ io.use(sharedsession(session, {
 }));
 
 
-sockets(server, config);
+sockets(server, io, config);
 
 console.log('signal master is running at: ' + "https://localhost:" + port);
 
