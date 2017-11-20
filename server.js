@@ -131,3 +131,7 @@ console.log('signal master is running at: ' + "https://localhost:" + port);
 // Require our routes
 const mainRoute = require('./routes/main')
 app.use('/', mainRoute);
+
+const createUtilRoute = require('./routes/util');
+const utilRoute = createUtilRoute(matcher)
+app.use('/util', utilRoute);
