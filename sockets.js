@@ -1,5 +1,4 @@
-var socketIO = require('socket.io'),
-    uuid = require('node-uuid'),
+var uuid = require('node-uuid'),
     crypto = require('crypto');
 
 module.exports = function(server, io, config) {

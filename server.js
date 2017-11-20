@@ -53,7 +53,7 @@ var server = https.createServer(options, app).listen(port, function() {
     console.log("Express server listening on port " + port);
 });
 
-var io = socketIO.listen(server);
+var io = require("socket.io").listen(server);
 
 sockets(server, io, config);
 
