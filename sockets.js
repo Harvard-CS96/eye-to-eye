@@ -32,6 +32,10 @@ module.exports = function(server, io, matcher, config) {
           matcher.disconnect(client.id);
         })
 
+        client.on("hangup", () => {
+          matcher.hangup(client.id);
+        })
+
         client.resources = {
             screen: false,
             video: true,
