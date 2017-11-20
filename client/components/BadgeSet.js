@@ -11,7 +11,7 @@ class BadgeSet extends React.Component {
         }
         return <div id="BadgeSet">
             <h3>BadgeSet</h3>
-            {rows}
+            { rows.map((x, i) => ({...x, key: i})) }
         </div>
     }
 }

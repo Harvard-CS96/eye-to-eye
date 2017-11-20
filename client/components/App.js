@@ -12,12 +12,14 @@ class App extends React.Component {
                 children,
                 <Logout />
             ] :
-            <Login />
+            [
+                <Login />
+            ]
 
         return <div id="App">
             {/* TODO: BETTER NAME */}
             <h1>VideoRoulette</h1>
-            { content }
+            { content.map((x, i) => ({...x, key: i})) }
         </div>
     }
 }
