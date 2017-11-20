@@ -7,7 +7,7 @@ module.exports = function(server, io, matcher, config) {
         socket.resources = {
             screen: false,
             video: true,
-            audio: false
+            audio: true
         };
 
         // pass a message to another id
