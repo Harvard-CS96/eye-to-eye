@@ -8,15 +8,14 @@ import SubmitFeedbackButton from '../containers/SubmitFeedbackButton';
 import strings from '../json/strings.json';
 
 class Feedback extends React.Component {
-    // constructor() {
-    //     super();
-    //     this.state = {
-    //         rating: null
-    //     };
-    // }
+    constructor() {
+        super();
+        this.state = {
+            rating: null
+        };
+    }
     onStarClick(nextValue, prevValue, name) {
-        this.state = {rating: nextValue};
-        console.log(this.state.rating);
+        this.setState({rating: nextValue});
     }
     render() {
         return <div id="Feedback">
@@ -33,7 +32,7 @@ class Feedback extends React.Component {
             <BadgeSet badgesDisplayed={['01','02','03']}/>
             <CriticismSet criticismsDisplayed={['Impolite', 'Too much hairgel']}/>
             <ReportAbuseButton/>
-            <SubmitFeedbackButton/>
+            <SubmitFeedbackButton rating={this.state.rating}/>
         </div>
     }
 }

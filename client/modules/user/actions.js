@@ -1,17 +1,28 @@
-// import * as types from './types';
+import * as types from './types';
 
-// const login = (id) => ({
-//     type: types.LOGIN,
-//     data: {
-//         id
-//     } 
-// })
+const login = (id) => ({
+    type: types.LOGIN,
+    data: {
+        id
+    } 
+})
 
-// const logout = () => ({
-//     type: types.LOGOUT
-// })
+const logout = () => ({
+    type: types.LOGOUT
+})
 
-// export {
-//     login,
-//     logout
-// }
+const submitFeedback = (userId, oldRating, newRating, numConversations) => ({
+    type: types.SUBMIT_FEEDBACK,
+    data: {
+        userId,
+        oldRating,
+        newRating,
+        numConversations
+    }
+})
+
+export {
+    login,
+    logout,
+    submitFeedback
+}

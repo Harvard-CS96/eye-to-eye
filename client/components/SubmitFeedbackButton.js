@@ -5,6 +5,9 @@ import strings from '../json/strings.json';
 
 class SubmitFeedbackButton extends React.Component {
     submitFeedback = () => {
+        // TODO: Update rating/feedback here. Get rating as a parameter from Feedback.js.
+        const { rating } = this.props;
+        console.log(rating);
         this.props.history.push('/profile');
     }
     render() {
