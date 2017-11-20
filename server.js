@@ -119,7 +119,7 @@ let matcher = new Matcher((id, status, partner = null) => {
 })
 
 
-sockets(server, io, config);
+sockets(server, io, matcher, config);
 
 console.log('signal master is running at: ' + "https://localhost:" + port);
 
