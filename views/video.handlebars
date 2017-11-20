@@ -107,8 +107,12 @@
                 });
             });
             // ALEX'S FACE-TRACKING STUFF
+            // Need to move this to somewhere other than onload window;
+            // instead we want to start face tracking when a partner has appeared
+            // (will this take too long? don't want to show unsafe video before blurring has started)
             window.onload = function() {
-              var vids = $(“#remoteVideos > video”).first();
+              // var vids = $(“#remoteVideos > video”).first();
+              var vids = $(“#remoteVideos”);
               var video = vids;
               var canvas = document.getElementById('canvas');
               var context = canvas.getContext('2d');
