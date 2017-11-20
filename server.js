@@ -55,12 +55,6 @@ var server = https.createServer(options, app).listen(port, function() {
 
 var io = require("socket.io").listen(server);
 
-sockets(server, io, config);
-
-console.log('signal master is running at: ' + "https://localhost:" + port);
-
-app.use(express.static('public'))
-
 // ----------------
 // End Merged code
 // ----------------
@@ -128,3 +122,9 @@ let matcher = new Matcher((id, status, partner = null) => {
 const logging = require('./controllers/logging');
 matcher.addCallback(PAIRING,      logging.logConnection);
 matcher.addCallback(DISCONNECTED, logging.logDisconnection);
+
+sockets(server, io, matcher, config);
+
+console.log('signal master is running at: ' + "https://localhost:" + port);
+
+app.use(express.static('public'))
