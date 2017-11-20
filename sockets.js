@@ -100,6 +100,7 @@ module.exports = function(server, io, matcher, config) {
         // when socket receives a message from a user, the (data) parameter
         // is the message the user send
 
+        /*
         let {
             user_id,
             username
@@ -144,6 +145,7 @@ module.exports = function(server, io, matcher, config) {
             matcher.disconnect(socket.id)
         })
 
+        */
 
         // tell socket about stun and turn servers and generate nonces
         socket.emit('stunservers', config.stunservers || []);
