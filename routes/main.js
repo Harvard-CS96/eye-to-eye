@@ -18,7 +18,7 @@ router.get('/', isLoggedIn, (req, res) => {
             isAuthenticated: 'true',
             user: JSON.stringify(req.user),
         } :
-        {   
+        {
             isAuthenticated: 'false',
             user: JSON.stringify({}),
         }
@@ -43,7 +43,7 @@ router.get('/updatePreferences', isLoggedIn, (req, res) => {
             isAuthenticated: 'true',
             user: JSON.stringify(req.user)
         } :
-        {   
+        {
             isAuthenticated: 'false',
             user: JSON.stringify({})
         }
@@ -70,6 +70,10 @@ router.get('/auth/error', (req, res) => { res.end('Auth failure :(') })
 router.get('/logout', function(req, res) {
     req.logout()
     res.redirect('/');
+})
+
+router.get('/video', (req, res) => {
+    res.render("video")
 })
 
 
