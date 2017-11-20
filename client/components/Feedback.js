@@ -8,6 +8,16 @@ import SubmitFeedbackButton from '../containers/SubmitFeedbackButton';
 import strings from '../json/strings.json';
 
 class Feedback extends React.Component {
+    // constructor() {
+    //     super();
+    //     this.state = {
+    //         rating: null
+    //     };
+    // }
+    onStarClick(nextValue, prevValue, name) {
+        this.state = {rating: nextValue};
+        console.log(this.state.rating);
+    }
     render() {
         return <div id="Feedback">
             <h2>Feedback</h2>
@@ -17,6 +27,7 @@ class Feedback extends React.Component {
             <StarRatingComponent 
                     name="user_star_rating" 
                     starCount={5}
+                    onStarClick={this.onStarClick.bind(this)}
                 />
             {/* TODO: Get badges and criticisms from database once branch merged. */}
             <BadgeSet badgesDisplayed={['01','02','03']}/>
