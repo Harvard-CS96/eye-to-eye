@@ -1,10 +1,10 @@
 import React from 'react';
+import strings from '../json/strings.json';
 
 class HideLeaders extends React.Component {
     render() {
-
-        return <div id="HideLeaders">
-            <h1>Hide Leaderboard</h1>
+		return <div id="HideLeaders">
+        	<div className="button" children={strings.HideLeaders.link} />
         </div>
     }
 }
