@@ -36,6 +36,13 @@ module.exports = function(server, io, matcher, config) {
           matcher.hangup(client.id);
         })
 
+        client.on("logout", () => {
+          delete client.handshake.session.user_id;
+          delete client.handshake.session.username;
+          client.handshake.session.save()
+          matcher.disconnect(client.id)
+        })
+
         client.resources = {
             screen: false,
             video: true,
