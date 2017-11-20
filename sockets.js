@@ -5,7 +5,51 @@ var socketIO = require('socket.io'),
 module.exports = function(server, config) {
     var io = socketIO.listen(server);
 
+    const Matcher = require('./matcher');
+    let matcher = new Matcher((id, status, partner = null) => { });
+
     io.sockets.on('connection', function(client) {
+
+        var socket = client;
+
+        let { user_id, username } = socket.handshake.session;
+        if (!username) {
+          socket.emit('request username')
+        } else {
+          socket.emit('recall username', username)
+          matcher.connect(socket.id, username, user_id);
+        }
+
+        socket.on("send message", function (data) {
+          socket.emit("new message", `You said: ${data}`)
+          socket.broadcast.to(matcher.getPartner(socket.id)).emit("new message",
+            `${matcher.getUsername(socket.id)} says: ${data}`
+            )
+
+        })
+
+        socket.on("set user", ({ username, user_id }) => {
+          matcher.connect(socket.id, username, user_id);
+          socket.handshake.session.username = username;
+          socket.handshake.session.save();
+          socket.emit('recall username', username)
+        })
+
+        socket.on("disconnect", () => {
+          matcher.disconnect(socket.id);
+        })
+
+        socket.on("hangup", () => {
+          matcher.hangup(socket.id);
+        })
+
+        socket.on("logout", () => {
+          delete socket.handshake.session.user_id;
+          delete socket.handshake.session.username;
+          socket.handshake.session.save()
+          matcher.disconnect(socket.id)
+        })
+
         client.resources = {
             screen: false,
             video: true,
