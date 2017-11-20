@@ -1,4 +1,8 @@
 
+# TextRoulette Documentation
+
+## Table of Contents
+
 * [Tutorial](Tutorial.md)
 * [Introduction](Introduction.md)
 
@@ -11,8 +15,8 @@
 
 * FrontEnd
 * [React](guides/React.md)
-* [Components](guides/Components.md)
 * [Redux](guides/Redux.md)
+
 * [Troubleshooting](Troubleshooting.md)
 
 
