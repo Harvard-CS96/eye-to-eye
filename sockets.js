@@ -5,7 +5,7 @@ module.exports = function(server, io, matcher, config) {
 
     io.sockets.on('connection', function(client) {
 
-        let { user_id, username } = socket.handshake.session;
+        let { user_id, username } = client.handshake.session;
 
 
 
