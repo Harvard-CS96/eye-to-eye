@@ -65,12 +65,13 @@ var exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+/*
 const session = require("express-session")({
   secret: "my-secret",
   resave: true,
   saveUninitialized: true
 });
-/*
+
 const sharedsession = require("express-socket.io-session");
 
 app.use(require('cookie-parser')());
@@ -92,47 +93,11 @@ io.use(sharedsession(session, {
 }));
 */
 
-const Matcher = require('./matcher');
-let matcher = new Matcher((id, status, partner = null) => {
-  switch (status) {
-    case WAITING:
-      {
-        // io.sockets.emit("meta", `${id} is waiting`)
-        //io.to(id).emit("waiting");
-        break;
-      }
-    case PAIRING:
-      {
-        // io.sockets.emit("meta", `${id} is pairing to ${partner}`)
-        //io.to(id).emit("pairing", matcher.getUsername(partner));
-        break;
-      }
-    case DISCONNECTED:
-      {
-        //io.to(id).emit("disconnected", matcher.getUsername(partner))
-      }
-    default:
-      {
-        break;
-      }
-  }
-})
 
-// add callbacks to matcher
-const logging = require('./controllers/logging');
-matcher.addCallback(PAIRING,      logging.logConnection);
-matcher.addCallback(DISCONNECTED, logging.logDisconnection);
-
-sockets(server, io, matcher, config);
+sockets(server, config);
 
 console.log('signal master is running at: ' + "https://localhost:" + port);
-
-// app.use(express.static('public'))
 
 // Require our routes
 const mainRoute = require('./routes/main')
 app.use('/', mainRoute);
-
-const createUtilRoute = require('./routes/util');
-const utilRoute = createUtilRoute(matcher)
-app.use('/util', utilRoute);
