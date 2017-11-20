@@ -17,23 +17,23 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     const { type, data } = action;
     switch (type) {
-        // case types.LOGIN: {
-        //     const { id } = data;
-        //     return {
-        //         ...state,
-        //         isAuthenticated: true,
-        //         id: id
-        //     }
-        // }
-        // case types.LOGOUT: {
-        //     state.isAuthenticated = false;
-        //     state.id = null;
-        //     return {
-        //         ...state,
-        //         isAuthenticated: false,
-        //         id: null
-        //     }
-        // }
+        case types.LOGIN: {
+            const { id } = data;
+            return {
+                ...state,
+                isAuthenticated: true,
+                id: id
+            }
+        }
+        case types.LOGOUT: {
+            state.isAuthenticated = false;
+            state.id = null;
+            return {
+                ...state,
+                isAuthenticated: false,
+                id: null
+            }
+        }
         default: {
             return state;
         }

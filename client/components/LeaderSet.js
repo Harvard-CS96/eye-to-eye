@@ -21,7 +21,8 @@ class LeaderSet extends React.Component {
 
 	    return <div id="LeaderSet">
 	    <h3>Leaderboard</h3>
-	    	{leaders}
+			{ leaders.map((x, i) => ({...x, key: i})) }
+
         </div>
 
 
