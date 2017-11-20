@@ -6,9 +6,12 @@ module.exports = function(server, io, matcher, config) {
     io.sockets.on('connection', function(client) {
 
         let { user_id, username } = client.handshake.session;
-
-
-
+        if (!username) {
+          client.emit('request username')
+        } else {
+          client.emit('recall username', username)
+          matcher.connect(client.id, username, user_id);
+        }
 
         client.resources = {
             screen: false,
