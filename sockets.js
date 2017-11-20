@@ -3,45 +3,45 @@ var uuid = require('node-uuid'),
 
 module.exports = function(server, io, config) {
 
-    io.sockets.on('connection', function(client) {
-        client.resources = {
+    io.sockets.on('connection', function(socket) {
+        socket.resources = {
             screen: false,
             video: true,
             audio: false
         };
 
         // pass a message to another id
-        client.on('message', function(details) {
+        socket.on('message', function(details) {
             console.log(details);
             if (!details) return;
 
             var otherClient = io.to(details.to);
             if (!otherClient) return;
 
-            details.from = client.id;
+            details.from = socket.id;
             otherClient.emit('message', details);
         });
 
-        client.on('shareScreen', function() {
-            client.resources.screen = true;
+        socket.on('shareScreen', function() {
+            socket.resources.screen = true;
         });
 
-        client.on('unshareScreen', function(type) {
-            client.resources.screen = false;
+        socket.on('unshareScreen', function(type) {
+            socket.resources.screen = false;
             removeFeed('screen');
         });
 
-        client.on('join', join);
+        socket.on('join', join);
 
         function removeFeed(type) {
-            if (client.room) {
-                io.sockets.in(client.room).emit('remove', {
-                    id: client.id,
+            if (socket.room) {
+                io.sockets.in(socket.room).emit('remove', {
+                    id: socket.id,
                     type: type
                 });
                 if (!type) {
-                    client.leave(client.room);
-                    client.room = undefined;
+                    socket.leave(socket.room);
+                    socket.room = undefined;
                 }
             }
         }
@@ -49,29 +49,29 @@ module.exports = function(server, io, config) {
         function join(name, cb) {
             // sanity check
             if (typeof name !== 'string') return;
-            // check if maximum number of clients reached
+            // check if maximum number of sockets reached
             if (config.rooms && config.rooms.maxClients > 0 &&
-                clientsInRoom(name) >= config.rooms.maxClients) {
+                socketsInRoom(name) >= config.rooms.maxClients) {
                 safeCb(cb)('full');
                 return;
             }
             // leave any existing rooms
             removeFeed();
             safeCb(cb)(null, describeRoom(name));
-            client.join(name);
-            client.room = name;
+            socket.join(name);
+            socket.room = name;
         }
 
         // we don't want to pass "leave" directly because the
         // event type string of "socket end" gets passed too.
-        client.on('disconnect', function() {
+        socket.on('disconnect', function() {
             removeFeed();
         });
-        client.on('leave', function() {
+        socket.on('leave', function() {
             removeFeed();
         });
 
-        client.on('create', function(name, cb) {
+        socket.on('create', function(name, cb) {
             if (arguments.length == 2) {
                 cb = (typeof cb == 'function') ? cb : function() {};
                 name = name || uuid();
@@ -91,7 +91,7 @@ module.exports = function(server, io, config) {
 
         // support for logging full webrtc traces to stdout
         // useful for large-scale error monitoring
-        client.on('trace', function(data) {
+        socket.on('trace', function(data) {
             console.log('trace', JSON.stringify(
                 [data.type, data.session, data.prefix, data.peer, data.time, data.value]
             ));
@@ -145,14 +145,14 @@ module.exports = function(server, io, config) {
         })
 
 
-        // tell client about stun and turn servers and generate nonces
-        client.emit('stunservers', config.stunservers || []);
+        // tell socket about stun and turn servers and generate nonces
+        socket.emit('stunservers', config.stunservers || []);
 
         // create shared secret nonces for TURN authentication
         // the process is described in draft-uberti-behave-turn-rest
         var credentials = [];
         // allow selectively vending turn credentials based on origin.
-        var origin = client.handshake.headers.origin;
+        var origin = socket.handshake.headers.origin;
         if (!config.turnorigins || config.turnorigins.indexOf(origin) !== -1) {
             config.turnservers.forEach(function(server) {
                 var hmac = crypto.createHmac('sha1', server.secret);
@@ -166,24 +166,24 @@ module.exports = function(server, io, config) {
                 });
             });
         }
-        client.emit('turnservers', credentials);
+        socket.emit('turnservers', credentials);
     });
 
 
     function describeRoom(name) {
         var adapter = io.nsps['/'].adapter;
-        var clients = adapter.rooms[name] || {};
+        var sockets = adapter.rooms[name] || {};
         var result = {
-            clients: {}
+            sockets: {}
         };
-        Object.keys(clients).forEach(function(id) {
-            result.clients[id] = adapter.nsp.connected[id].resources;
+        Object.keys(sockets).forEach(function(id) {
+            result.sockets[id] = adapter.nsp.connected[id].resources;
         });
         return result;
     }
 
-    function clientsInRoom(name) {
-        return io.sockets.clients(name).length;
+    function socketsInRoom(name) {
+        return io.sockets.sockets(name).length;
     }
 
 };
