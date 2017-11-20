@@ -92,6 +92,32 @@ io.use(sharedsession(session, {
   autoSave:true
 }));
 
+const Matcher = require('./matcher');
+let matcher = new Matcher((id, status, partner = null) => {
+  switch (status) {
+    case WAITING:
+      {
+        // io.sockets.emit("meta", `${id} is waiting`)
+        io.to(id).emit("waiting");
+        break;
+      }
+    case PAIRING:
+      {
+        // io.sockets.emit("meta", `${id} is pairing to ${partner}`)
+        io.to(id).emit("pairing", matcher.getUsername(partner));
+        break;
+      }
+    case DISCONNECTED:
+      {
+        io.to(id).emit("disconnected", matcher.getUsername(partner))
+      }
+    default:
+      {
+        break;
+      }
+  }
+})
+
 
 sockets(server, io, config);
 
