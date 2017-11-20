@@ -28,6 +28,10 @@ module.exports = function(server, io, matcher, config) {
           client.emit('recall username', username)
         })
 
+        client.on("disconnect", () => {
+          matcher.disconnect(client.id);
+        })
+
         client.resources = {
             screen: false,
             video: true,
