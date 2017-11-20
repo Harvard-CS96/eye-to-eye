@@ -35,19 +35,19 @@
                     </div>
 
                     <!-- form and input box to submit messages -->
-                    <div id="send-message" class="mt-5">
+                    <form id="join-room" class="mt-5">
                         <div class="form-row">
                             <div class="form-group col-md-8">
                                 <input type="text" class="form-control" id="room" aria-describedby="roomHelp" placeholder="Room Name">
                             </div>
                             <div class="form-group col-md-2">
-                                <input id="join-room-button" type="submit" value="Join Room" class="btn btn-primary" style="width:100%;"></input>
+                                <input id="join-room-button" type="submit" value="Join Room" class="btn btn-primary disabled" style="width:100%;"></input>
                             </div>
                             <div class="form-group col-md-2">
                                 <input id="end-conversation" type="button" value="End Conversation" class="btn btn-danger disabled" style="width:100%;"></input>
                             </div>
                         </div>
-                    </div>
+                    </form>
                     <a href="updatePreferences">Update Your Stances</a>
                 </div>
             </div>
@@ -74,7 +74,9 @@
             });
             // we have to wait until it's ready
             webrtc.on('readyToCall', function() {
-                $("#join").click(function() {
+                $("#join-room-button").removeClass("disabled");
+                $("#join-room").submit(function(e) {
+                    e.preventDefault();
                     webrtc.joinRoom($("#room").val());
                 });
             });
