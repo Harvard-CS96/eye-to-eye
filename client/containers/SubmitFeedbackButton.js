@@ -12,11 +12,10 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         submitFeedback: feedback => {
-            console.log("test")
+            console.log("Hit container")
             const { rating } = ownProps;
             console.log(rating);            
             dispatch(submitFeedback(rating))
-            // userId, oldRating, newRating, numConversations
         }
     }
 } 
