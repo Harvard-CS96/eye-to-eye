@@ -5,6 +5,7 @@ const reducer = (state = initialState, action) => {
     switch (type) {
         case types.SUBMIT_FEEDBACK: {
             const { rating } = data;
+            console.log("Hit reducer");
             console.log(rating);
             return {
                 ...state,
