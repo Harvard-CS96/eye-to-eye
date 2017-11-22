@@ -111,15 +111,16 @@
                 console.log('video added', peer);
                 var remotes = document.getElementById('remotes');
                 if (remotes) {
-                    var container = document.createElement('div');
-                    container.className = 'videoContainer';
-                    container.id = 'container_' + webrtc.getDomId(peer);
-                    container.appendChild(video);
-
-                    // suppress contextmenu
-                    // video.oncontextmenu = function () { return false; };
-
-                    remotes.appendChild(container);
+                    // var container = document.createElement('div');
+                    // container.className = 'videoContainer';
+                    // container.id = 'container_' + webrtc.getDomId(peer);
+                    // container.appendChild(video);
+                    //
+                    // // suppress contextmenu
+                    // // video.oncontextmenu = function () { return false; };
+                    //
+                    // remotes.appendChild(container);
+                    console.log("found remotes")
                 }
             });
 
