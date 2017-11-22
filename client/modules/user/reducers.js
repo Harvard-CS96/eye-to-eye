@@ -1,17 +1,20 @@
 import * as types from './types';
 
-const initialID = window.user ?
-    window.user.id :
-    null
+let initialID = null,
+    initialName = null,
+    initialBadges = null;
 
-const initialName = window.user && window.user.facebook ?
-    window.user.facebook.name :
-    null
+if (window.user && window.user.facebook) {
+    initialID = window.user.id;
+    initialName = window.user.facebook.name;
+    initialBadges = window.user.badges;
+}
 
 const initialState = {
     isAuthenticated: window.isAuthenticated,
     id: initialID,
-    name: initialName
+    name: initialName,
+    badges: initialBadges
 }
 
 const reducer = (state = initialState, action) => {

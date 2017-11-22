@@ -1,8 +1,11 @@
 import { connect } from 'react-redux';
 import _BadgeSet from '../components/BadgeSet';
+import { selectors as userSelectors } from '../modules/user';
 
+const { getBadges } = userSelectors;
 
 const mapStateToProps = (state, ownProps) => ({
+    badges: getBadges(state)
 })
 
 

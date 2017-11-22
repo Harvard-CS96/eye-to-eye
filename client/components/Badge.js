@@ -4,9 +4,13 @@ import strings from '../json/strings.json';
 
 class Badge extends React.Component {
     render() {
-        var badgeId = this.props.badgeId;     
+        const { badgeId, count } = this.props;
+        const renderedCount = count > 0 ?
+            <div>{count}</div> :
+            null;
         return <div id="Badge">
-            <img src={require("../assets/badge-" + badgeId + "-on.png")} width="100" height="100"/>
+            <img src={require("../assets/badge-" + badgeId + "-on.png")} width="100" height="100" />
+            {renderedCount}
         </div>
     }
 }
