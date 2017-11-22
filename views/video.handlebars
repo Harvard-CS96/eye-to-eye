@@ -109,18 +109,45 @@
 
             webrtc.on('videoAdded', function (video, peer) {
                 console.log('video added', peer);
-                var remotes = document.getElementById('remotes');
-                if (remotes) {
-                    // var container = document.createElement('div');
-                    // container.className = 'videoContainer';
-                    // container.id = 'container_' + webrtc.getDomId(peer);
-                    // container.appendChild(video);
-                    //
-                    // // suppress contextmenu
-                    // // video.oncontextmenu = function () { return false; };
-                    //
-                    // remotes.appendChild(container);
-                    console.log("found remotes")
+
+                var vids = $('#remoteVideos > video').first();
+                // var vids = $(“#remoteVideos”);
+                var video = vids;
+                var canvas = document.getElementById('canvas');
+                var context = canvas.getContext('2d');
+
+                var tracker = new tracking.ObjectTracker('face');
+                tracker.setInitialScale(4);
+                tracker.setStepSize(2);
+                tracker.setEdgesDensity(0.1);
+
+                tracking.track('#remoteVideos > video', tracker, { camera: true });
+
+                tracker.on('track', function(event) {
+                  context.clearRect(0, 0, canvas.width, canvas.height);
+
+                  event.data.forEach(function(rect) {
+                    context.strokeStyle = '#a64ceb';
+                    context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+                    context.font = '11px Helvetica';
+                    context.fillStyle = "#fff";
+                    context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+                    context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+                  });
+                });
+
+                // var remotes = document.getElementById('remotes');
+                // if (remotes) {
+                //     // var container = document.createElement('div');
+                //     // container.className = 'videoContainer';
+                //     // container.id = 'container_' + webrtc.getDomId(peer);
+                //     // container.appendChild(video);
+                //     //
+                //     // // suppress contextmenu
+                //     // // video.oncontextmenu = function () { return false; };
+                //     //
+                //     // remotes.appendChild(container);
+                //     console.log("found remotes")
                 }
             });
 
@@ -129,31 +156,31 @@
             // instead we want to start face tracking when a partner has appeared - after joined a room
             // (will this take too long? don't want to show unsafe video before blurring has started)
             window.onload = function() {
-              var vids = $('#remoteVideos > video').first();
-              // var vids = $(“#remoteVideos”);
-              var video = vids;
-              var canvas = document.getElementById('canvas');
-              var context = canvas.getContext('2d');
-
-              var tracker = new tracking.ObjectTracker('face');
-              tracker.setInitialScale(4);
-              tracker.setStepSize(2);
-              tracker.setEdgesDensity(0.1);
-
-              tracking.track('#remoteVideos > video', tracker, { camera: true });
-
-              tracker.on('track', function(event) {
-                context.clearRect(0, 0, canvas.width, canvas.height);
-
-                event.data.forEach(function(rect) {
-                  context.strokeStyle = '#a64ceb';
-                  context.strokeRect(rect.x, rect.y, rect.width, rect.height);
-                  context.font = '11px Helvetica';
-                  context.fillStyle = "#fff";
-                  context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
-                  context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
-                });
-              });
+              // var vids = $('#remoteVideos > video').first();
+              // // var vids = $(“#remoteVideos”);
+              // var video = vids;
+              // var canvas = document.getElementById('canvas');
+              // var context = canvas.getContext('2d');
+              //
+              // var tracker = new tracking.ObjectTracker('face');
+              // tracker.setInitialScale(4);
+              // tracker.setStepSize(2);
+              // tracker.setEdgesDensity(0.1);
+              //
+              // tracking.track('#remoteVideos > video', tracker, { camera: true });
+              //
+              // tracker.on('track', function(event) {
+              //   context.clearRect(0, 0, canvas.width, canvas.height);
+              //
+              //   event.data.forEach(function(rect) {
+              //     context.strokeStyle = '#a64ceb';
+              //     context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+              //     context.font = '11px Helvetica';
+              //     context.fillStyle = "#fff";
+              //     context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+              //     context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+              //   });
+              // });
 
             };
             // FACE TRACKING ENDS HERE
