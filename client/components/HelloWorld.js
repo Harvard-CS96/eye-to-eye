@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Counter from '../containers/Counter';
-import Feedback from '../containers/Feedback';
 import Profile from '../containers/Profile'
-
+import Feedback from '../containers/Feedback';
 import Strings from '../json/strings.json';
 
 class HelloWorld extends React.Component {
