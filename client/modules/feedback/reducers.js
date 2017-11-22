@@ -36,6 +36,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 selectedBadges: badges.map(badge => ({
                     badge: badge.uuid,
+                    name: badge.name,
                     enabled: false
                 }))
             }
