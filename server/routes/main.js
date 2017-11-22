@@ -56,8 +56,13 @@ router.get('/questions', isLoggedIn, (req, res) => {
 });
 
 // Either find specific questions or all questions.
-router.post('/chats', (req, res) => {
-    chats.logFeedback(req.body, (results) => {
+router.post('/chats', isLoggedIn, (req, res) => {
+    const feedback = {
+        from: req.user.uuid,
+        stars: req.body.stars,
+        badges: req.body.badges
+    }
+    chats.logFeedback(feedback, (results) => {
         res.send(results);
     });
 });
