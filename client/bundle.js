@@ -10,6 +10,7 @@ import App from './containers/App';
 import routes from './routes';
 
 import './style/master.scss';
+import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const RoutedApp = withRouter(App)
 
