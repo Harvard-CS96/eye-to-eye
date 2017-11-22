@@ -16,6 +16,7 @@ class Profile extends React.Component {
         return <div id="Profile">
         	{Strings.Profile.body}
             <QuestionSet questions={questions}/>
+            {/* TODO: Create different badget object */}
             <BadgeSet badgesDisplayed={['01','02','03']}/>
             <LeaderSet showLeaderboard={true}/>
             <StartConversationButton />
