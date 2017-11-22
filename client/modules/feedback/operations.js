@@ -14,6 +14,7 @@ const submitFeedback = (rating) => dispatch => {
             console.log(error);
         });
 }
+const toggleBadge = actions.toggleBadge;
 
 export {
     submitFeedback

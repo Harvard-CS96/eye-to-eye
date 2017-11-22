@@ -1,6 +1,6 @@
 import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
-import BadgeSet from '../containers/BadgeSet';
+// import FeedbackBadgeSet from '../containers/FeedbackBadgeSet';
 import CriticismSet from '../containers/CriticismSet'
 import ReportAbuseButton from '../containers/ReportAbuseButton';
 import SubmitFeedbackButton from '../containers/SubmitFeedbackButton';
@@ -11,15 +11,14 @@ class Feedback extends React.Component {
     constructor() {
         super();
         this.state = {
-            rating: null,
-            selectedBadges: [],
-            selectedCriticisms: []
+            rating: null
         };
     }
     onStarClick(nextValue, prevValue, name) {
         this.setState({rating: nextValue});
     }
     render() {
+        console.log(this.state);
         return <div id="Feedback">
             <h2>Feedback</h2>
             <div>
@@ -31,7 +30,7 @@ class Feedback extends React.Component {
                     onStarClick={this.onStarClick.bind(this)}
                 />
             {/* TODO: Get badges and criticisms from database once branch merged. */}
-            <BadgeSet badgesDisplayed={['01','02','03']}/>
+            {/* <FeedbackBadgeSet badgesDisplayed={['creative','friendly','funny']}/> */}
             <CriticismSet criticismsDisplayed={['Impolite', 'Too much hairgel']}/>
             <ReportAbuseButton/>
             <SubmitFeedbackButton rating={this.state.rating}/>

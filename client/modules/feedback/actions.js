@@ -7,6 +7,14 @@ const submitFeedback = (newRating) => ({
     }
 })
 
+const toggleBadge = (badgeId) => ({
+    type: types.TOGGLE_BADGE,
+    data: {
+        badgeId
+    }
+})
+
 export {
-    submitFeedback
+    submitFeedback,
+    toggleBadge
 }
