@@ -16,7 +16,7 @@ class Profile extends React.Component {
         return <div id="Profile">
         	{Strings.Profile.body}
             <QuestionSet questions={questions}/>
-            <BadgeSet badgesDisplayed={['01','02','03']}/>
+            <BadgeSet />
             <LeaderSet showLeaderboard={true}/>
             <StartConversationButton />
         </div>

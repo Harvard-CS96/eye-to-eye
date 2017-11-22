@@ -11,6 +11,7 @@ var questions = require(path.join(DIR.ROOT, 'controllers/questions'));
 var users = require(path.join(DIR.ROOT, 'controllers/users'));
 var chats = require(path.join(DIR.ROOT, 'controllers/chats'));
 var reports = require(path.join(DIR.ROOT, 'controllers/reports'));
+var badges = require(path.join(DIR.ROOT, 'controllers/badges'));
 
 const router = express.Router();
 
@@ -110,6 +111,20 @@ router.get('/auth/error', (req, res) => { res.end('Auth failure :(') })
 router.get('/logout', function(req, res) {
     req.logout()
     res.redirect('/');
+})
+ 
+router.get('/badges/list', (req, res) => {
+    return badges.listAll()
+        .then(badges => {
+            console.log(badges)
+            res.json(badges)
+        })
+        .catch(err => {
+            console.log(err)
+            res.json({
+                error: err
+            })
+        })
 })
 
 // route middleware to make sure a user is logged in

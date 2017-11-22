@@ -9,7 +9,7 @@ class Badge extends React.Component {
             <div>{count}</div> :
             null;
         return <div id="Badge">
-            <img src={require("../assets/badge-" + badgeId + "-on.png")} width="100" height="100" />
+            <img src={"/assets/badges/" + badgeId + "-on.png"} width="100" height="100" />
             {renderedCount}
         </div>
     }

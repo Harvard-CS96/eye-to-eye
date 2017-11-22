@@ -13,4 +13,4 @@ const QuestionSchema = new mongoose.Schema({
 }, { collection: 'questions',
      preserveNull: true }); // Necessary since some fields will be null by design.
 
-module.exports = mongoose.model('Question', QuestionSchema);
+module.exports = QuestionSchema

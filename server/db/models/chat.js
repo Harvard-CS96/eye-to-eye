@@ -36,4 +36,4 @@ const ChatSchema = new mongoose.Schema({
 ChatSchema.set('toObject', {getters: true}); // Returns uuid as string when accessed.
 ChatSchema.set('toJSON', {getters: true});
 
-module.exports = mongoose.model('Chat', ChatSchema);
+module.exports = ChatSchema

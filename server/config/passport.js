@@ -4,7 +4,7 @@ const fb = require('fb');
 var FacebookStrategy = require('passport-facebook').Strategy;
 const uuid = require('uuid');
 
-var User = require('../db/models/user');
+var User = require('../db/connect').models.User;
 
 // load the auth variables
 var configAuth = require('./auth');

@@ -6,9 +6,12 @@ var UUID = mongoose.Types.UUID;
 
 // How many badges of a certain type does this user have?
 const BadgeCountSchema = new mongoose.Schema({
-    badge: String,
+    badge: { type: UUID, default: uuid.v4 },
     count: Number
 }, { noId: true })
+
+BadgeCountSchema.set('toObject', {getters: true}); // Return uuids as string in a nice way.
+BadgeCountSchema.set('toJSON', {getters: true});
 
 // Single response to a specific question
 const ResponseSchema = new mongoose.Schema({
@@ -46,4 +49,4 @@ const UserSchema = new mongoose.Schema({
 UserSchema.set('toObject', {getters: true}); // Return uuids as string in a nice way.
 UserSchema.set('toJSON', {getters: true});
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = UserSchema;

@@ -63,14 +63,17 @@ serverWatch.on('ready', () => {
     // Reload the server on any change
     serverWatch.on('all', (type, path) => {
         logBuildServer("Detected change:", path)
-        socketio.close()
         // Fully re-require server
         if (router !== null) {
             emptyCache(router.context);
         }
+        if (socketio !== null) {
+            socketio.close()
+        }
         loadServer()
             .then(() => {
                 socketio.listen(httpServer)
+                logBuildServer("Reloaded server!")
             })    
             .catch(e => {
                 logBuildError("Failed to reload server: " + e.toString())
@@ -81,6 +84,7 @@ serverWatch.on('ready', () => {
 
 // Handle server requests
 app.use((req, res, next) => {
+    console.log("HANDLING REQUEST")
     // If there is an error, send the error on any request
     if (serverLoadError !== null) {
         return res.status(500).end("Server load error: " + serverLoadError);

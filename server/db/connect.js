@@ -25,14 +25,16 @@ conn.openUri(db_uri)
 
 // instantiate data models
 // (mongoose waits until the connection is established to run these)
-const Chat = require('./models/chat');
-const User = require('./models/user');
-const Question = require('./models/question');
-const Report = require('./models/report');
+const Badge = mongoose.model("Badge", require('./models/badge'));
+const Chat = mongoose.model("Chat", require('./models/chat'));
+const User = mongoose.model("User", require('./models/user'));
+const Question = mongoose.model("Question", require('./models/question'));
+const Report = mongoose.model("Report", require('./models/report'));
 
 module.exports = {
     connection: conn,
     models: {
+        Badge,
         Chat,
         User,
         Question,
