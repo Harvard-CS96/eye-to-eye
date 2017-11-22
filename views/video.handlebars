@@ -2172,7 +2172,7 @@ headtrackr.controllers.three.realisticRelativeCameraControl = function(camera, s
             // });
 
             // HEADTRACKR.JS VERSION OF FACETRACKING
-            webrtc.on('videoAdded', function (video, peer) {
+            webrtc.on('videoAdded', function () {
               var videoInput = $('#remoteVideos > video').first();
               var canvasInput = document.getElementById('canvas');
 
