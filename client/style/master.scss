@@ -60,3 +60,11 @@ div#LandingPage {
     background-color: rgba($primary, 0.3);
     border-radius: 0.25em;
 }
+
+.buttonSelected {
+    cursor: pointer;
+    padding: 0.5em 1em;
+    margin: 0.5em;
+    background-color: rgba($secondary, 0.3);
+    border-radius: 0.25em;
+}
