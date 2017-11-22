@@ -5,7 +5,7 @@ const loadQuestions = () => dispatch => {
     return axios('/questions')
         .then(response => response.data)
         .then(data => {
-            let questions = data;
+            let { questions } = data;
             questions = questions
                 .filter(q => (
                     q._id &&
