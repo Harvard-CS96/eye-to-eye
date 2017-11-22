@@ -68,6 +68,7 @@
   "scripts": {
     "build": "webpack -p --config webpack/webpack.config.prod.js --progress --profile --colors",
     "dev": "DEBUG=http,build* node devServer.js",
+    "dev-debug": "DEBUG=http,build* node devServer.js",
     "deploy": "npm run build && node prodServer.js"
   },
   "repository": {

@@ -1,13 +1,16 @@
 const mongoose = require('mongoose');
+const uuid = require('uuid');
+require('mongoose-uuid2')(mongoose);
+const UUID = mongoose.Types.UUID;
 
-// To add a new type of badge, update the enum
 const BadgeSchema = new mongoose.Schema({
-    kind: {
-        type: String,
-        enum: ['funny', 'creative', 'friendly']
-    },
-    img_uri: { 
-        type: String,
-        enum: ['uri1', 'uri2', 'uri3']    
+    uuid: UUID,
+    name: { 
+        type: String 
     }
 }, { noId: true })
+
+BadgeSchema.set('toObject', { getters: true }); // Return uuids as string in a nice way.
+BadgeSchema.set('toJSON', { getters: true });
+
+module.exports = BadgeSchema

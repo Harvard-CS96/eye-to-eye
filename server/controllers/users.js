@@ -65,25 +65,19 @@ function updateStance(uuid, questions_answered, callback=(res)=>{}) {
  });
 }
 
-function incrementBadgeCount(currentBadges, badgeName){
+function incrementBadgeCount(currentBadges, incrementId) {
   
-  var badgeIdx = currentBadges.map(d => d.badge).indexOf(badgeName);
-  // If this user hasn't recieved this badge before
-  if(badgeIdx === -1){
-    var newBadge = {
-      "badge": badgeName,
-      "count": 1
-    };
-    currentBadges.push(newBadge);
-    return currentBadges;
+  const existIndex = currentBadges.map(x => x.badge.uuid).indexOf(incrementId) 
+  if (existIndex === -1) {
+    currentBadges.push({
+      badge: incrementId,
+      count: 1
+    })
+  } else {
+    currentBadges[existIndex].count++
   }
-  // Otherwise find and update existing record
-  else{
-    var specificBadge = currentBadges[badgeIdx];
-    specificBadge.count++;
-    currentBadges[badgeIdx] = specificBadge;
-    return currentBadges;
-  }
+
+  return currentBadges
 }
 
 function applyFeedback(uuid, feedback) {
@@ -94,7 +88,7 @@ function applyFeedback(uuid, feedback) {
     const new_stars = ((+user.rating.stars) * (new_count - 1) + (+feedback.stars)) / new_count;
 
     var badges = user.badges;
-    feedback.badges.forEach(function(badge){
+    feedback.badges.forEach(badgeId => {
       badges = incrementBadgeCount(badges, badge);
     })
 

@@ -18,8 +18,11 @@ const {
 // to connect to the database and instantiate the data models
 var db = require('./db/connect');
 
+const path = require('path')
+const serveStatic = require('serve-static')
 // to use the express module
-var router = require("express")();
+const express = require('express')
+var router = express();
 
 var server = require("http").createServer(router);
 
@@ -155,6 +158,8 @@ router.use('/', mainRoute);
 const createUtilRoute = require('./routes/util');
 const utilRoute = createUtilRoute(matcher)
 router.use('/util', utilRoute);
+
+router.use('/assets', serveStatic(path.join(__dirname, 'assets')));
 
 module.exports = {
   router,
