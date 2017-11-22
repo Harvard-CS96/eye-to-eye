@@ -11,8 +11,6 @@ class HelloWorld extends React.Component {
             <Feedback />
             <Link to="/about">{Strings.HelloWorld.link}</Link>
             {Strings.HelloWorld.body}
-            <ReportAbuse />
-            <Feedback />
             <br />
             <Link to="/profile">{Strings.HelloWorld.link2}</Link>
             <br />

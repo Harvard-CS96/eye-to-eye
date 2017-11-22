@@ -28,20 +28,15 @@ function getAuthInfo(req){
 }
 
 router.get('/', isLoggedIn, (req, res) => {
+    res.render("react", getAuthInfo(req))
+})
+
+router.get('/video', isLoggedIn, (req, res) => {
     res.render("video", getAuthInfo(req));
 })
 
 router.get('/text', isLoggedIn, (req, res) => {
-    const hbsData = req.isAuthenticated() === true ?
-        {
-            isAuthenticated: 'true',
-            user: JSON.stringify(req.user),
-        } :
-        {
-            isAuthenticated: 'false',
-            user: JSON.stringify({}),
-        }
-    res.render("text", hbsData)
+    res.render("text", getAuthInfo(req))
 })
 
 // Get a user document from the db by uuid

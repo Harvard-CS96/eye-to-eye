@@ -32,7 +32,7 @@ var multer = require('multer');
 
 // to use our socket.io module
 var socketio = require("socket.io")()
-
+const config = require('getconfig')
 // to use the handlebars templating engine
 var exphbs = require('express-handlebars');
 router.engine('handlebars', exphbs({defaultLayout: 'main'}));
@@ -95,55 +95,59 @@ let matcher = new Matcher((id, status, partner = null) => {
 })
 
 // add callbacks to matcher
-const logging = require('./controllers/logging');
-matcher.addCallback(PAIRING,      logging.logConnection);
-matcher.addCallback(DISCONNECTED, logging.logDisconnection);
+const chats = require('./controllers/chats');
+matcher.addCallback(PAIRING,      chats.logConnection);
+matcher.addCallback(DISCONNECTED, chats.logDisconnection);
 
 // when a user connects to the socket
-socketio.sockets.on("connection", function (socket) {
-  // when socket receives a message from a user, the (data) parameter
-  // is the message the user send
+// socketio.sockets.on("connection", function (socket) {
+//   // when socket receives a message from a user, the (data) parameter
+//   // is the message the user send
 
-  let { user_id, username } = socket.handshake.session;
-  if (!username) {
-    socket.emit('request username')
-  } else {
-    socket.emit('recall username', username)
-    matcher.connect(socket.id, username, user_id);
-  }
+//   let { user_id, username } = socket.handshake.session;
+//   if (!username) {
+//     socket.emit('request username')
+//   } else {
+//     socket.emit('recall username', username)
+//     matcher.connect(socket.id, username, user_id);
+//   }
 
-  socket.on("send message", function (data) {
-    socket.emit("new message", `You said: ${data}`)
-    socket.broadcast.to(matcher.getPartner(socket.id)).emit("new message", 
-      `${matcher.getUsername(socket.id)} says: ${data}`
-      )
+//   socket.on("send message", function (data) {
+//     socket.emit("new message", `You said: ${data}`)
+//     socket.broadcast.to(matcher.getPartner(socket.id)).emit("new message", 
+//       `${matcher.getUsername(socket.id)} says: ${data}`
+//       )
 
-  })
+//   })
 
-  socket.on("set user", ({ username, user_id }) => {
-    matcher.connect(socket.id, username, user_id);
-    socket.handshake.session.username = username;
-    socket.handshake.session.save();
-    socket.emit('recall username', username)
-  })
+//   socket.on("set user", ({ username, user_id }) => {
+//     matcher.connect(socket.id, username, user_id);
+//     socket.handshake.session.username = username;
+//     socket.handshake.session.save();
+//     socket.emit('recall username', username)
+//   })
 
-  socket.on("disconnect", () => {
-    matcher.disconnect(socket.id);
-  })
+//   socket.on("disconnect", () => {
+//     matcher.disconnect(socket.id);
+//   })
 
-  socket.on("hangup", () => {
-    matcher.hangup(socket.id);
-  })
+//   socket.on("hangup", () => {
+//     matcher.hangup(socket.id);
+//   })
 
-  socket.on("logout", () => {
-    delete socket.handshake.session.user_id;
-    delete socket.handshake.session.username;
-    socket.handshake.session.save()
-    matcher.disconnect(socket.id)
-  })
+//   socket.on("logout", () => {
+//     delete socket.handshake.session.user_id;
+//     delete socket.handshake.session.username;
+//     socket.handshake.session.save()
+//     matcher.disconnect(socket.id)
+//   })
 
-})
+// })
+// sock
 
+
+const sockets = require('./sockets');
+sockets(socketio, matcher, config)
 // Require our routes
 const mainRoute = require('./routes/main')
 router.use('/', mainRoute);

@@ -65,8 +65,10 @@ function getMostRecent(uuid, callback) {
             if (err) {
                 console.log(err)
             }
-            if (result) {
+            if (Array.isArray(result) && result.length > 0) {
                 callback(result[0]) // A list was returned, must get element.
+            } else {
+                console.log("No last chat for this user!")
             }
         })
 }
