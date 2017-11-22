@@ -1,7 +1,8 @@
-const SUBMIT_FEEDBACK = 'user/submit_feedback'
-const TOGGLE_BADGE = 'user/toggle_badge'
-
+const SUBMIT_FEEDBACK = 'feedback/submit_feedback'
+const TOGGLE_BADGE = 'feedback/toggle_badge'
+const LOAD_BADGES = 'feedback/load_badges'
 export {
     SUBMIT_FEEDBACK,
-    TOGGLE_BADGE
+    TOGGLE_BADGE,
+    LOAD_BADGES
 }

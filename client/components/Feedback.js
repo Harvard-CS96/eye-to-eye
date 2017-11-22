@@ -1,6 +1,6 @@
 import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
-// import FeedbackBadgeSet from '../containers/FeedbackBadgeSet';
+import FeedbackBadgeSet from '../containers/FeedbackBadgeSet';
 import CriticismSet from '../containers/CriticismSet'
 import ReportAbuseButton from '../containers/ReportAbuseButton';
 import SubmitFeedbackButton from '../containers/SubmitFeedbackButton';
@@ -30,7 +30,7 @@ class Feedback extends React.Component {
                     onStarClick={this.onStarClick.bind(this)}
                 />
             {/* TODO: Get badges and criticisms from database once branch merged. */}
-            {/* <FeedbackBadgeSet badgesDisplayed={['creative','friendly','funny']}/> */}
+            <FeedbackBadgeSet />
             <CriticismSet criticismsDisplayed={['Impolite', 'Too much hairgel']}/>
             <ReportAbuseButton/>
             <SubmitFeedbackButton rating={this.state.rating}/>

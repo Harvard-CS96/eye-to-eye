@@ -16,6 +16,18 @@ const submitFeedback = (rating) => dispatch => {
 }
 const toggleBadge = actions.toggleBadge;
 
+const loadAllBadges = () => dispatch => {
+    axios.get('/badges/list')
+        .then(response => response.data)    
+        .then(response => {
+            console.log(response)
+            dispatch(actions.loadAllBadges(response))
+        })
+        
+}
+
 export {
-    submitFeedback
+    submitFeedback,
+    toggleBadge,
+    loadAllBadges
 }

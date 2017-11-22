@@ -14,7 +14,15 @@ const toggleBadge = (badgeId) => ({
     }
 })
 
+const loadAllBadges = (badges) => ({
+    type: types.LOAD_BADGES,
+    data: {
+        badges
+    }
+})
+
 export {
     submitFeedback,
-    toggleBadge
+    toggleBadge,
+    loadAllBadges
 }
