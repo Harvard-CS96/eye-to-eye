@@ -112,8 +112,8 @@
 
                 var vids = $('#remoteVideos > video').first();
                 var video = vids;
-                var canvas = document.getElementById('canvas');
-                var context = canvas.getContext('2d');
+                // var canvas = document.getElementById('canvas');
+                // var context = canvas.getContext('2d');
 
                 var tracker = new tracking.ObjectTracker('face');
                 tracker.setInitialScale(4);
@@ -123,14 +123,15 @@
                 tracking.track('#remoteVideos > video', tracker, { camera: true });
 
                 tracker.on('track', function(event) {
-                  context.clearRect(0, 0, canvas.width, canvas.height);
+                  // context.clearRect(0, 0, canvas.width, canvas.height);
 
                   event.data.forEach(function(rect) {
-                    context.strokeStyle = '#a64ceb';
-                    context.strokeRect(rect.x, rect.y, rect.width, rect.height);
-                    context.fillStyle = "#fff";
-                    context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
-                    context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+                    console.log(rect.x, rect.y)
+                    // context.strokeStyle = '#a64ceb';
+                    // context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+                    // context.fillStyle = "#fff";
+                    // context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+                    // context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
                   });
                 });
 
