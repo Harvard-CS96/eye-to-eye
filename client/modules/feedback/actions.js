@@ -21,8 +21,16 @@ const toggleCriticism = (criticismId) => ({
     }
 })
 
+const loadAllBadges = (badges) => ({
+    type: types.LOAD_BADGES,
+    data: {
+        badges
+    }
+})
+
 export {
     submitFeedback,
     toggleBadge,
-    toggleCriticism
+    toggleCriticism,
+    loadAllBadges
 }

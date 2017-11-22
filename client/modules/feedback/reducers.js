@@ -20,16 +20,12 @@ const reducer = (state = initialState, action) => {
         }
         case types.TOGGLE_BADGE: {
             const { badgeId } = data;
-            let { selectedBadges } = [state.selectedBadges];
-            var location = selectedBadges.indexOf(badgeId);
-            if (location == -1) {
-                selectedBadges.push(badgeId);
+            let selectedBadges = [...state.selectedBadges];
+            var location = selectedBadges.map(x => x.badge).indexOf(badgeId);
+            if (location === -1) {
+                return state;
             }
-            else {
-                selectedBadges.splice(location, 1);
-            }
-            console.log("Hit reducer for toggling badge");
-            console.log(selectedBadges);
+            selectedBadges[location].enabled = !selectedBadges[location].enabled;
             return {
                 ...state,
                 selectedBadges: selectedBadges
@@ -52,6 +48,16 @@ const reducer = (state = initialState, action) => {
                 selectedCriticisms: selectedCriticisms
             }
         }
+        case types.LOAD_BADGES: {
+            const { badges } = data;
+            return {
+                ...state,
+                selectedBadges: badges.map(badge => ({
+                    badge: badge.uuid,
+                    enabled: false
+                }))
+            }
+        }    
         default: {
             return state;
         }
