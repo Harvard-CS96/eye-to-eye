@@ -68,6 +68,7 @@ serverWatch.on('ready', () => {
             emptyCache(router.context);
         }
         if (socketio !== null) {
+            emptyCache(socketio.context);
             socketio.close()
         }
         loadServer()
