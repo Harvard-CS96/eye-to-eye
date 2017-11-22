@@ -8,7 +8,7 @@ import Profile from './containers/Profile';
 import Feedback from './containers/Feedback';
 
 export default ([
-    <Route exact path="/" component={Profile} />,
+    <Route exact path="/" component={HelloWorld} />,
     <Route path="/about" component={About} />,
     <Route path="/profile" component={Profile} />,
     <Route path="/feedback" component={Feedback} />
