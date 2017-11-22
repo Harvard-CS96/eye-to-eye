@@ -14,7 +14,15 @@ const toggleBadge = (badgeId) => ({
     }
 })
 
+const toggleCriticism = (criticismId) => ({
+    type: types.TOGGLE_CRITICISM,
+    data: {
+        criticismId
+    }
+})
+
 export {
     submitFeedback,
-    toggleBadge
+    toggleBadge,
+    toggleCriticism
 }

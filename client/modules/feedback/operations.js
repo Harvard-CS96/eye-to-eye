@@ -15,7 +15,9 @@ const submitFeedback = (rating) => dispatch => {
         });
 }
 const toggleBadge = actions.toggleBadge;
-
+const toggleCriticism = actions.toggleCriticism;
 export {
-    submitFeedback
+    submitFeedback,
+    toggleBadge,
+    toggleCriticism
 }
