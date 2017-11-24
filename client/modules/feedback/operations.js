@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as actions from './actions';
 
 const submitFeedback = (rating, selectedBadges) => dispatch => {
-    console.log("Hit operation");
+    console.log("OPERATION - SUBMIT FEEDBACK");
     console.log(rating);
     console.log(selectedBadges);
     //TODO: Get rid of "from" parameter once db updates this.
