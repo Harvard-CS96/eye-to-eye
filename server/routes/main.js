@@ -81,9 +81,9 @@ router.get('/feedback', isLoggedIn, (req, res) => {
     res.render("feedback", getAuthInfo(req));
 })
 
-// Save new report
 router.post('/feedback/report', isLoggedIn, (req, res) => {
-    reports.createReport(req.body.report);
+    console.log("blah blah blah");
+    reports.createReport(req.body);
 })
 
 router.get('/login', (req, res) => {
