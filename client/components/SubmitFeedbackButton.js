@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 
 import strings from '../json/strings.json';
 
+//TODO Deprecate
 class SubmitFeedbackButton extends React.Component {
     submitFeedback = () => {
         // TODO: Update rating/feedback here (call submitFeedback).

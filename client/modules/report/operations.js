@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as actions from './actions';
 
+//TODO: change reportType to reportData, which includes from and to (currently only holds kind)
 const submitReport = (reportType) => dispatch => {
     console.log("Hit submit operation");
     console.log(reportType);
