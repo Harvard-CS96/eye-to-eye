@@ -1,9 +1,10 @@
 import * as types from './types';
 
-const submitFeedback = (newRating) => ({
+const submitFeedback = (rating, selectedBadges) => ({
     type: types.SUBMIT_FEEDBACK,
     data: {
-        newRating
+        rating,
+        selectedBadges
     }
 })
 

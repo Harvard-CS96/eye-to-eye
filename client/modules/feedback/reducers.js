@@ -10,12 +10,14 @@ const reducer = (state = initialState, action) => {
     const { type, data } = action;
     switch (type) {
         case types.SUBMIT_FEEDBACK: {
-            const { rating } = data;
-            console.log("Hit reducer for submitting feedback");
+            const { rating, selectedBadges } = data;
+            console.log("REDUCER - SUBMIT FEEDBACK");
             console.log(rating);
+            console.log(selectedBadges);
             return {
                 ...state,
-                rating: rating
+                rating: rating,
+                selectedBadges: selectedBadges
             }
         }
         case types.TOGGLE_BADGE: {
@@ -26,6 +28,8 @@ const reducer = (state = initialState, action) => {
                 return state;
             }
             selectedBadges[location].enabled = !selectedBadges[location].enabled;
+            console.log("REDUCER - TOGGLE BADGE");
+            console.log(selectedBadges);
             return {
                 ...state,
                 selectedBadges: selectedBadges
@@ -33,15 +37,13 @@ const reducer = (state = initialState, action) => {
         }
         case types.TOGGLE_CRITICISM: {
             const { criticismId } = data;
-            let { selectedCriticisms } = [state.selectedCriticisms];
-            var location = selectedCriticisms.indexOf(criticismId);
-            if (location == -1) {
-                selectedCriticisms.push(criticismId);
+            let selectedCriticisms = [...state.selectedCriticisms];
+            var location = selectedCriticisms.map(x => x.criticism).indexOf(criticismId);
+            if (location === -1) {
+                return state;
             }
-            else {
-                selectedCriticisms.splice(location, 1);
-            }
-            console.log("Hit reducer for toggling criticism");
+            selectedCriticisms[location].enabled = !selectedCriticisms[location].enabled;
+            console.log("REDUCER - TOGGLE CRITICISM");
             console.log(selectedCriticisms);
             return {
                 ...state,

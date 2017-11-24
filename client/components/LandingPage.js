@@ -10,8 +10,6 @@ class LandingPage extends React.Component {
         return <div id="LandingPage">
             <ul class="topnav">
                 <li>Home</li>
-                <li><a href="#news">News</a></li>
-                <li><a href="#contact">Contact</a></li>
                 <li class="right"><a href="#about">About</a></li>
             </ul>
             <h1>Join The Conversation</h1>

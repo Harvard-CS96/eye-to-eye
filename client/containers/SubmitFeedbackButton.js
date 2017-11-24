@@ -1,31 +1,27 @@
 import { connect } from 'react-redux';
 import _SubmitFeedbackButton from '../components/SubmitFeedbackButton';
-import { operations as fOperations } from '../modules/feedback';
+import { selectors as fSelectors, operations as fOperations } from '../modules/feedback';
 
 const { submitFeedback } = fOperations;
+const { getBadges } = fSelectors;
 
 const mapStateToProps = (state, ownProps) => ({
-
+    selectedBadges: getBadges(state)
 })
-
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        submitFeedback: feedback => {
-            console.log("Hit container")
-            const { rating } = ownProps;
-            console.log(rating);            
-            dispatch(submitFeedback(rating))
-        }
-    }
+const mapDispatchToProps = {
+    submitFeedback
 } 
 
+// Eliminated this code block because properties were not being passed.
 // const mapDispatchToProps = (dispatch, ownProps) => {
-//     const { id } = ownProps;
+//     console.log(ownProps);
 //     return {
-//         setAnswer: answer => {
-//             console.log(id, answer)
-//             dispatch(setAnswer(id, answer))
+//         submitFeedback: feedback => {
+//             const { rating, selectedBadges } = ownProps;
+//             console.log(rating);
+//             console.log(selectedBadges);  
+//             console.log(this.props);          
+//             dispatch(submitFeedback(rating, selectedBadges))
 //         }
 //     }
 // } 
