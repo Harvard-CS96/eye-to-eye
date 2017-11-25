@@ -13,16 +13,13 @@ class CriticismSet extends React.Component {
     }
     renderCriticism = (criticism, i) => {
         const { criticismId, enabled } = criticism;
-        console.log(criticismId);
         const onClick = this.getOnClickCriticism(criticismId)
         return <Criticism criticismId={criticismId} on={enabled===true} key={i} onClick={onClick} />
     }
     render() {
         const { selectedCriticisms } = this.props
         const { renderCriticism } = this;
-        console.log(selectedCriticisms);
         var renderedCriticisms = selectedCriticisms.map(renderCriticism);
-        console.log(renderedCriticisms);
         return <div id="CriticismSet">
             <h3>CriticismSet</h3>
             {renderedCriticisms}
