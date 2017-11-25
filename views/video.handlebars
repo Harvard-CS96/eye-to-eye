@@ -48,7 +48,7 @@
                     <!-- where the messages will apend in -->
                     <div id="chat" class="border bg-light text-left p-3" style="height:20em;overflow:scroll;">
                       <div class="local_column">
-                        <video id="localVideo"></video> 
+                        <video id="localVideo"></video>
                       </div>
                         <div class="remote_column">
                           <span id="remoteVideos"></span>
@@ -155,6 +155,8 @@
                   event.data.forEach(function(rect) {
                     console.log(rect.x, rect.y)
                     context.strokeStyle = '#a64ceb';
+                    var center = {"x": rect.x + (0.5 * rect.width), "y": rect.y + (0.5 * rect.height)}
+                    console.log(center)
                     context.strokeRect(rect.x, rect.y, rect.width, rect.height);
                     context.fillStyle = "#fff";
                     context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
