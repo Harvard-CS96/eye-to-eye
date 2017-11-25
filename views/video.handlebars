@@ -118,8 +118,8 @@
                 // var video = $('#remoteVideos > video').first();
                 // var video = document.getElementById('localVideo');
                 // // var video = vids;
-                // var canvas = document.getElementById('canvas');
-                // var context = canvas.getContext('2d');
+                var canvas = document.getElementById('canvas');
+                var context = canvas.getContext('2d');
 
                 var tracker = new tracking.ObjectTracker('face');
                 tracker.setInitialScale(4);
@@ -133,11 +133,11 @@
 
                   event.data.forEach(function(rect) {
                     console.log(rect.x, rect.y)
-                    // context.strokeStyle = '#a64ceb';
-                    // context.strokeRect(rect.x, rect.y, rect.width, rect.height);
-                    // context.fillStyle = "#fff";
-                    // context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
-                    // context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+                    context.strokeStyle = '#a64ceb';
+                    context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+                    context.fillStyle = "#fff";
+                    context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+                    context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
                   });
                 });
 
