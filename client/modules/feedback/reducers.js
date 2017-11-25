@@ -18,7 +18,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 rating: rating,
-                selectedBadges: selectedBadges
+                selectedBadges: selectedBadges,
+                selectedCriticisms: selectedCriticisms
             }
         }
         case types.TOGGLE_BADGE: {

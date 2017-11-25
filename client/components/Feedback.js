@@ -18,6 +18,7 @@ class Feedback extends React.Component {
         this.setState({rating: nextValue});
     }
     render() {
+        console.log(this.props);
         return <div id="Feedback">
             <h2>Feedback</h2>
             <div>

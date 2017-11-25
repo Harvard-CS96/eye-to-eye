@@ -3,10 +3,11 @@ import _SubmitFeedbackButton from '../components/SubmitFeedbackButton';
 import { selectors as fSelectors, operations as fOperations } from '../modules/feedback';
 
 const { submitFeedback } = fOperations;
-const { getBadges } = fSelectors;
+const { getBadges, getCriticisms } = fSelectors;
 
 const mapStateToProps = (state, ownProps) => ({
-    selectedBadges: getBadges(state)
+    selectedBadges: getBadges(state),
+    selectedCriticisms: getCriticisms(state)
 })
 const mapDispatchToProps = {
     submitFeedback

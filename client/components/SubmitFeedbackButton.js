@@ -5,12 +5,12 @@ import strings from '../json/strings.json';
 
 class SubmitFeedbackButton extends React.Component {
     onClickSubmit = () => {
-        const { rating, selectedBadges } = this.props;
+        const { rating, selectedBadges, selectedCriticisms } = this.props;
         console.log(rating);
         console.log(selectedBadges);
+        console.log(selectedCriticisms);
         const { submitFeedback } = this.props;
-        // this.props.submitFeedback(rating, selectedBadges);
-        submitFeedback(rating, selectedBadges);  
+        submitFeedback(rating, selectedBadges, selectedCriticisms);  
         this.props.history.push('/profile');
     }
     render() {
