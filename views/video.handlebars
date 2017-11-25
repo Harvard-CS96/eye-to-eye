@@ -154,14 +154,40 @@
 
                   event.data.forEach(function(rect) {
                     console.log(rect.x, rect.y)
-                    context.strokeStyle = '#a64ceb';
+                    // context.strokeStyle = '#a64ceb';
                     var center = {"x": rect.x + (0.5 * rect.width), "y": rect.y + (0.5 * rect.height)}
                     console.log(center)
-                    context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+                    // context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+                    // context.fillStyle = "#fff";
+                    // context.fillRect(center.x - 1, center.y - 1, 2, 2);
+                    // context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+                    // context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+
+                    // Our oval-creating part
                     context.fillStyle = "#fff";
-                    context.fillRect(center.x - 1, center.y - 1, 2, 2);
-                    context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
-                    context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+                    context.fillRect(0,0,320,240);
+                    context.globalCompositeOperation = 'destination-out';
+                    context.beginPath();
+
+                    var centerX = center.x;
+                    var centerY = center.y;
+                    var height = rect.height * 1.1;
+                    var width = rect.width * 1.1;
+
+                    context.moveTo(centerX, centerY - height/2); // A1
+
+                    context.bezierCurveTo(
+                      centerX + width/2, centerY - height/2, // C1
+                      centerX + width/2, centerY + height/2, // C2
+                      centerX, centerY + height/2); // A2
+
+                    context.bezierCurveTo(
+                      centerX - width/2, centerY + height/2, // C3
+                      centerX - width/2, centerY - height/2, // C4
+                      centerX, centerY - height/2); // A1
+
+                    context.fill();
+                    context.closePath();
                   });
                 });
 
