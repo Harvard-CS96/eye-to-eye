@@ -132,33 +132,41 @@
             // TRACKING.JS VERSION OF FACETRACKING
 
             webrtc.on('videoAdded', function (video, peer) {
-                console.log('video added', peer['id']);
+                // console.log('video added', peer['id']);
 
+                // Grab the ID of the peer video tag
                 var video_id = '#' + peer['id'] + '_video_incoming'
 
-                // var video = $('#remoteVideos > video').first();
-                // var video = document.getElementById('localVideo');
-                // // var video = vids;
+                // Grab the canvas ID and getContext
                 var canvas = document.getElementById('canvas');
                 var context = canvas.getContext('2d');
 
+                // Set the tracker up with default settings
                 var tracker = new tracking.ObjectTracker('face');
                 tracker.setInitialScale(4);
                 tracker.setStepSize(2);
                 tracker.setEdgesDensity(0.1);
-
+                // Had to set camera to false on the peer video
+                // so that it doesn't automatically try to play a foreign stream
                 tracking.track(video_id, tracker, { camera: false });
 
+                // Variables to help with smoothing
+                // Smoothing only occurs with one face in the frame though
                 var frames_without_face = 0;
                 var frames_without_face_threshold = 20;
                 var prior_data = [];
 
+                // On track event
                 tracker.on('track', function(event) {
                   var rectangles = event.data;
+                  // If statements to check whether last few frames had a face
                   if (rectangles.length == 0) {
                     // then increment
                     frames_without_face++;
                     if (frames_without_face < frames_without_face_threshold) {
+                      // stores previous data as the current rectangle to use
+                      // if there is currently no face but not that many
+                      // frames have occurred since last face seen
                       rectangles = prior_data;
                     }
                   } else {
@@ -166,7 +174,8 @@
                     prior_data = rectangles;
                   }
 
-                  context.clearRect(0, 0, canvas.width, canvas.height);
+                  // clear the white canvas
+                  // context.clearRect(0, 0, canvas.width, canvas.height);
 
                   // make everything white before finding a face
                   context.fillStyle = "#fff";
