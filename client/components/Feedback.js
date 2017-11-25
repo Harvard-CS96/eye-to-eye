@@ -30,7 +30,6 @@ class Feedback extends React.Component {
                 onStarClick={this.onStarClick.bind(this)}
                 starColor='#cbe1f9'
             /></div><br/>            
-            {/* TODO: Get badges and criticisms from database once branch merged. */}
             <div>
                 {strings.Feedback.badges}
             </div>
