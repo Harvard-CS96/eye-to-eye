@@ -10,7 +10,7 @@ class About extends React.Component {
             <br />
             <Link to="/">{Strings.About.link}</Link>
             <br />
-        </div>            
+        </div>
     }
 }
 

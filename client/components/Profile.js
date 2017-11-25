@@ -15,10 +15,10 @@ class Profile extends React.Component {
         console.log(this.props);
         const { questions } = this.props;
         return <div id="Profile">
-        	{Strings.Profile.body}
-            <QuestionSet questions={questions}/>
+            {Strings.Profile.body}
+            <QuestionSet questions={questions} />
             <BadgeSet />
-            <LeaderSet showLeaderboard={true}/>
+            <LeaderSet showLeaderboard={true} />
             <StartConversationButton />
         </div>
     }
