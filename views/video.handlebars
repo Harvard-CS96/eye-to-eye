@@ -10,22 +10,25 @@
 
 
         <style>
-            /*video {
-                width: 49.5%;
-            }*/
-
             video, canvas {
-              margin-left: 5px;
-              margin-top: 5px;
-              position: absolute;
               width: 320px;
               height: 240px;
+              margin-top: 5px;
+              position: absolute;
             }
 
-            .video_columns {
+            .remote_column video, .remote_column canvas {
+              margin-left: 330px;
+            }
+
+            .local_column video, .local_column canvas {
+              margin-left: 5px;
+            }
+
+            /*.local_column, .remote_column video {
               width: 49.5%;
               position: relative;
-            }
+            }*/
 
         </style>
         <!-- Bootstrap CSS -->
@@ -44,10 +47,10 @@
                     <p id="identity"></p>
                     <!-- where the messages will apend in -->
                     <div id="chat" class="border bg-light text-left p-3" style="height:20em;overflow:scroll;">
-                      <div class="video_columns">
+                      <div class="local_column">
                         <video id="localVideo"></video>
                       </div>
-                        <div class="video_columns">
+                        <div class="remote_column">
                           <span id="remoteVideos"></span>
                           <canvas id="canvas"></canvas>
                         </div>
