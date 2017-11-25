@@ -174,22 +174,24 @@
                     prior_data = rectangles;
                   }
 
-                  // clear the white canvas
+                  // clear the canvas in case there are previous drawings there
                   // context.clearRect(0, 0, canvas.width, canvas.height);
 
                   // make everything white before finding a face
                   context.fillStyle = "#fff";
                   context.fillRect(0,0,canvas.width,canvas.height);
 
-                  console.log(event.data);
-                  console.log("The frames without face is", frames_without_face);
+                  // Debugging console statements
+                  // console.log(event.data);
+                  // console.log("The frames without face is", frames_without_face);
 
+                  // Loop through the faces collected in rectangles variable
                   rectangles.forEach(function(rect) {
-                    console.log(rect.x, rect.y)
+                    // console.log(rect.x, rect.y)
 
                     // context.strokeStyle = '#a64ceb';
                     var center = {"x": rect.x + (0.5 * rect.width), "y": rect.y + (0.5 * rect.height)}
-                    console.log(center)
+                    // console.log(center)
                     // Below line draws the rectangle for the face
                     // context.strokeRect(rect.x, rect.y, rect.width, rect.height);
 
@@ -228,22 +230,6 @@
                 });
 
             });
-
-            // HEADTRACKR.JS VERSION OF FACETRACKING
-            // webrtc.on('videoAdded', function () {
-            //   var videoInput = $('#remoteVideos > video').first();
-            //   var canvasInput = document.getElementById('canvas');
-            //
-            //   var htracker = new headtrackr.Tracker();
-            //   htracker.init(videoInput, canvasInput);
-            //   htracker.start();
-            //
-            //   document.addEventListener('facetrackingEvent',
-            //     function (event) {
-            //       console.log("the x coordinate is ", event.x)
-            //     }
-            //   );
-            // });
 
             $("#logout").click(function() {
                 window.location.href = '/logout';
