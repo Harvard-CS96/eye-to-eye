@@ -10,10 +10,11 @@ const reducer = (state = initialState, action) => {
     const { type, data } = action;
     switch (type) {
         case types.SUBMIT_FEEDBACK: {
-            const { rating, selectedBadges } = data;
+            const { rating, selectedBadges, selectedCriticisms } = data;
             console.log("REDUCER - SUBMIT FEEDBACK");
             console.log(rating);
             console.log(selectedBadges);
+            console.log(selectedCriticisms);
             return {
                 ...state,
                 rating: rating,

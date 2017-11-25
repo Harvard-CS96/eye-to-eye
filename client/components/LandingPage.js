@@ -8,9 +8,9 @@ import { Carousel } from 'react-responsive-carousel';
 class LandingPage extends React.Component {
     render() {
         return <div id="LandingPage">
-            <ul class="topnav">
+            <ul className="topnav">
                 <li>Home</li>
-                <li class="right"><a href="#about">About</a></li>
+                <li className="right"><a href="#about">About</a></li>
             </ul>
             <h1>Join The Conversation</h1>
             <Login />

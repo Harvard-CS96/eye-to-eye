@@ -1,10 +1,11 @@
 import * as types from './types';
 
-const submitFeedback = (rating, selectedBadges) => ({
+const submitFeedback = (rating, selectedBadges, selectedCriticisms) => ({
     type: types.SUBMIT_FEEDBACK,
     data: {
         rating,
-        selectedBadges
+        selectedBadges,
+        selectedCriticisms
     }
 })
 
@@ -28,6 +29,7 @@ const loadAllBadges = (badges) => ({
         badges
     }
 })
+
 
 export {
     submitFeedback,

@@ -8,7 +8,7 @@ import Strings from '../json/strings.json';
 class HelloWorld extends React.Component {
     render() {
         return <div id="HelloWorld">
-            <Profile />
+            {/* <Profile /> */}
             <Link to="/about">{Strings.HelloWorld.link}</Link>
             {Strings.HelloWorld.body}
             <br />
