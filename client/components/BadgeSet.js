@@ -3,7 +3,7 @@ import Badge from '../containers/Badge';
 import strings from '../json/strings.json';
 
 class BadgeSet extends React.Component {
-    renderBadge = (badge, i) => { 
+    renderBadge = (badge, i) => {
         const { badge: badgeId, count } = badge
         return <Badge badgeId={badgeId} count={count} key={i} />
     }
@@ -14,7 +14,7 @@ class BadgeSet extends React.Component {
 
         return <div id="BadgeSet">
             <h3>BadgeSet</h3>
-            { renderedBadges }
+            {renderedBadges}
         </div>
     }
 }

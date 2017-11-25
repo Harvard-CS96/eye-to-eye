@@ -8,7 +8,7 @@ class Logout extends React.Component {
         const { increment, decrement, count } = this.props
         return <div id="Counter">
             <div className="button" children={strings.Counter.decrement} onClick={decrement} />
-            { count }
+            {count}
             <div className="button" children={strings.Counter.increment} onClick={increment} />
         </div>
     }

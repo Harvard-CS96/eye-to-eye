@@ -3,11 +3,6 @@ import cn from 'classnames';
 import strings from '../json/strings.json';
 
 class Criticism extends React.Component {
-    // onCriticismClick = () => {
-    //     console.log("toggle");
-    //     console.log(this.props.criticismId);
-    //     this.props.toggleCriticism(this.props.criticismId);
-    // }
     render() {
         const { criticismId, on = true, onClick } = this.props;
         const className = on === true ?

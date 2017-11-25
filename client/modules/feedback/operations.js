@@ -35,7 +35,7 @@ const loadAllBadges = () => dispatch => {
 const loadAllCriticisms = () => dispatch => {
     console.log("OPERATIONS - LOAD ALL CRITICISMS");
     dispatch(actions.loadAllCriticisms(["Could be funnier", "Could be nicer"]));
-    // dispatch(actions.loadAllCriticisms([{_id: "5a15c4e9f36d28650ee82282", uuid: "2b7ea95c-bf5f-41d0-823d-8026b6d917f0", name: "Creative", id: null},{_id: "5a15c4f9f36d28650ee82289", uuid: "c75509e0-e443-45a8-b13c-2dbdfc73fd14", name: "Funny", id: null},{_id: "5a15c508f36d28650ee8228f", uuid: "6a636a5a-169e-4ed4-98a5-16bf89ea4093", name: "Friendly", id: null}]));
+    // TODO: get from db
     // axios.get('/criticisms/list')
     //     .then(response => response.data)    
     //     .then(response => {

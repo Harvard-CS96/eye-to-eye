@@ -67,6 +67,10 @@ div#LandingPage {
     border-radius: 0.25em;
 }
 
+.button.disabled-link {
+    pointer-events: none;
+}
+
 .Badge.clickable {
     cursor: pointer;
 }
