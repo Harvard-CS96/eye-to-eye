@@ -25,9 +25,24 @@ const loadAllBadges = () => dispatch => {
     axios.get('/badges/list')
         .then(response => response.data)    
         .then(response => {
+            console.log("OPERATIONS - LOAD ALL BADGES");
             console.log(response)
-            dispatch(actions.loadAllBadges(response))
+            dispatch(actions.loadAllBadges(response));
         })
+        
+}
+
+const loadAllCriticisms = () => dispatch => {
+    axios.get('/criticisms/list')
+        .then(response => response.data)    
+        .then(response => {
+            console.log("OPERATIONS - LOAD ALL CRITICISMS");
+            console.log(response);
+            dispatch(actions.loadAllCriticisms(response));
+        })
+        .catch(error => {
+            console.log(error);
+        });
         
 }
 
@@ -35,5 +50,6 @@ export {
     submitFeedback,
     toggleBadge,
     loadAllBadges,
-    toggleCriticism
+    toggleCriticism,
+    loadAllCriticisms
 }

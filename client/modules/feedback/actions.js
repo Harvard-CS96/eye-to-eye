@@ -30,10 +30,17 @@ const loadAllBadges = (badges) => ({
     }
 })
 
+const loadAllCriticisms = (criticisms) => ({
+    type: types.LOAD_CRITICISMS,
+    data: {
+        criticisms
+    }
+})
 
 export {
     submitFeedback,
     toggleBadge,
     toggleCriticism,
-    loadAllBadges
+    loadAllBadges,
+    loadAllCriticisms
 }
