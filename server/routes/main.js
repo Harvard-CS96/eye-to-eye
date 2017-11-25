@@ -141,6 +141,38 @@ router.get('/criticisms/list', (req, res) => {
         })
 })
 
+router.get('/system-check', (req, res) => {
+    if (!req.isAuthenticated()) {
+        return res.json({
+            authenticated: false,            
+            status: false
+        })
+    }
+
+    return res.json({
+        'check': req.session.systemCheck === true // true | false
+    })
+})
+
+router.post('/system-check', (req, res) => {
+    if (!req.isAuthenticated()) {
+        return res.json({
+            authenticated: false,
+            status: false
+        })
+    }
+
+    const { check = false } = req.body;
+
+    req.session.systemCheck = (
+        check === true ||
+        check === 'true'
+    );
+    res.json({
+        status: req.session.systemCheck === true // true | false
+    })
+})
+
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on
