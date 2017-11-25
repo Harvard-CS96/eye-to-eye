@@ -4,6 +4,7 @@ import Counter from '../containers/Counter';
 import Profile from '../containers/Profile'
 import Feedback from '../containers/Feedback';
 import Strings from '../json/strings.json';
+import Logout from '../containers/Logout';
 
 class HelloWorld extends React.Component {
     render() {
@@ -17,6 +18,8 @@ class HelloWorld extends React.Component {
             <Link to="/about">{Strings.HelloWorld.link1}</Link>
             <br />
             <Link to="/feedback">{Strings.Feedback.link}</Link>
+            <br />
+            <Logout />
         </div>
     }
 }
