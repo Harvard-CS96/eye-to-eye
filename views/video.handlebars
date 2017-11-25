@@ -111,7 +111,9 @@
             // TRACKING.JS VERSION OF FACETRACKING
 
             webrtc.on('videoAdded', function (video, peer) {
-                console.log('video added', peer);
+                console.log('video added', peer['id']);
+
+                // var thing = "#" + peer['id'] + "_video_incoming"
 
                 // var video = $('#remoteVideos > video').first();
                 // var video = document.getElementById('localVideo');
