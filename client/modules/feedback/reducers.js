@@ -70,7 +70,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedCriticisms: criticisms.map(criticism => ({
-                    criticismId: criticism,
+                    criticismId: criticism.uuid,
+                    criticismName: criticism.name,
                     enabled: false
                 }))
             }

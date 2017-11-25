@@ -34,18 +34,18 @@ const loadAllBadges = () => dispatch => {
 
 const loadAllCriticisms = () => dispatch => {
     console.log("OPERATIONS - LOAD ALL CRITICISMS");
-    dispatch(actions.loadAllCriticisms(["Could be funnier", "Could be nicer"]));
+    // dispatch(actions.loadAllCriticisms(["Could be funnier", "Could be nicer"]));
     // TODO: get from db
-    // axios.get('/criticisms/list')
-    //     .then(response => response.data)    
-    //     .then(response => {
-    //         console.log("OPERATIONS - LOAD ALL CRITICISMS");
-    //         console.log(response);
-    //         dispatch(actions.loadAllCriticisms(response));
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //     });
+    axios.get('/criticisms/list')
+        .then(response => response.data)    
+        .then(response => {
+            console.log("OPERATIONS - LOAD ALL CRITICISMS");
+            console.log(response);
+            dispatch(actions.loadAllCriticisms(response));
+        })
+        .catch(error => {
+            console.log(error);
+        });
         
 }
 
