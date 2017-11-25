@@ -152,6 +152,9 @@
                 tracker.on('track', function(event) {
                   context.clearRect(0, 0, canvas.width, canvas.height);
 
+                  context.fillStyle = "#fff";
+                  context.fillRect(0,0,320,240);
+
                   event.data.forEach(function(rect) {
                     console.log(rect.x, rect.y)
                     // context.strokeStyle = '#a64ceb';
@@ -164,8 +167,7 @@
                     // context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
 
                     // Our oval-creating part
-                    context.fillStyle = "#fff";
-                    context.fillRect(0,0,320,240);
+
                     // context.globalCompositeOperation = 'destination-out';
                     // context.beginPath();
                     //
