@@ -12,7 +12,8 @@ class CriticismSet extends React.Component {
         }
     }
     renderCriticism = (criticism, i) => {
-        const { criticism: criticismId, enabled } = criticism;
+        const { criticismId, enabled } = criticism;
+        console.log(criticismId);
         const onClick = this.getOnClickCriticism(criticismId)
         return <Criticism criticismId={criticismId} on={false} key={i} onClick={onClick} />
     }

@@ -9,6 +9,7 @@ class Criticism extends React.Component {
     //     this.props.toggleCriticism(this.props.criticismId);
     // }
     render() {
+        console.log(this.props);
         const { criticismId, on = true, onClick } = this.props;
         // const { onCriticismClick } = this;
         const className = on === true ?
