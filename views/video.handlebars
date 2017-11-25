@@ -154,10 +154,12 @@
 
                   // make everything white before finding a face
                   context.fillStyle = "#fff";
-                  context.fillRect(0,0,320,240);
+                  context.fillRect(0,0,canvas.width,canvas.height);
 
                   event.data.forEach(function(rect) {
                     console.log(rect.x, rect.y)
+                    // clear the white when a face is detected
+                    context.clearRect(0, 0, canvas.width, canvas.height);
                     // context.strokeStyle = '#a64ceb';
                     var center = {"x": rect.x + (0.5 * rect.width), "y": rect.y + (0.5 * rect.height)}
                     console.log(center)
