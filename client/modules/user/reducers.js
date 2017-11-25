@@ -14,7 +14,8 @@ const initialState = {
     isAuthenticated: window.isAuthenticated,
     id: initialID,
     name: initialName,
-    badges: initialBadges
+    badges: initialBadges,
+    passedSystemCheck: null
 }
 
 const reducer = (state = initialState, action) => {

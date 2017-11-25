@@ -13,10 +13,7 @@ const login = () => dispatch => {
 
 const logout = actions.logout;
 
-const submitFeedback = actions.submitFeedback;
-
 export {
     login, 
     logout,
-    submitFeedback
 }
