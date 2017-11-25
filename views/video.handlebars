@@ -113,7 +113,7 @@
             webrtc.on('videoAdded', function (video, peer) {
                 console.log('video added', peer['id']);
 
-                // var thing = "#" + peer['id'] + "_video_incoming"
+                var video_id = '#' + peer['id'] + '_video_incoming'
 
                 // var video = $('#remoteVideos > video').first();
                 // var video = document.getElementById('localVideo');
@@ -126,7 +126,7 @@
                 tracker.setStepSize(2);
                 tracker.setEdgesDensity(0.1);
 
-                tracking.track(peer, tracker, { camera: true });
+                tracking.track(video_id, tracker, { camera: true });
 
                 tracker.on('track', function(event) {
                   // context.clearRect(0, 0, canvas.width, canvas.height);
