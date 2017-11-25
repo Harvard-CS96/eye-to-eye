@@ -12,6 +12,7 @@ class Profile extends React.Component {
         this.props.loadQuestions()
     }
     render() {
+        console.log(this.props);
         const { questions } = this.props;
         return <div id="Profile">
         	{Strings.Profile.body}
