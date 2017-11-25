@@ -150,8 +150,22 @@
                 tracking.track(video_id, tracker, { camera: false });
 
                 var frames_without_face = 0;
+                var frames_without_face_threshold = 20;
+                var prior_data = [];
 
                 tracker.on('track', function(event) {
+                  var rectangles = event.data;
+                  if (rectangles.length == 0) {
+                    // then increment
+                    frames_without_face++;
+                    if (frames_without_face < frames_without_face_threshold) {
+                      rectangles = prior_data;
+                    }
+                  } else {
+                    frames_without_face = 0;
+                    prior_data = rectangles;
+                  }
+
                   context.clearRect(0, 0, canvas.width, canvas.height);
 
                   // make everything white before finding a face
@@ -161,7 +175,7 @@
                   console.log(event.data);
                   console.log("The frames without face is", frames_without_face);
 
-                  event.data.forEach(function(rect) {
+                  rectangles.forEach(function(rect) {
                     console.log(rect.x, rect.y)
 
                     // context.strokeStyle = '#a64ceb';
