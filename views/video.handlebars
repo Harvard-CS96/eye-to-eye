@@ -22,6 +22,10 @@
               height: 240px;
             }
 
+            .video_columns {
+              width: 49.5%;
+            }
+
         </style>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -39,10 +43,10 @@
                     <p id="identity"></p>
                     <!-- where the messages will apend in -->
                     <div id="chat" class="border bg-light text-left p-3" style="height:20em;overflow:scroll;">
-                      <div>
+                      <div class="video_columns">
                         <video id="localVideo"></video>
                       </div>
-                        <div>
+                        <div class="video_columns">
                           <span id="remoteVideos"></span>
                           <canvas id="canvas"></canvas>
                         </div>
