@@ -138,7 +138,7 @@
                 tracking.track(video_id, tracker, { camera: false });
 
                 tracker.on('track', function(event) {
-                  // context.clearRect(0, 0, canvas.width, canvas.height);
+                  context.clearRect(0, 0, canvas.width, canvas.height);
 
                   event.data.forEach(function(rect) {
                     console.log(rect.x, rect.y)
