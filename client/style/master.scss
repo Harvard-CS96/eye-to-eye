@@ -64,6 +64,7 @@ div#LandingPage {
 }
 
 .button.disabled-link {
+    background-color: rgba($disabled, 0.3);
     pointer-events: none;
 }
 

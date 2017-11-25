@@ -17,8 +17,11 @@ class SubmitFeedbackButton extends React.Component {
             'button',
             { 'disabled-link': (typeof rating !== 'number') }
         ])
+        const buttonText = typeof rating === 'number' ?
+            strings.SubmitFeedbackButton.link :
+            strings.SubmitFeedbackButton.disabled;
         return <div id="SubmitFeedbackButton">
-            <div className={className} children={strings.SubmitFeedbackButton.link} onClick={onClickSubmit} />
+            <div className={className} children={buttonText} onClick={onClickSubmit} />
         </div>
     }
 }
