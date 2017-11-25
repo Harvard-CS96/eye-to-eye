@@ -13,7 +13,6 @@ class BadgeSet extends React.Component {
         var renderedBadges = badges.map(renderBadge);
 
         return <div id="BadgeSet">
-            <h3>BadgeSet</h3>
             {renderedBadges}
         </div>
     }

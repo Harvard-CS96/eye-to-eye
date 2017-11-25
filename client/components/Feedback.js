@@ -15,25 +15,30 @@ class Feedback extends React.Component {
         };
     }
     onStarClick(nextValue, prevValue, name) {
-        this.setState({rating: nextValue});
+        this.setState({ rating: nextValue });
     }
     render() {
         console.log(this.props);
         return <div id="Feedback">
-            <h2>Feedback</h2>
             <div>
                 {strings.Feedback.body}
             </div>
-            <StarRatingComponent 
-                    name="user_star_rating" 
-                    starCount={5}
-                    onStarClick={this.onStarClick.bind(this)}
-                />
+            <StarRatingComponent
+                name="user_star_rating"
+                starCount={5}
+                onStarClick={this.onStarClick.bind(this)}
+            />
             {/* TODO: Get badges and criticisms from database once branch merged. */}
+            <div>
+            {strings.Feedback.badges}
+            </div>
             <FeedbackBadgeSet />
+            <div>
+            {strings.Feedback.criticisms}
+            </div>
             <CriticismSet />
-            <ReportAbuseButton/>
-            <SubmitFeedbackButton rating={this.state.rating}/>
+            <ReportAbuseButton />
+            <SubmitFeedbackButton rating={this.state.rating} />
         </div>
     }
 }

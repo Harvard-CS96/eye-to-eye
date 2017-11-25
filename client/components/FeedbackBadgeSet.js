@@ -21,7 +21,6 @@ class FeedbackBadgeSet extends React.Component {
         const { renderBadge } = this;
         var renderedBadges = badges.map(renderBadge);
         return <div id="FeedbackBadgeSet">
-            <h3>FeedbackBadgeSet</h3>
             {renderedBadges}
         </div>
     }
