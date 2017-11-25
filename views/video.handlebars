@@ -171,28 +171,29 @@
 
                     // Our oval-creating part
 
-                    // context.globalCompositeOperation = 'destination-out';
-                    // context.beginPath();
-                    //
-                    // var centerX = center.x;
-                    // var centerY = center.y;
-                    // var height = rect.height * 1.1;
-                    // var width = rect.width * 1.1;
-                    //
-                    // context.moveTo(centerX, centerY - height/2); // A1
-                    //
-                    // context.bezierCurveTo(
-                    //   centerX + width/2, centerY - height/2, // C1
-                    //   centerX + width/2, centerY + height/2, // C2
-                    //   centerX, centerY + height/2); // A2
-                    //
-                    // context.bezierCurveTo(
-                    //   centerX - width/2, centerY + height/2, // C3
-                    //   centerX - width/2, centerY - height/2, // C4
-                    //   centerX, centerY - height/2); // A1
-                    //
-                    // context.fill();
-                    // context.closePath();
+                    context.globalCompositeOperation = 'destination-out';
+                    context.beginPath();
+
+                    var centerX = center.x;
+                    var centerY = center.y;
+                    var height = rect.height * 1.1;
+                    var width = rect.width * 1.1;
+
+                    context.moveTo(centerX, centerY - height/2); // A1
+
+                    context.bezierCurveTo(
+                      centerX + width/2, centerY - height/2, // C1
+                      centerX + width/2, centerY + height/2, // C2
+                      centerX, centerY + height/2); // A2
+
+                    context.bezierCurveTo(
+                      centerX - width/2, centerY + height/2, // C3
+                      centerX - width/2, centerY - height/2, // C4
+                      centerX, centerY - height/2); // A1
+
+                    context.fill();
+                    context.closePath();
+                    context.globalCompositeOperation = 'source-over';
                   });
                 });
 
