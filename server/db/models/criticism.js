@@ -8,7 +8,7 @@ const CriticismSchema = new mongoose.Schema({
   name: {
     type: String
   }
-}, { noId: true })
+}, { collection: 'criticisms' })
 
 CriticismSchema.set('toObject', { getters: true }); // Return uuids as string in a nice way.
 CriticismSchema.set('toJSON', { getters: true });

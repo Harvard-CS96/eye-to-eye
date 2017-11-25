@@ -12,6 +12,7 @@ var users = require(path.join(DIR.ROOT, 'controllers/users'));
 var chats = require(path.join(DIR.ROOT, 'controllers/chats'));
 var reports = require(path.join(DIR.ROOT, 'controllers/reports'));
 var badges = require(path.join(DIR.ROOT, 'controllers/badges'));
+var criticisms = require(path.join(DIR.ROOT, 'controllers/criticisms'));
 
 const router = express.Router();
 
@@ -82,7 +83,6 @@ router.get('/feedback', isLoggedIn, (req, res) => {
 })
 
 router.post('/feedback/report', isLoggedIn, (req, res) => {
-    console.log("blah blah blah");
     reports.createReport(req.body);
 })
 
@@ -118,6 +118,20 @@ router.get('/badges/list', (req, res) => {
         .then(badges => {
             console.log(badges)
             res.json(badges)
+        })
+        .catch(err => {
+            console.log(err)
+            res.json({
+                error: err
+            })
+        })
+})
+
+router.get('/criticisms/list', (req, res) => {
+    return criticisms.listAll()
+        .then(criticisms => {
+            console.log(criticisms)
+            res.json(criticisms)
         })
         .catch(err => {
             console.log(err)
