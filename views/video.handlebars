@@ -158,16 +158,15 @@
 
                   event.data.forEach(function(rect) {
                     console.log(rect.x, rect.y)
-                    // clear the white when a face is detected
-                    context.clearRect(0, 0, canvas.width, canvas.height);
+
                     // context.strokeStyle = '#a64ceb';
                     var center = {"x": rect.x + (0.5 * rect.width), "y": rect.y + (0.5 * rect.height)}
                     console.log(center)
                     // context.strokeRect(rect.x, rect.y, rect.width, rect.height);
-                    // context.fillStyle = "#fff";
-                    // context.fillRect(center.x - 1, center.y - 1, 2, 2);
-                    // context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
-                    // context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+                    context.fillStyle = "#000";
+                    context.fillRect(center.x - 1, center.y - 1, 2, 2);
+                    context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+                    context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
 
                     // Our oval-creating part
 
