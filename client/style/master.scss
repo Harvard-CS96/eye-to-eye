@@ -59,12 +59,8 @@ div#LandingPage {
     border-radius: 0.25em;
 }
 
-.buttonSelected {
-    cursor: pointer;
-    padding: 0.5em 1em;
-    margin: 0.5em;
+.button.selected {
     background-color: rgba($secondary, 0.3);
-    border-radius: 0.25em;
 }
 
 .button.disabled-link {

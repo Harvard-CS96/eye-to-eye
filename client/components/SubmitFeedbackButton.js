@@ -7,7 +7,7 @@ class SubmitFeedbackButton extends React.Component {
     onClickSubmit = () => {
         const { rating, selectedBadges, selectedCriticisms } = this.props;
         const { submitFeedback } = this.props;
-        submitFeedback(rating, selectedBadges, selectedCriticisms);  
+        submitFeedback(rating, selectedBadges, selectedCriticisms);
         this.props.history.push('/profile');
     }
     render() {
@@ -15,7 +15,7 @@ class SubmitFeedbackButton extends React.Component {
         const { onClickSubmit } = this;
         const className = cn([
             'button',
-            {'disabled-link': (typeof rating !== 'number')}
+            { 'disabled-link': (typeof rating !== 'number') }
         ])
         return <div id="SubmitFeedbackButton">
             <div className={className} children={strings.SubmitFeedbackButton.link} onClick={onClickSubmit} />
