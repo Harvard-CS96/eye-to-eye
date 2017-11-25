@@ -69,7 +69,6 @@ serverWatch.on('ready', () => {
         }
         if (socketio !== null) {
             emptyCache(socketio.context);
-            socketio.close()
         }
         loadServer()
             .then(() => {
