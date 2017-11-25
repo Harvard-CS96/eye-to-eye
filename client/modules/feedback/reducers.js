@@ -53,6 +53,7 @@ const reducer = (state = initialState, action) => {
         }
         case types.LOAD_BADGES: {
             const { badges } = data;
+            console.log("REDUCER - LOAD BADGES");
             return {
                 ...state,
                 selectedBadges: badges.map(badge => ({
@@ -64,6 +65,7 @@ const reducer = (state = initialState, action) => {
         }  
         case types.LOAD_CRITICISMS: {
             const { criticisms } = data;
+            console.log("REDUCER - LOAD CRITICISMS");
             return {
                 ...state,
                 selectedCriticisms: criticisms.map(criticism => ({

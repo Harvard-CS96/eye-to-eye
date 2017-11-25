@@ -30,7 +30,7 @@ class Feedback extends React.Component {
                 />
             {/* TODO: Get badges and criticisms from database once branch merged. */}
             <FeedbackBadgeSet />
-            <CriticismSet criticismsDisplayed={['Impolite', 'Too much hairgel']}/>
+            <CriticismSet />
             <ReportAbuseButton/>
             <SubmitFeedbackButton rating={this.state.rating}/>
         </div>

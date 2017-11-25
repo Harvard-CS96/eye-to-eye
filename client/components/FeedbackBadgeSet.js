@@ -11,19 +11,20 @@ class FeedbackBadgeSet extends React.Component {
             this.props.toggleBadge(badgeId)
         }
     }
-    renderBadge = (badge, i) => { 
+    renderBadge = (badge, i) => {
         const { badge: badgeId, enabled, count } = badge
         const onClick = this.getOnClickBadge(badgeId)
         return <Badge badgeId={badgeId} on={enabled === true} onClick={onClick} count={count} key={i} />
     }
     render() {
         const { badges } = this.props
+        console.log(badges);
         const { renderBadge } = this;
         var renderedBadges = badges.map(renderBadge);
-
+        console.log(renderedBadges);
         return <div id="FeedbackBadgeSet">
             <h3>FeedbackBadgeSet</h3>
-            { renderedBadges }
+            {renderedBadges}
         </div>
     }
 }
