@@ -149,12 +149,12 @@
 
                 tracking.track(video_id, tracker, { camera: false });
 
-                // make everything white before finding a face
-                context.fillStyle = "#fff";
-                context.fillRect(0,0,320,240);
-
                 tracker.on('track', function(event) {
                   context.clearRect(0, 0, canvas.width, canvas.height);
+
+                  // make everything white before finding a face
+                  context.fillStyle = "#fff";
+                  context.fillRect(0,0,320,240);
 
                   event.data.forEach(function(rect) {
                     console.log(rect.x, rect.y)
