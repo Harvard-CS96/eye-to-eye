@@ -113,10 +113,10 @@
             webrtc.on('videoAdded', function (video, peer) {
                 console.log('video added', peer);
 
-                var vids = $('#remoteVideos > video').first();
+                var video = $('#remoteVideos > video').first();
                 // var video = vids;
-                // var canvas = document.getElementById('canvas');
-                // var context = canvas.getContext('2d');
+                var canvas = document.getElementById('canvas');
+                var context = canvas.getContext('2d');
 
                 var tracker = new tracking.ObjectTracker('face');
                 tracker.setInitialScale(4);
