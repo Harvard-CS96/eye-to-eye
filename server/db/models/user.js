@@ -41,6 +41,7 @@ const UserSchema = new mongoose.Schema({
     },
     is_first_time: { type: Boolean, default: true },
     needs_to_rate: { type: Boolean, default: false },
+    showLeaderboard: { type: Boolean, default: true },
     date_registered: { type: Date, default: Date.now },
     questions_answered: { type: [VectorSchema], default: [] },
     badges: { type: [BadgeCountSchema], default: [] },
