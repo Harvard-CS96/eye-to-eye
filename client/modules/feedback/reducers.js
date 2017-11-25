@@ -39,7 +39,7 @@ const reducer = (state = initialState, action) => {
         case types.TOGGLE_CRITICISM: {
             const { criticismId } = data;
             let selectedCriticisms = [...state.selectedCriticisms];
-            var location = selectedCriticisms.map(x => x.criticism).indexOf(criticismId);
+            var location = selectedCriticisms.map(x => x.criticismId).indexOf(criticismId);
             if (location === -1) {
                 return state;
             }
@@ -61,7 +61,17 @@ const reducer = (state = initialState, action) => {
                     enabled: false
                 }))
             }
-        }    
+        }  
+        case types.LOAD_CRITICISMS: {
+            const { criticisms } = data;
+            return {
+                ...state,
+                selectedCriticisms: criticisms.map(criticism => ({
+                    criticismId: criticism,
+                    enabled: false
+                }))
+            }
+        }   
         default: {
             return state;
         }
