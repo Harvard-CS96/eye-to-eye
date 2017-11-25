@@ -30,6 +30,7 @@ const Chat = mongoose.model("Chat", require('./models/chat'));
 const User = mongoose.model("User", require('./models/user'));
 const Question = mongoose.model("Question", require('./models/question'));
 const Report = mongoose.model("Report", require('./models/report'));
+const Criticism = mongoose.model("Criticism", require('./models/criticism'));
 
 module.exports = {
     connection: conn,
@@ -38,6 +39,7 @@ module.exports = {
         Chat,
         User,
         Question,
-        Report
+        Report,
+        Criticism
     }
 };
