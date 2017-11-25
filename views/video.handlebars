@@ -159,6 +159,7 @@
                     console.log(center)
                     context.strokeRect(rect.x, rect.y, rect.width, rect.height);
                     context.fillStyle = "#fff";
+                    context.fillRect(center.x - 1, center.y - 1, 2, 2);
                     context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
                     context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
                   });
