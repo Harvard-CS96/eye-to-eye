@@ -1,11 +1,52 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Strings from '../json/strings.json';
+import { ReactMic } from 'react-mic';
 
 class SystemCheck extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            record: false,
+            blobURL: null
+        }
+        this.onStop = this.onStop.bind(this);        
+    }
+
+    startRecording = () => {
+        this.setState({
+            record: true
+        });
+    }
+
+    stopRecording = () => {
+        this.setState({
+            record: false
+        });
+    }
+
+    onStop(recordedBlob) {
+        console.log('recordedBlob is: ', recordedBlob);        
+        this.setState({
+            blobURL: recordedBlob.blobURL
+        });
+    }
+
     render() {
         return <div id="SystemCheck">
-            <h3>HI</h3>
+        {/* TODO: Include video face detection check here. */}
+            <div>
+                <ReactMic
+                    record={this.state.record}
+                    className="sound-wave"
+                    onStop={this.onStop}
+                    strokeColor="#000000"
+                    backgroundColor="#eeeeee" />
+                    <br/>
+                <button onClick={this.startRecording} type="button">Start</button>
+                <button onClick={this.stopRecording} type="button">Stop</button>
+                <div><audio ref="audioSource" controls="controls" src={this.state.blobURL}></audio></div>
+            </div>
         </div>
     }
 }
