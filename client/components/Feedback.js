@@ -23,21 +23,23 @@ class Feedback extends React.Component {
             <div>
                 {strings.Feedback.body}
             </div>
+            <div id="StarRating">
             <StarRatingComponent
                 name="user_star_rating"
                 starCount={5}
                 onStarClick={this.onStarClick.bind(this)}
                 starColor='#cbe1f9'
-            />
+            /></div><br/>            
             {/* TODO: Get badges and criticisms from database once branch merged. */}
             <div>
                 {strings.Feedback.badges}
             </div>
             <FeedbackBadgeSet />
-            <div>
+            <br/><div>
                 {strings.Feedback.criticisms}
             </div>
             <CriticismSet />
+            <br/>
             <SubmitFeedbackButton rating={this.state.rating} />
             <ReportAbuseButton />
         </div>

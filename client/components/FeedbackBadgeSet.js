@@ -12,9 +12,9 @@ class FeedbackBadgeSet extends React.Component {
         }
     }
     renderBadge = (badge, i) => {
-        const { badge: badgeId, enabled, count } = badge
+        const { badge: badgeId, enabled, count, name } = badge
         const onClick = this.getOnClickBadge(badgeId)
-        return <Badge badgeId={badgeId} on={enabled === true} onClick={onClick} count={count} key={i} />
+        return <Badge badgeId={badgeId} on={enabled === true} onClick={onClick} count={count} name={name} key={i} />
     }
     render() {
         const { badges } = this.props
