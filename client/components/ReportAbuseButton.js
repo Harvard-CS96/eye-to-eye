@@ -5,7 +5,6 @@ import strings from '../json/strings.json';
 
 class ReportAbuseButton extends React.Component {
     goToAbuse = () => {
-        //TODO: Link to report abuse screen.
         this.props.history.push('/report_abuse');
     }
     render() {

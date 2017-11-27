@@ -25,7 +25,7 @@ class SystemCheck extends React.Component {
     }
 
     onStop = (recordedBlob) => {
-        console.log('recordedBlob is: ', recordedBlob);        
+        console.log('recordedBlob is: ', recordedBlob);
         this.setState({
             blobURL: recordedBlob.blobURL
         });
@@ -41,10 +41,10 @@ class SystemCheck extends React.Component {
     }
 
     render() {
-        const { passedSystemCheck } = this.props;
         return <div id="SystemCheck">
-        {/* TODO: Include video face detection check here. */}
-        {/* TODO: Add proceed button that checks if all tests done. */}
+            {/* TODO: Include video face detection check here. */}
+            <div id="WebcamCheck">
+            </div>
             <div>
                 <ReactMic
                     record={this.state.record}
@@ -52,13 +52,14 @@ class SystemCheck extends React.Component {
                     onStop={this.onStop}
                     strokeColor="#000000"
                     backgroundColor="#eeeeee" />
-                    <br/>
+                <br />
                 <button onClick={this.startRecording} type="button">Start</button>
                 <button onClick={this.stopRecording} type="button">Stop</button>
                 <div><audio ref="audioSource" controls="controls" src={this.state.blobURL}></audio></div>
             </div>
-        <div className="button" children="Return To Profile" onClick={this.onReturn} />
-        <div className="button" children="Continue" onClick={this.onContinue} />
+            <div className="button" children="Return To Profile" onClick={this.onReturn} />
+            {/* TODO: Add proceed button that checks if all tests done. */}
+            <div className="button" children="Continue" onClick={this.onContinue} />
         </div>
     }
 }
