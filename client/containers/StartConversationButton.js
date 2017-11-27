@@ -7,7 +7,7 @@ const { passedSystemCheck } = uSelectors;
 const { checkStatus } = uOperations;
 
 const mapStateToProps = (state, ownProps) => ({
-    systemCheckStatus: passedSystemCheck(state)
+    passedSystemCheck: passedSystemCheck(state)
 })
 
 

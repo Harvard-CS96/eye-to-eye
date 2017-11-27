@@ -12,11 +12,6 @@ class SystemCheck extends React.Component {
         }
     }
 
-    componentDidMount() {
-        // this.props.checkStatus()
-        // should become this.props.updateStatus()
-    }
-
     startRecording = () => {
         this.setState({
             record: true
@@ -41,6 +36,7 @@ class SystemCheck extends React.Component {
     }
 
     onContinue = () => {
+        this.props.updateStatus();
         this.props.history.push('/conversation');
     }
 

@@ -39,9 +39,21 @@ const reducer = (state = initialState, action) => {
             }
         }
         case types.UPDATE_STATUS: {
-            const { status } = data;
+            const { passedSystemCheck } = data;
+            console.log("REDUCER - UPDATE STATUS");
+            console.log(passedSystemCheck);
             return {
-                ...state
+                ...state,
+                passedSystemCheck: true
+            }
+        }
+        case types.CHECK_STATUS: {
+            const { passedSystemCheck } = data;
+            console.log("REDUCER - CHECK STATUS");
+            console.log(passedSystemCheck);
+            return {
+                ...state,
+                passedSystemCheck: passedSystemCheck
             }
         }
         default: {

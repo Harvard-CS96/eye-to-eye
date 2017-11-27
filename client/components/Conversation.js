@@ -12,8 +12,9 @@ class Conversation extends React.Component {
      * 5) "To" video screen - if the call ends, proceed to feedback.
      */
     render() {
+        this.props.checkStatus();        
         return <div id="Conversation">
-
+            <Link to="/feedback">{Strings.Feedback.link}</Link>
         </div>
     }
 }
