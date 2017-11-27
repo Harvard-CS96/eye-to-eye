@@ -20,6 +20,8 @@ class HelloWorld extends React.Component {
             <br />
             <Link to="/system_check">{Strings.SystemCheck.link}</Link>
             <br />
+            <Link to="/conversation/test">test convo</Link>
+            <br />
             <Logout />
         </div>
     }
