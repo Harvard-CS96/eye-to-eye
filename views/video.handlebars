@@ -104,6 +104,17 @@
   </script>
 
         <script>
+            // Store user identity info
+            const isAuthenticated = {{ isAuthenticated }}
+            const user = {{{ user }}}
+            // Identify the hostname for the signaling server, taking care to
+            // include port number if necessary (for localhost debugging envs)
+            var host;
+            if (window.location.port) {
+                host = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
+            } else {
+                host = "/";
+            }
             var webrtc = new SimpleWebRTC({
                 // the id/element dom element that will hold "our" video
                 localVideoEl: 'localVideo',
@@ -112,21 +123,50 @@
                 // immediately ask for camera access
                 autoRequestMedia: true,
                 // set signaling server
-                url: 'https://signaling.tk/',
+                url: host,
                 debug: true
             });
-            // we have to wait until it's ready
-            webrtc.on('readyToCall', function() {
-                $("#join-room-button").removeClass("disabled");
-                $("#join-room").submit(function(e) {
-                    e.preventDefault();
-                    webrtc.joinRoom($("#room").val(), function() {
-                        $("#end-conversation").removeClass("disabled").click(function() {
-                            webrtc.leaveRoom();
-                            $(this).addClass("disabled");
-                        });
-                    });
+            function matchPartner() {
+                // leave current room, if any
+                webrtc.leaveRoom();
+                // Disable End Conversation Button
+                $("#end-conversation").prop('disabled', 'true');
+                // tell the server to match user to new partner
+                webrtc.connection.emit("request match")
+            }
+            webrtc.connection.on("waiting", function() {
+                // Tell user matching is happening
+                $("#notice").text("Matching you to another user...");
+                // Disable End Conversation Button
+                $("#end-conversation").prop('disabled', 'true');
+            })
+            webrtc.connection.on("recall username", function(username) {
+                $("#identity").text("Hello, " + username);
+            });
+            webrtc.connection.on("pairing", function(partner, room) {
+                // leave current room, if any
+                webrtc.leaveRoom();
+                // join new room
+                webrtc.joinRoom(room);
+                // Update Notice Text
+                $("#notice").text("You are talking with " + partner);
+                // Enable the end conversation Button
+                $("#end-conversation").prop('disabled', null);
+            });
+            // When the webSocket connection is ready, identify the users
+            webrtc.on('connectionReady', function() {
+                // Identify user to matcher
+                webrtc.connection.emit("set user", {
+                    username: user.facebook.name,
+                    user_id: user.uuid
                 });
+            });
+            // Wait until video capabilities are ready to perform first match
+            webrtc.on('readyToCall', matchPartner);
+            // When user ends conversation, start a new match
+            $("#end-conversation").click(function() {
+                webrtc.connection.emit("hangup");
+                matchPartner();
             });
 
             // TRACKING.JS VERSION OF FACETRACKING
@@ -181,10 +221,6 @@
                   context.fillStyle = "#fff";
                   context.fillRect(0,0,canvas.width,canvas.height);
 
-                  // Debugging console statements
-                  // console.log(event.data);
-                  // console.log("The frames without face is", frames_without_face);
-
                   // Loop through the faces collected in rectangles variable
                   rectangles.forEach(function(rect) {
                     // console.log(rect.x, rect.y)
@@ -195,7 +231,7 @@
                     // Below line draws the rectangle for the face
                     // context.strokeRect(rect.x, rect.y, rect.width, rect.height);
 
-                    // Below lines draw the dot for center of face and text for width and height
+                    // These lines draw the dot for center of face and text for width and height
                     // context.fillStyle = "#000";
                     // context.fillRect(center.x - 1, center.y - 1, 2, 2);
                     // context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
