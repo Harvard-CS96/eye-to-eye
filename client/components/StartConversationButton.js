@@ -6,11 +6,9 @@ import strings from '../json/strings.json';
 class StartConversationButton extends React.Component {
     componentDidMount() {
         this.props.checkStatus();
-        console.log(this.props.passedSystemCheck);
     }
     onClick = () => {
         const { passedSystemCheck } = this.props;
-        console.log(passedSystemCheck);
         if (passedSystemCheck === true) {
             this.props.history.push('/conversation');
         } else {

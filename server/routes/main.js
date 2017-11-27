@@ -1,5 +1,9 @@
 const path = require('path');
 const express = require('express');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const router = express.Router();
+
 const DIR = require('../constants.js').DIR
 
 const fb = require('fb');
@@ -14,7 +18,6 @@ var reports = require(path.join(DIR.ROOT, 'controllers/reports'));
 var badges = require(path.join(DIR.ROOT, 'controllers/badges'));
 var criticisms = require(path.join(DIR.ROOT, 'controllers/criticisms'));
 
-const router = express.Router();
 
 function getAuthInfo(req){
     const hbsData = req.isAuthenticated() === true ?
@@ -148,7 +151,9 @@ router.get('/system-check', (req, res) => {
             status: false
         })
     }
-
+    console.log("GET session");
+    console.log(req.session.id);    
+    console.log(req.session.systemCheck);
     return res.json({
         'check': req.session.systemCheck === true // true | false
     })
@@ -168,9 +173,13 @@ router.post('/system-check', (req, res) => {
         check === true ||
         check === 'true'
     );
+    console.log("POST session");
+    console.log(req.session.id);
+    console.log(req.session.systemCheck);
     res.json({
         status: req.session.systemCheck === true // true | false
     })
+
 })
 
 // route middleware to make sure a user is logged in

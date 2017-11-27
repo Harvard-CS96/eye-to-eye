@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as actions from './actions';
+// axios.defaults.withCredentials = true;
 
 const login = () => dispatch => {
     return axios('/user/login')
@@ -25,11 +26,23 @@ const checkStatus = () => dispatch => {
 
 const updateStatus = () => dispatch => {
     console.log("OPERATION - UPDATE STATUS");
-    axios.post('/system-check', {check: true}).then(response => {console.log(response.data.status);});
-    axios('/system-check').then(response => response.data).then(response => {console.log(response)});
-    return axios.post('/system-check', {status: true})
+    // axios.post('/system-check', {check: true}).then(response => {console.log(response.data.status);});
+    // axios('/system-check').then(response => response.data).then(response => {console.log(response)});
+    // return axios({
+    //     method: 'POST',
+    //     url: '/system-check',
+    //     data: {check: true},
+    //     withCredentials: true
+    // }).then(response => {
+    //     console.log(response.data.status);
+    //     dispatch(actions.updateStatus(true));
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // });
+    return axios.post('/system-check', {check: true})
         .then(response => {
-            console.log(response);
+            console.log(response.data.status);
             dispatch(actions.updateStatus(true));
         })
         .catch(error => {

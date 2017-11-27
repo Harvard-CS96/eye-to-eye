@@ -42,7 +42,6 @@ class SystemCheck extends React.Component {
 
     render() {
         const { passedSystemCheck } = this.props;
-        console.log(passedSystemCheck);
         return <div id="SystemCheck">
         {/* TODO: Include video face detection check here. */}
         {/* TODO: Add proceed button that checks if all tests done. */}
@@ -65,23 +64,3 @@ class SystemCheck extends React.Component {
 }
 
 export default withRouter(SystemCheck);
-
-// import React from 'react';
-// import { Link, withRouter } from 'react-router-dom';
-
-// import strings from '../json/strings.json';
-
-// class ReportAbuseButton extends React.Component {
-//     goToAbuse = () => {
-//         //TODO: Link to report abuse screen.
-//         this.props.history.push('/report_abuse');
-//     }
-//     render() {
-//         const { goToAbuse } = this;
-//         return <div id="ReportAbuseButton">
-//             <div className="button" children={strings.ReportAbuseButton.link} onClick={goToAbuse} />
-//         </div>
-//     }
-// }
-
-// export default withRouter(ReportAbuseButton);
