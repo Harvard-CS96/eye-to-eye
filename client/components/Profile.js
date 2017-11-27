@@ -4,6 +4,7 @@ import BadgeSet from '../containers/BadgeSet';
 import StartConversationButton from "../containers/StartConversationButton"
 import LeaderSet from "../containers/LeaderSet"
 import QuestionSet from './QuestionSet'
+import Logout from '../containers/Logout'
 import { Link } from 'react-router-dom';
 import Strings from '../json/strings.json';
 
@@ -20,6 +21,7 @@ class Profile extends React.Component {
             <BadgeSet />
             <LeaderSet showLeaderboard={true} />
             <StartConversationButton />
+            <Logout />
         </div>
     }
 }

@@ -10,7 +10,6 @@ class App extends React.Component {
         const content = isAuthenticated === true ?
             [
                 children,
-                <Logout />
             ] :
             [
                 <LandingPage />

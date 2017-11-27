@@ -1,5 +1,9 @@
 const path = require('path');
 const express = require('express');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const router = express.Router();
+
 const DIR = require('../constants.js').DIR
 
 const fb = require('fb');
@@ -14,9 +18,8 @@ var reports = require(path.join(DIR.ROOT, 'controllers/reports'));
 var badges = require(path.join(DIR.ROOT, 'controllers/badges'));
 var criticisms = require(path.join(DIR.ROOT, 'controllers/criticisms'));
 
-const router = express.Router();
 
-function getAuthInfo(req){
+function getAuthInfo(req) {
     const hbsData = req.isAuthenticated() === true ?
         {
             isAuthenticated: 'true',
@@ -52,7 +55,7 @@ router.get('/profile', (req, res) => {
 router.get('/questions', isLoggedIn, (req, res) => {
     questions.findActive((questions) => {
         users.findById(req.user.uuid, (userData) => {
-            res.send({questions: questions, userData: userData});
+            res.send({ questions: questions, userData: userData });
         });
     });
 });
@@ -101,18 +104,18 @@ router.get('/auth/facebook', passport.authenticate('facebook'));
 // handle the callback after facebook has authenticated the user
 router.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect : '/',
-        failureRedirect : '/auth/error'
+        successRedirect: '/',
+        failureRedirect: '/auth/error'
     }))
 
 router.get('/auth/error', (req, res) => { res.end('Auth failure :(') })
 
 // route for logging out
-router.get('/logout', function(req, res) {
+router.get('/logout', function (req, res) {
     req.logout()
     res.redirect('/');
 })
- 
+
 router.get('/badges/list', (req, res) => {
     return badges.listAll()
         .then(badges => {
@@ -139,6 +142,39 @@ router.get('/criticisms/list', (req, res) => {
                 error: err
             })
         })
+})
+
+router.get('/system-check', (req, res) => {
+    if (!req.isAuthenticated()) {
+        return res.json({
+            authenticated: false,
+            status: false
+        })
+    }
+    return res.json({
+        'check': req.session.systemCheck === true // true | false
+    })
+})
+
+router.post('/system-check', (req, res) => {
+    if (!req.isAuthenticated()) {
+        return res.json({
+            authenticated: false,
+            status: false
+        })
+    }
+
+    const { check = false } = req.body;
+
+    req.session.systemCheck = (
+        check === true ||
+        check === 'true'
+    );
+    req.session.save(function () {
+        res.json({
+            status: req.session.systemCheck === true // true | false
+        })
+    });
 })
 
 // route middleware to make sure a user is logged in

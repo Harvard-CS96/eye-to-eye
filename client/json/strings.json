@@ -44,5 +44,8 @@
         "link": "Submit Feedback",
         "body": "How was your conversation?",
         "disabled": "Please rate your conversation partner from one to five stars."
+    },
+    "SystemCheck": {
+        "link": "System Check"
     }
 }

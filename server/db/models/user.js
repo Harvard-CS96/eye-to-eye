@@ -41,6 +41,7 @@ const UserSchema = new mongoose.Schema({
     },
     is_first_time: { type: Boolean, default: true },
     needs_to_rate: { type: Boolean, default: false },
+    showLeaderboard: { type: Boolean, default: true },
     date_registered: { type: Date, default: Date.now },
     showLeaderboard: { type: Boolean, default: true },
     questions_answered: { type: [VectorSchema], default: [] },

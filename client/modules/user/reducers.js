@@ -14,7 +14,8 @@ const initialState = {
     isAuthenticated: window.isAuthenticated,
     id: initialID,
     name: initialName,
-    badges: initialBadges
+    badges: initialBadges,
+    passedSystemCheck: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -35,6 +36,24 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 isAuthenticated: false,
                 id: null
+            }
+        }
+        case types.UPDATE_STATUS: {
+            const { passedSystemCheck } = data;
+            console.log("REDUCER - UPDATE STATUS");
+            console.log(passedSystemCheck);
+            return {
+                ...state,
+                passedSystemCheck: true
+            }
+        }
+        case types.CHECK_STATUS: {
+            const { passedSystemCheck } = data;
+            console.log("REDUCER - CHECK STATUS");
+            console.log(passedSystemCheck);
+            return {
+                ...state,
+                passedSystemCheck: passedSystemCheck
             }
         }
         default: {

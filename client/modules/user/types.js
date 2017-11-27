@@ -1,9 +1,11 @@
 const LOGIN = 'auth/login'
 const LOGOUT = 'auth/logout'
-const SUBMIT_FEEDBACK = 'user/submit_feedback'
+const UPDATE_STATUS = 'user/update_status'
+const CHECK_STATUS = 'user/check_status'
 
 export {
     LOGIN,
     LOGOUT,
-    SUBMIT_FEEDBACK
+    UPDATE_STATUS,
+    CHECK_STATUS
 }

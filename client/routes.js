@@ -7,6 +7,8 @@ import About from './containers/About';
 import Profile from './containers/Profile';
 import Feedback from './containers/Feedback';
 import ReportAbuse from './containers/ReportAbuse';
+import SystemCheck from './containers/SystemCheck';
+import Conversation from './containers/Conversation';
 
 export default ([
     <Route exact path="/" component={HelloWorld} />,
@@ -14,4 +16,6 @@ export default ([
     <Route path="/profile" component={Profile} />,
     <Route path="/feedback" component={Feedback} />,
     <Route path="/report_abuse" component={ReportAbuse} />,
+    <Route path="/system_check" component={SystemCheck} />,
+    <Route path="/conversation" component={Conversation} />
 ]).map((x, i) => ({...x, key: i}))
