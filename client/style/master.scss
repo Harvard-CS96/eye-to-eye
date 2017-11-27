@@ -3,41 +3,46 @@
 body {
     background-color: $off-white;
 }
-#app-root {
-    div#App {
-        padding: 100px;
-        background-color: $white;
-        display: flex;
-        flex-direction: column;
-        align-items: center; 
-        justify-content: center;    
-        text-align: center;        
-    }
-}
 
-div#LandingPage {
-    background-color: $off-white;
-    ul.topnav {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #333;
-    }
-    ul.topnav li {float: left;}
-    
-    ul.topnav li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
-    
-    ul.topnav li a:hover:not(.active) {background-color: #111;}
-    
-    ul.topnav li.right {float: right;}
-}
+
+header.masthead {
+  position: relative;
+  background-color: #343a40;
+  background: url("../assets/coloured-speech-bubbles.jpg") no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding-top: 8rem;
+  padding-bottom: 8rem; }
+
+header.masthead .overlay {
+    position: absolute;
+    background-color: #212529;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.3; }
+
+header.masthead h1 {
+    font-size: 2rem; }
+
+@media (min-width: 768px) {
+    header.masthead {
+      padding-top: 12rem;
+      padding-bottom: 12rem; }
+      header.masthead h1 {
+        font-size: 3rem; } }
+
+.showcase .showcase-text {
+  padding: 3rem; }
+
+.showcase .showcase-img {
+  min-height: 30rem;
+  background: url("../assets/handshake.jpg");
+  background-size: cover; }
+
 
 #Logout #ReportAbuseButton {
     display: flex;

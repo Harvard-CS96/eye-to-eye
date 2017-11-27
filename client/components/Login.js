@@ -10,8 +10,16 @@ class Login extends React.Component {
     render() {
         const { login } = this;
         return <div id="Login">
-            <div className="button" children={strings.Login.link} onClick={login} />
-        </div>
+        		<div className="container">
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <div className="text-center">
+                        <button type="submit" className="btn btn-primary" children={strings.Login.link} onClick={login}>Sign in</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        	</div>
     }
 }
 
