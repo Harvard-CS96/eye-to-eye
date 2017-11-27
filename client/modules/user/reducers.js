@@ -38,6 +38,12 @@ const reducer = (state = initialState, action) => {
                 id: null
             }
         }
+        case types.UPDATE_STATUS: {
+            const { status } = data;
+            return {
+                ...state
+            }
+        }
         default: {
             return state;
         }

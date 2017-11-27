@@ -13,7 +13,17 @@ const login = () => dispatch => {
 
 const logout = actions.logout;
 
+const checkStatus = () => dispatch => {
+    return axios('/system-check')
+        .then(response => response.data)
+        .then(response => {
+            console.log("OPERATIONS - CHECK STATUS");
+            console.log(response);
+        })
+}
+
 export {
     login, 
     logout,
+    checkStatus
 }

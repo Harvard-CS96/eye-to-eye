@@ -10,7 +10,10 @@ class SystemCheck extends React.Component {
             record: false,
             blobURL: null
         }
-        this.onStop = this.onStop.bind(this);        
+    }
+    
+    componentDidMount() {
+        this.props.checkStatus()
     }
 
     startRecording = () => {
@@ -25,7 +28,7 @@ class SystemCheck extends React.Component {
         });
     }
 
-    onStop(recordedBlob) {
+    onStop = (recordedBlob) => {
         console.log('recordedBlob is: ', recordedBlob);        
         this.setState({
             blobURL: recordedBlob.blobURL
@@ -33,8 +36,11 @@ class SystemCheck extends React.Component {
     }
 
     render() {
+        const { passedSystemCheck } = this.props;
+        console.log(passedSystemCheck);
         return <div id="SystemCheck">
         {/* TODO: Include video face detection check here. */}
+        {/* TODO: Add proceed button that checks if all tests done. */}
             <div>
                 <ReactMic
                     record={this.state.record}
