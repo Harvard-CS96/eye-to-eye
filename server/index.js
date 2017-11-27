@@ -43,8 +43,8 @@ router.set('view engine', 'handlebars');
 
 const session = require("express-session")({
   secret: "my-secret",
-  resave: false,
-  saveUninitialized: true,
+  resave: true,
+  saveUninitialized: true
 });
 
 const sharedsession = require("express-socket.io-session");
@@ -55,8 +55,8 @@ router.use(bodyParser.urlencoded({ extended: true })); // for parsing applicatio
 
 router.use(require('express-session')({
   secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
+  resave: true,
+  saveUninitialized: true
 }));
 router.use(session);
 router.use(passport.initialize());
