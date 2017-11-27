@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Strings from '../json/strings.json';
 import { ReactMic } from 'react-mic';
 
@@ -11,9 +11,10 @@ class SystemCheck extends React.Component {
             blobURL: null
         }
     }
-    
+
     componentDidMount() {
-        this.props.checkStatus()
+        // this.props.checkStatus()
+        // should become this.props.updateStatus()
     }
 
     startRecording = () => {
@@ -35,6 +36,14 @@ class SystemCheck extends React.Component {
         });
     }
 
+    onReturn = () => {
+        this.props.history.push('/profile');
+    }
+
+    onContinue = () => {
+        this.props.history.push('/conversation');
+    }
+
     render() {
         const { passedSystemCheck } = this.props;
         console.log(passedSystemCheck);
@@ -53,8 +62,30 @@ class SystemCheck extends React.Component {
                 <button onClick={this.stopRecording} type="button">Stop</button>
                 <div><audio ref="audioSource" controls="controls" src={this.state.blobURL}></audio></div>
             </div>
+        <div className="button" children="Return To Profile" onClick={this.onReturn} />
+        <div className="button" children="Continue" onClick={this.onContinue} />
         </div>
     }
 }
 
-export default SystemCheck;
+export default withRouter(SystemCheck);
+
+// import React from 'react';
+// import { Link, withRouter } from 'react-router-dom';
+
+// import strings from '../json/strings.json';
+
+// class ReportAbuseButton extends React.Component {
+//     goToAbuse = () => {
+//         //TODO: Link to report abuse screen.
+//         this.props.history.push('/report_abuse');
+//     }
+//     render() {
+//         const { goToAbuse } = this;
+//         return <div id="ReportAbuseButton">
+//             <div className="button" children={strings.ReportAbuseButton.link} onClick={goToAbuse} />
+//         </div>
+//     }
+// }
+
+// export default withRouter(ReportAbuseButton);
