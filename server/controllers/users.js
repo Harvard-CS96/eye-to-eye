@@ -6,6 +6,9 @@
 var mongoose = require('mongoose'),
 User = mongoose.model('User');
 
+// use the facebook API
+const fb = require('fb');
+
 function findById(uuid, callback) {
   User.findOne({"uuid": uuid}, (err, results) => {
       if (err) {
@@ -23,6 +26,60 @@ function findAllInList(uuids, callback) {
       }
       callback(results);
     });
+}
+
+// Get a list of user profiles from a list of facebook ids
+function findByFBIdList(fbids, callback) {
+  User.find({"facebook.id": {$in: fbids}}, (err, results) => {
+    if (err) {
+      console.log(err)
+    }
+    if (results === undefined) {
+      results = []
+    }
+    callback(results);
+  })
+}
+
+// Get leaderboard (of unrestricted length) made up of user's facebook friends.
+function getLeaderboard(uuid, callback) {
+  console.log(uuid);
+  findById(uuid, (profile) => {
+
+    console.log(profile);
+
+    // Get user's friends who use the app from the FB api
+    fb.api(
+        "me", 
+        {fields: "friends", access_token: profile.facebook.token},
+        response => {
+          // Find all friends in the database
+          findByFBIdList(response.friends, friends => {
+            // Keep only friends willing to appear on leaderboards
+            public_friends = friends.filter(f => f.showLeaderboard)
+
+            // Count up badge totals
+            public_friends = public_friends.map(f => {
+              f.badge_total = f.badges.reduce((acc, b) => {acc + b.count}, 0);
+              return f
+            })
+
+            // Sort friends by number of badges, descending
+            public_friends.sort((a, b) => {
+              return b.badge_total - a.badge_total;
+            });
+
+            // Feed the leaderboard into the callback
+            callback(public_friends)
+          });
+        }
+    );
+
+    // Update user to show up on other's leaderboards
+    profile.showLeaderboard = true;
+    profile.save()
+
+  });
 }
 
 // Logs user responses to database.  Talk to Russell before changing.  
@@ -110,5 +167,7 @@ module.exports = {
   findAllInList,
   updateStance,
   applyFeedback,
-  findById
+  findById,
+  findByFBIdList,
+  getLeaderboard
 }
