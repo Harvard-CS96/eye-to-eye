@@ -3317,12 +3317,12 @@
                 tracker.setEdgesDensity(0.1);
                 // Had to set camera to false on the peer video
                 // so that it doesn't automatically try to play a foreign stream
-                tracking.track(video_id, tracker, { camera: false, fps:1 });
+                tracking.track(video_id, tracker, { camera: false, fps:10 });
 
                 // Variables to help with smoothing
                 // Smoothing only occurs with one face in the frame though
                 var frames_without_face = 0;
-                var frames_without_face_threshold = 20;
+                var frames_without_face_threshold = 7;
                 var prior_data = [];
 
                 // On track event
