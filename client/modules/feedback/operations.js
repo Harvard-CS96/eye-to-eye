@@ -6,8 +6,7 @@ const submitFeedback = (rating, selectedBadges, selectedCriticisms) => dispatch 
     console.log(rating);
     console.log(selectedBadges);
     console.log(selectedCriticisms);
-    //TODO: Get rid of "from" parameter once db updates this and test POST request.
-    return axios.post('/chats', {badges: selectedBadges, criticisms: selectedCriticisms, stars: rating})
+    return axios.post('/chats', { badges: selectedBadges, criticisms: selectedCriticisms, stars: rating })
         .then(response => {
             console.log(response);
             dispatch(actions.submitFeedback(rating, selectedBadges, selectedCriticisms));
@@ -23,19 +22,19 @@ const toggleCriticism = actions.toggleCriticism;
 
 const loadAllBadges = () => dispatch => {
     axios.get('/badges/list')
-        .then(response => response.data)    
+        .then(response => response.data)
         .then(response => {
             console.log("OPERATIONS - LOAD ALL BADGES");
             console.log(response)
             dispatch(actions.loadAllBadges(response));
         })
-        
+
 }
 
 const loadAllCriticisms = () => dispatch => {
     console.log("OPERATIONS - LOAD ALL CRITICISMS");
     axios.get('/criticisms/list')
-        .then(response => response.data)    
+        .then(response => response.data)
         .then(response => {
             console.log("OPERATIONS - LOAD ALL CRITICISMS");
             console.log(response);
@@ -44,7 +43,7 @@ const loadAllCriticisms = () => dispatch => {
         .catch(error => {
             console.log(error);
         });
-        
+
 }
 
 export {
