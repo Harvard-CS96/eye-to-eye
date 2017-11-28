@@ -8,6 +8,10 @@
         "body": "This site is built with node.js, express, react, redux, react-router, SCSS, and webpack.",
         "link": "Back to Home"
     },
+    "LeaderboardButton": {
+        "disabled": "Show Leaderboard",
+        "link": "Hide Leaderboard"
+    },
     "HideLeaders": {
         "link": "Hide Leaderboard"
     },
