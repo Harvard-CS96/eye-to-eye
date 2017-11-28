@@ -3285,16 +3285,16 @@
             });
 
             // we have to wait until it's ready
- -            webrtc.on('readyToCall', function() {
- -                $("#join-room-button").removeClass("disabled");
- -                $("#join-room").submit(function(e) {
- -                    e.preventDefault();
- -                    webrtc.joinRoom($("#room").val(), function() {
- -                        $("#end-conversation").removeClass("disabled").click(function() {
- -                            webrtc.leaveRoom();
- -                            $(this).addClass("disabled");
- -                        });
- -                    });
+            webrtc.on('readyToCall', function() {
+              $("#join-room-button").removeClass("disabled");
+                 $("#join-room").submit(function(e) {
+                    e.preventDefault();
+                    webrtc.joinRoom($("#room").val(), function() {
+                        $("#end-conversation").removeClass("disabled").click(function() {
+                            webrtc.leaveRoom();
+                            $(this).addClass("disabled");
+                         });
+                     });
                   };
                 };
 
