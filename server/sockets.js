@@ -18,7 +18,6 @@ module.exports = function(io, matcher, config) {
           client.broadcast.to(matcher.getPartner(client.id)).emit("new message",
             `${matcher.getUsername(client.id)} says: ${data}`
             )
-
         })
 
         client.on("set user", ({ username, user_id }) => {
@@ -58,15 +57,6 @@ module.exports = function(io, matcher, config) {
 
             details.from = client.id;
             otherClient.emit('message', details);
-        });
-
-        client.on('shareScreen', function() {
-            client.resources.screen = true;
-        });
-
-        client.on('unshareScreen', function(type) {
-            client.resources.screen = false;
-            removeFeed('screen');
         });
 
         client.on('join', join);
