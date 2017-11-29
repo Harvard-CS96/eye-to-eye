@@ -3329,9 +3329,11 @@
                 };
 
                 function updateBuffer(rect, buffer) {
+                  console.log("the to be added rect is", rect);
+                  console.log("the buffer is", buffer);
                   buffer.data.unshift(rect);
                   if (buffer.data.length > buffer.size) {
-                      buffer.data.pop()
+                      buffer.data.pop();
                   }
                   return buffer;
                 };
@@ -3355,7 +3357,7 @@
                 // On track event
                 tracker.on('track', function(event) {
                   var rectangles = event.data;
-                  console.log(buffer.data);
+                  
                   // If statements to check whether last few frames had a face
                   if (rectangles.length == 0) {
                     // then increment
