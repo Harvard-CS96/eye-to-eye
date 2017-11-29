@@ -3328,9 +3328,17 @@
                   return {"size": size, "data":[]};
                 };
 
+                function printBuffer(buffer) {
+                  buffer.data.forEach(function(rect) {
+                    for(var key in rect) {
+                      console.log(key, rect.key);
+                    }
+                  });
+                };
+
                 function updateBuffer(rect, buffer) {
                   console.log("the to be added rect is", rect);
-                  console.log("the buffer is", buffer);
+                  printBuffer(buffer);
                   buffer.data.unshift(rect);
                   if (buffer.data.length > buffer.size) {
                       buffer.data.pop();
