@@ -302,6 +302,8 @@ function getUserDataOfID(userData, id){
     for (var i=0, iLen=userData.length; i < iLen; i++) {
         if (userData[i].uuid == id) return userData[i];
     }
+
+    return null;
 }
 
 // return a list of questions the user wants to talk about

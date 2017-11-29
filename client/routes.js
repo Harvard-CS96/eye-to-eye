@@ -17,5 +17,6 @@ export default ([
     <Route path="/feedback" component={Feedback} />,
     <Route path="/report_abuse" component={ReportAbuse} />,
     <Route path="/system_check" component={SystemCheck} />,
+    <Route exact path="/conversation" component={Conversation} />,
     <Route path="/conversation/:room_id" component={Conversation} />
 ]).map((x, i) => ({...x, key: i}))

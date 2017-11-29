@@ -14,10 +14,13 @@ class Conversation extends React.Component {
      */
 
     render() {
-        const { room_id } = this.props.match.params;
+        const { room_id } = this.props.match.params
+        const contents = (room_id === null) ?
+            null :
+            <VideoChat room_id={room_id} />
 
         return <div id="Conversation">
-            <VideoChat room_id={room_id} />
+            { contents }
             <Link to="/feedback">{Strings.Feedback.link}</Link>
         </div>
     }
