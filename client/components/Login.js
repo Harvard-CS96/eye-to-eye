@@ -14,7 +14,7 @@ class Login extends React.Component {
                   <div className="row">
                     <div className="col-lg-12">
                       <div className="text-center">
-                        <button type="submit" className="btn btn-primary" children={strings.Login.link} onClick={login}>Sign in</button>
+                        <button type="submit" className="btn btn-primary" children={strings.Login.link} onClick={login}>Continue with Facebook</button>
                       </div>
                     </div>
                   </div>
