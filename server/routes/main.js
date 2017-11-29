@@ -93,7 +93,13 @@ router.get('/feedback_legacy', isLoggedIn, (req, res) => {
 })
 
 router.post('/feedback/report', isLoggedIn, (req, res) => {
-    reports.createReport(req.body);
+    const reportData = { 
+        to: req.body.to, 
+        from: req.body.from,
+        kind: req.body.kind,
+        text: req.body.text,
+    }
+    reports.createReport(reportData);
 })
 
 router.get('/login', (req, res) => {

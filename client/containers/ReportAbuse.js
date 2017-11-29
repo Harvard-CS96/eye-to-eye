@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(submitReport(data))
         }
     }
-} 
+}
 
 const ReportAbuse = connect(mapStateToProps, mapDispatchToProps)(_ReportAbuse);
 export default ReportAbuse;
