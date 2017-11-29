@@ -3400,7 +3400,8 @@
                           buffer = updateBuffer(buffer.data[0], buffer);
                       }
                     } else {
-                      
+                      // empty the buffer
+                      buffer = createBuffer(5);
                     }
                   } else {
                     // if there is a face
