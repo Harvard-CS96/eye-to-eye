@@ -43,16 +43,15 @@ function findByFBIdList(fbids, callback) {
 
 // Get leaderboard (of unrestricted length) made up of user's facebook friends.
 function getLeaderboard(uuid, callback) {
-  console.log(uuid);
+
   findById(uuid, (profile) => {
-
-    console.log(profile);
-
     // Get user's friends who use the app from the FB api
     fb.api(
         "me", 
         {fields: "friends", access_token: profile.facebook.token},
         response => {
+          console.log("FRIENDS: "); 
+          console.log(response.friends);
           // Find all friends in the database
           findByFBIdList(response.friends, friends => {
             // Keep only friends willing to appear on leaderboards
@@ -76,10 +75,12 @@ function getLeaderboard(uuid, callback) {
     );
 
     // Update user to show up on other's leaderboards
-    profile.showLeaderboard = true;
-    profile.save()
-
+    if (!profile.showLeaderboard) {
+      profile.showLeaderboard = true;
+      profile.save();
+    }
   });
+
 }
 
 // Logs user responses to database.  Talk to Russell before changing.  
