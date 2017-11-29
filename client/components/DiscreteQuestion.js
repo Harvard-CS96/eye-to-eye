@@ -9,9 +9,11 @@ class DiscreteQuestion extends React.Component {
         this.props.setAnswer(value)
     }
     render() {
-        const { id, text, options, answer } = this.props;
+        const { id, text, options, answer, userAnswer } = this.props;
         const { renderOption, onChange } = this;
         const renderedOptions = options.map(renderOption);
+        console.log("IT WORKED: ", userAnswer);
+
 
         return <div className="Question DiscreteQuestion">
             <h1>{text}</h1>

@@ -1,9 +1,9 @@
 import * as types from './types';
 
-const loadQuestions = (questions) => ({
+const loadQuestions = (data) => ({
     type: types.LOAD_QUESTIONS,
     data: {
-        questions
+        data
     }
 })
 
