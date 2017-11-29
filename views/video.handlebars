@@ -3359,19 +3359,19 @@
                   var rectangles = event.data;
 
                   // If statements to check whether last few frames had a face
-                  if (rectangles.length == 0) {
-                    // then increment
-                    frames_without_face++;
-                    if (frames_without_face < frames_without_face_threshold) {
-                      // stores previous data as the current rectangle to use
-                      // if there is currently no face but not that many
-                      // frames have occurred since last face seen
-                      rectangles = prior_data;
-                    }
-                  } else {
-                    frames_without_face = 0;
-                    prior_data = rectangles;
-                  }
+                  // if (rectangles.length == 0) {
+                  //   // then increment
+                  //   frames_without_face++;
+                  //   if (frames_without_face < frames_without_face_threshold) {
+                  //     // stores previous data as the current rectangle to use
+                  //     // if there is currently no face but not that many
+                  //     // frames have occurred since last face seen
+                  //     rectangles = prior_data;
+                  //   }
+                  // } else {
+                  //   frames_without_face = 0;
+                  //   prior_data = rectangles;
+                  // }
 
                   // find biggest face
                   function largest_face(rectangles) {
