@@ -94,12 +94,12 @@ router.get('/feedback_legacy', isLoggedIn, (req, res) => {
 
 router.post('/feedback/report', isLoggedIn, (req, res) => {
     const reportData = { 
-        to: req.body.to, 
-        from: req.body.from,
+        from: req.user.uuid,
         kind: req.body.kind,
         text: req.body.text,
     }
     reports.createReport(reportData);
+    res.json({ success: true })
 })
 
 router.get('/login', (req, res) => {

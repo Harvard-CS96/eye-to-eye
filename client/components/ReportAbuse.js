@@ -9,31 +9,47 @@ class ReportAbuse extends React.Component {
     constructor() {
         super();
         this.state = {
-            abuseType: "nudity",
+            abuseType: "Select...",
+            abuseComment: ""
         };
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
-        this.props.submitReport(this.state.abuseType);
+        this.props.submitReport(
+            {
+                kind: this.state.abuseType,
+                text: this.state.abuseComment
+            }
+        ).then(() => {
+            this.props.history.push('/');
+        })
     }
 
-    handleChange(event) {
-        this.setState({abuseType: event.target.value});
+    handleChangeComment = (event) => {
+        this.setState({ abuseComment: event.target.value });
+    }
+
+    handleChangeType = (event) => {
+        this.setState({ abuseType: event.target.value });
     }
 
     render() {
+        const { handleChangeType, handleChangeComment, handleSubmit } = this;
+        const { abuseType, abuseComment } = this.state;
         return <div id="ReportAbuse" className="Question DiscreteQuestion">
             <h1>Report Abuse</h1>
-            <form onSubmit={this.handleSubmit.bind(this)}>
+            <form onSubmit={handleSubmit}>
                 <label>
-                <select value={this.state.abuseType} onChange={this.handleChange.bind(this)}>
+                <select value={abuseType} onChange={this.handleChangeType}>
+                    <option disabled value="Select...">Select...</option>
                     <option value="nudity">nudity</option>
                     <option value="offensive">offensive language</option>
                     <option value="other">other</option>
                 </select>
                 </label>
                 <br />
+                <input type="text" value={abuseComment} onChange={handleChangeComment} />
                 <input type="submit" value="Submit" />
             </form>
         </div>

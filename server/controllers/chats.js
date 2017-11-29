@@ -130,5 +130,6 @@ function logDisconnection(payload) {
 module.exports = {
     logConnection,
     logDisconnection,
-    logFeedback
+    logFeedback,
+    getMostRecent
 }

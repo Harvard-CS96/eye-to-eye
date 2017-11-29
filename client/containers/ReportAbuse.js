@@ -9,14 +9,8 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        submitReport: data => {
-            console.log("Hit dis container");
-            console.log(data);            
-            dispatch(submitReport(data))
-        }
-    }
+const mapDispatchToProps = {
+    submitReport
 }
 
 const ReportAbuse = connect(mapStateToProps, mapDispatchToProps)(_ReportAbuse);
