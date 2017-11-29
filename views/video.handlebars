@@ -3345,6 +3345,9 @@
 
                   // find biggest face
                   function largest_face(rectangles) {
+                    if (rectangles.length == 0) {
+
+                    }
                       var biggestArea = 0;
                       var biggestRect = null;
                       rectangles.forEach(function(rect) {
@@ -3357,7 +3360,7 @@
                       return biggestRect;
                   }
 
-                  var dominant_face = [largest_face(rectangles)];
+                  var dominant_face = largest_face(rectangles);
 
                   // clear the canvas in case there are previous drawings there
                   // context.clearRect(0, 0, canvas.width, canvas.height);
@@ -3367,7 +3370,7 @@
                   context.fillRect(0,0,canvas.width,canvas.height);
 
                   // Loop through the faces collected in rectangles variable
-                  dominant_face.forEach(function(rect) {
+                  if(dominant_face) {
                     // console.log(rect.x, rect.y)
 
                     // context.strokeStyle = '#a64ceb';
@@ -3407,7 +3410,7 @@
                     context.fill();
                     context.closePath();
                     context.globalCompositeOperation = 'source-over';
-                  });
+                  }
                 });
 
             });
