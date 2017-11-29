@@ -7,16 +7,15 @@
 * [Introduction](Introduction.md)
 
 * Backend
-* [Connections](guides/Connections.md)
-* [Video](guides/Video.md)
-* [Routes](guides/Routes.md)
-* [Database](guides/Database.md)
-* [Matching Users](guides/MatchingUsers.md)
+    * [Connections](guides/Connections.md)
+    * [Video](guides/Video.md)
+    * [Routes](guides/Routes.md)
+    * [Database](guides/Database.md)
+    * [Matching Users](guides/MatchingUsers.md)
 
 * FrontEnd
-* [React](guides/React.md)
-* [Redux](guides/Redux.md)
-
+    * [React](guides/React.md)
+    * [Redux](guides/Redux.md)
 * [Troubleshooting](Troubleshooting.md)
 
 
