@@ -3325,9 +3325,37 @@
                 var frames_without_face_threshold = 10;
                 var prior_data = [];
 
+                function createBuffer(size) {
+                  return {"size": size, "data":[]};
+                };
+
+                function updateBuffer(rect, buffer) {
+                  buffer.unshift(rect);
+                  if (buffer.data.length > buffer.size) {
+                      buffer.data.pop()
+                  }
+                  return buffer;
+                };
+
+                function averageBuffer(buffer) {
+                  var new_rect = {"x": 0, "y": 0, "width": 0, "height": 0}
+                  buffer.data.forEach(function(r) {
+                    new_rect.x += r.x;
+                    new_rect.y += r.y;
+                    new_rect.width += r.width;
+                    new_rect.height += r.height;
+                  });
+                  for(var key in new_rect) {
+                    new_rect.key /= buffer.size;
+                  }
+                  return new_rect;
+                };
+
+                var buffer = createBuffer(5);
                 // On track event
                 tracker.on('track', function(event) {
                   var rectangles = event.data;
+                  console.log(rectangles);
                   // If statements to check whether last few frames had a face
                   if (rectangles.length == 0) {
                     // then increment
@@ -3360,8 +3388,7 @@
                       return biggestRect;
                   }
 
-                  var rect = largest_face(rectangles);
-
+                  var face = largest_face(rectangles);
                   // clear the canvas in case there are previous drawings there
                   // context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -3369,8 +3396,11 @@
                   context.fillStyle = "#fff";
                   context.fillRect(0,0,canvas.width,canvas.height);
 
+
                   // Loop through the faces collected in rectangles variable
-                  if(rect) {
+                  if(face) {
+                    buffer = updateBuffer(face, buffer);
+                    rect = averageBuffer(buffer);
                     // console.log(rect.x, rect.y)
 
                     // context.strokeStyle = '#a64ceb';
