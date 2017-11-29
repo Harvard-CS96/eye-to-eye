@@ -20,7 +20,7 @@ class LeaderboardButton extends React.Component {
         const buttonText = typeof toggle === 'number' ?
             strings.LeaderboardButton.link :
             strings.LeaderboardButton.disabled;
-        return <div id="LeaderboardButton">
+        return <div className="button">
             <div children={buttonText} onClick={onClickSubmit} />
         </div>
     }
