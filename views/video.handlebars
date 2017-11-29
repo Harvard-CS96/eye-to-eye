@@ -3363,6 +3363,10 @@
 
                   return new_rect;
                 };
+                
+                // make everything white before finding a face
+                context.fillStyle = "#fff";
+                context.fillRect(0,0,canvas.width,canvas.height);
 
                 var buffer = createBuffer(5);
                 // On track event
@@ -3403,11 +3407,7 @@
 
                   var face = largest_face(rectangles);
                   // clear the canvas in case there are previous drawings there
-                  // context.clearRect(0, 0, canvas.width, canvas.height);
-
-                  // make everything white before finding a face
-                  context.fillStyle = "#fff";
-                  context.fillRect(0,0,canvas.width,canvas.height);
+                  context.clearRect(0, 0, canvas.width, canvas.height);
 
 
                   // Loop through the faces collected in rectangles variable
