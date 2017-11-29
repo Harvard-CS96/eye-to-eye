@@ -402,8 +402,7 @@
             tracking.trackCanvasInternal_(canvas, tracker);
           }
         }
-        else
-        console.log('skipping frame')
+        // console.log('skipping frame')
       });
     };
 
@@ -3356,7 +3355,7 @@
                 // On track event
                 tracker.on('track', function(event) {
                   var rectangles = event.data;
-                  console.log(rectangles);
+                  console.log(buffer.data);
                   // If statements to check whether last few frames had a face
                   if (rectangles.length == 0) {
                     // then increment
