@@ -102,53 +102,6 @@ const chats = require('./controllers/chats');
 matcher.addCallback(PAIRING,      chats.logConnection);
 matcher.addCallback(DISCONNECTED, chats.logDisconnection);
 
-// when a user connects to the socket
-// socketio.sockets.on("connection", function (socket) {
-//   // when socket receives a message from a user, the (data) parameter
-//   // is the message the user send
-
-//   let { user_id, username } = socket.handshake.session;
-//   if (!username) {
-//     socket.emit('request username')
-//   } else {
-//     socket.emit('recall username', username)
-//     matcher.connect(socket.id, username, user_id);
-//   }
-
-//   socket.on("send message", function (data) {
-//     socket.emit("new message", `You said: ${data}`)
-//     socket.broadcast.to(matcher.getPartner(socket.id)).emit("new message", 
-//       `${matcher.getUsername(socket.id)} says: ${data}`
-//       )
-
-//   })
-
-//   socket.on("set user", ({ username, user_id }) => {
-//     matcher.connect(socket.id, username, user_id);
-//     socket.handshake.session.username = username;
-//     socket.handshake.session.save();
-//     socket.emit('recall username', username)
-//   })
-
-//   socket.on("disconnect", () => {
-//     matcher.disconnect(socket.id);
-//   })
-
-//   socket.on("hangup", () => {
-//     matcher.hangup(socket.id);
-//   })
-
-//   socket.on("logout", () => {
-//     delete socket.handshake.session.user_id;
-//     delete socket.handshake.session.username;
-//     socket.handshake.session.save()
-//     matcher.disconnect(socket.id)
-//   })
-
-// })
-// sock
-
-
 const sockets = require('./sockets');
 sockets(socketio, matcher, config)
 // Require our routes
@@ -159,7 +112,7 @@ const createUtilRoute = require('./routes/util');
 const utilRoute = createUtilRoute(matcher)
 router.use('/util', utilRoute);
 
-router.use('/assets', serveStatic(path.join(__dirname, 'assets')));
+router.use('/static', serveStatic(path.join(__dirname, 'static')));
 
 module.exports = {
   router,

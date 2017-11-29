@@ -10,7 +10,6 @@ module.exports = function(io, matcher, config) {
           client.emit('request username')
         } else {
           client.emit('recall username', username)
-          matcher.connect(client.id, username, user_id);
         }
 
         client.on("send message", function (data) {
@@ -21,14 +20,15 @@ module.exports = function(io, matcher, config) {
         })
 
         client.on("set user", ({ username, user_id }) => {
-          matcher.connect(client.id, username, user_id);
           client.handshake.session.username = username;
+          client.handshake.session.user_id = user_id;
           client.handshake.session.save();
           client.emit('recall username', username)
         })
 
         client.on("disconnect", () => {
           matcher.disconnect(client.id);
+          removeFeed();
         })
 
         client.on("hangup", () => {
@@ -40,6 +40,14 @@ module.exports = function(io, matcher, config) {
           delete client.handshake.session.username;
           client.handshake.session.save()
           matcher.disconnect(client.id)
+        })
+
+        client.on("request match", () => {
+            console.log("match requested");
+            console.log("client.id " + client.id);
+            console.log("client.handshake.session.username " + client.handshake.session.username);
+            console.log("client.handshake.session.user_id " + client.handshake.session.user_id);
+            matcher.connect(client.id, client.handshake.session.username, client.handshake.session.user_id);
         })
 
         client.resources = {
@@ -90,11 +98,6 @@ module.exports = function(io, matcher, config) {
             client.room = name;
         }
 
-        // we don't want to pass "leave" directly because the
-        // event type string of "socket end" gets passed too.
-        client.on('disconnect', function() {
-            removeFeed();
-        });
         client.on('leave', function() {
             removeFeed();
         });
@@ -164,7 +167,8 @@ module.exports = function(io, matcher, config) {
     }
 
     function clientsInRoom(name) {
-        return io.sockets.clients(name).length;
+        var clients = io.nsps['/'].adapter.rooms[name];
+        return clients ? Object.keys(io.nsps['/'].adapter.rooms[name]).length : 0;
     }
 
 };

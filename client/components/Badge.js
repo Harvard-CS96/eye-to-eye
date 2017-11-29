@@ -16,7 +16,7 @@ class Badge extends React.Component {
             'on' :
             'off';
         return <div className={className} onClick={onClick}>
-            <img src={"/assets/badges/" + badgeId + "-" + imgSuffix + ".png"} width="100" height="100" />
+            <img src={"/static/badges/" + badgeId + "-" + imgSuffix + ".png"} width="100" height="100" />
             {name}
             {renderedCount}
         </div>
