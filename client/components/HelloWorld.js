@@ -9,7 +9,6 @@ class HelloWorld extends React.Component {
     render() {
         return <div id="HelloWorld">
             {/* <Profile /> */}
-            <Link to="/about">{Strings.HelloWorld.link}</Link>
             {Strings.HelloWorld.body}
             <br />
             <Link to="/profile">{Strings.HelloWorld.link2}</Link>
@@ -20,7 +19,7 @@ class HelloWorld extends React.Component {
             <br />
             <Link to="/system_check">{Strings.SystemCheck.link}</Link>
             <br />
-            <Link to="/conversation/test">test convo</Link>
+            <Link to="/conversation">test convo</Link>
             <br />
             <Logout />
         </div>
