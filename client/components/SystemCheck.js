@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import Strings from '../json/strings.json';
 import { ReactMic } from 'react-mic';
+import VideoChat from '../components/VideoChat';
 
 class SystemCheck extends React.Component {
     constructor(props) {
@@ -44,6 +45,7 @@ class SystemCheck extends React.Component {
         return <div id="SystemCheck">
             {/* TODO: Include video face detection check here. */}
             <div id="WebcamCheck">
+            <VideoChat room_id="blah"/>
             </div>
             <div>
                 <ReactMic

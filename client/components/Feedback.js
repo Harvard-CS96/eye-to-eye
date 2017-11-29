@@ -28,7 +28,7 @@ class Feedback extends React.Component {
                 name="user_star_rating"
                 starCount={5}
                 onStarClick={this.onStarClick.bind(this)}
-                starColor='#cbe1f9'
+                starColor='#509aee'
             /></div><br/>            
             <div>
                 {strings.Feedback.badges}
