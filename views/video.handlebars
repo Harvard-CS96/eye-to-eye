@@ -3369,21 +3369,6 @@
                 tracker.on('track', function(event) {
                   var rectangles = event.data;
 
-                  // If statements to check whether last few frames had a face
-                  // if (rectangles.length == 0) {
-                  //   // then increment
-                  //   frames_without_face++;
-                  //   if (frames_without_face < frames_without_face_threshold) {
-                  //     // stores previous data as the current rectangle to use
-                  //     // if there is currently no face but not that many
-                  //     // frames have occurred since last face seen
-                  //     rectangles = prior_data;
-                  //   }
-                  // } else {
-                  //   frames_without_face = 0;
-                  //   prior_data = rectangles;
-                  // }
-
                   // find biggest face
                   function largest_face(rectangles) {
                     if (rectangles.length == 0) {
@@ -3402,6 +3387,27 @@
                   }
 
                   var face = largest_face(rectangles);
+
+                  // If statements to check whether last few frames had a face
+                  if (!face) {
+                    // then increment
+                    frames_without_face++;
+                    if (frames_without_face < frames_without_face_threshold) {
+                      // stores previous data as the current rectangle to use
+                      // if there is currently no face but not that many
+                      // frames have occurred since last face seen
+                      if (buffer.data.length > 0) {
+                          buffer = updateBuffer(buffer.data[0], buffer);
+                      }
+                    } else {
+                      
+                    }
+                  } else {
+                    // if there is a face
+                    frames_without_face = 0;
+                    buffer = updateBuffer(face, buffer);
+                  }
+
                   // clear the canvas in case there are previous drawings there
                   // context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -3410,8 +3416,7 @@
                   context.fillRect(0,0,canvas.width,canvas.height);
 
                   // Loop through the faces collected in rectangles variable
-                  if(face) {
-                    buffer = updateBuffer(face, buffer);
+                  if(buffer.data.length > 0) {
                     rect = averageBuffer(buffer);
                     // console.log(rect.x, rect.y)
 
