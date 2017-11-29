@@ -24,9 +24,9 @@ module.exports = {
 		rules,
 	},
 	plugins: [
-		new CopyWebpackPlugin([{
-			from: path.join(SETTINGS.SRCDIR, 'index.html'),
-		}]),
+		// new CopyWebpackPlugin([{
+		// 	from: path.join(SETTINGS.SRCDIR, 'index.html'),
+		// }]),
 		new webpack.DefinePlugin({
 			'process.env': JSON.stringify({
 				NODE_ENV: 'production',

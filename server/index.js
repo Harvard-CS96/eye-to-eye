@@ -114,6 +114,8 @@ router.use('/util', utilRoute);
 
 router.use('/static', serveStatic(path.join(__dirname, 'static')));
 
+router.use('*', mainRoute);
+
 module.exports = {
   router,
   socketio

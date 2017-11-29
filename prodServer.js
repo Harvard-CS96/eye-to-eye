@@ -23,10 +23,5 @@ let socketio = server.socketio;
 app.use(serveStatic('build'))
 
 // server
-app.use(router)
 socketio.listen(httpServer)
-
-// Redirect remaining requests to client root
-app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-})
+app.use(router)

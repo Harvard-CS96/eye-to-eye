@@ -88,7 +88,7 @@ router.get('/updateStance', isLoggedIn, (req, res) => {
     res.render("updateStance", getAuthInfo(req));
 })
 
-router.get('/feedback', isLoggedIn, (req, res) => {
+router.get('/feedback_legacy', isLoggedIn, (req, res) => {
     res.render("feedback", getAuthInfo(req));
 })
 

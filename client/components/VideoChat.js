@@ -1,6 +1,4 @@
 import React from 'react';
-require('tracking')
-import loadFaceTracking from '../assets/loadFaceTracking';
 
 class VideoChat extends React.Component {
     constructor() {
@@ -17,8 +15,6 @@ class VideoChat extends React.Component {
     remoteVideoCanvasRef = "remote-video-canvas"
 
     componentDidMount() {
-        loadFaceTracking(window.tracking)
-
         const { localVideoRef, remoteVideoContainerRef, remoteVideoCanvasRef, width, height } = this;
         const { room_id } = this.props;
 

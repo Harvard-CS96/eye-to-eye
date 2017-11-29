@@ -42,7 +42,7 @@ div#LandingPage {
     header.masthead {
         position: relative;
         background-color: #343a40;
-        background: url("../assets/coloured-speech-bubbles.jpg") no-repeat center center;
+        background: url("../static/coloured-speech-bubbles.jpg") no-repeat center center;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -74,7 +74,7 @@ div#LandingPage {
       
       .showcase .showcase-img {
         min-height: 30rem;
-        background: url("../assets/handshake.jpg");
+        background: url("../static/handshake.jpg");
         background-size: cover; }
 }
 

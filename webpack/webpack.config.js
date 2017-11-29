@@ -36,9 +36,9 @@ module.exports = {
 	plugins: [
 		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
-		new CopyWebpackPlugin([{
-			from: path.join(SETTINGS.SRCDIR, 'index.html')
-		}]),
+		// new CopyWebpackPlugin([{
+		// 	from: path.join(SETTINGS.SRCDIR, 'index.html')
+		// }]),
 		new webpack.optimize.ModuleConcatenationPlugin(),
 	],
 	node: {

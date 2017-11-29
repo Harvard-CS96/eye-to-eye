@@ -86,15 +86,15 @@ class LandingPage extends React.Component {
                 {/* Carousel*/}
                 <Carousel showThumbs={false} showStatus={false} infiniteLoop={true} emulateTouch={true}>
                     <div>
-                        <img src={require("../assets/preview1.png")} />
+                        <img src={require("../static/preview1.png")} />
                         <p className="legend">Share your views on trending topics and issues.</p>
                     </div>
                     <div>
-                        <img src={require("../assets/preview2.png")} />
+                        <img src={require("../static/preview2.png")} />
                         <p className="legend">Have a discussion with someone with different views.</p>
                     </div>
                     <div>
-                        <img src={require("../assets/preview3.png")} />
+                        <img src={require("../static/preview3.png")} />
                         <p className="legend">Rate your partner and earn badges for having great conversations.</p>
                     </div>
                 </Carousel>

@@ -82,16 +82,7 @@ serverWatch.on('ready', () => {
     });
 });
 
-// Handle server requests
-app.use((req, res, next) => {
-    console.log("HANDLING REQUEST")
-    // If there is an error, send the error on any request
-    if (serverLoadError !== null) {
-        return res.status(500).end("Server load error: " + serverLoadError);
-    }
-    logHTTP(`HTTP ${req.method} ${req.originalUrl}`);
-    router(req, res, next);
-});
+
 
 // Add webpack middlewares
 const devMiddleware = webpackDevMiddleware(compiler, {
@@ -126,11 +117,20 @@ const devMiddleware = webpackDevMiddleware(compiler, {
         }
     } 
 })
-app.use(devMiddleware);
+
 app.use(webpackHotMiddleware(compiler, {
     log: false,
 }));
+app.use(devMiddleware);
+// Handle server requests
+app.use((req, res, next) => {
+    // If there is an error, send the error on any request
+    if (serverLoadError !== null) {
+        return res.status(500).end("Server load error: " + serverLoadError);
+    }
+    logHTTP(`HTTP ${req.method} ${req.originalUrl}`);
+    router(req, res, next);
+});
 app.use('*', (err, req, res, next) => {
     devMiddleware(req, res, next);
 });
-
