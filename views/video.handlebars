@@ -3360,7 +3360,7 @@
                       return biggestRect;
                   }
 
-                  var dominant_face = largest_face(rectangles);
+                  var rect = largest_face(rectangles);
 
                   // clear the canvas in case there are previous drawings there
                   // context.clearRect(0, 0, canvas.width, canvas.height);
@@ -3370,7 +3370,7 @@
                   context.fillRect(0,0,canvas.width,canvas.height);
 
                   // Loop through the faces collected in rectangles variable
-                  if(dominant_face) {
+                  if(rect) {
                     // console.log(rect.x, rect.y)
 
                     // context.strokeStyle = '#a64ceb';
