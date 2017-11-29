@@ -3355,11 +3355,11 @@
                     new_rect.height += r.height;
                     new_rect.total += r.total;
                   });
-                  new_rect.x /= buffer.size;
-                  new_rect.y /= buffer.size;
-                  new_rect.width /= buffer.size;
-                  new_rect.height /= buffer.size;
-                  new_rect.total /= buffer.size;
+                  new_rect.x /= buffer.data.length;
+                  new_rect.y /= buffer.data.length;
+                  new_rect.width /= buffer.data.length;
+                  new_rect.height /= buffer.data.length;
+                  new_rect.total /= buffer.data.length;
 
                   return new_rect;
                 };
