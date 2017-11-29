@@ -3330,7 +3330,7 @@
                 };
 
                 function updateBuffer(rect, buffer) {
-                  buffer.unshift(rect);
+                  buffer.data.unshift(rect);
                   if (buffer.data.length > buffer.size) {
                       buffer.data.pop()
                   }
@@ -3338,12 +3338,13 @@
                 };
 
                 function averageBuffer(buffer) {
-                  var new_rect = {"x": 0, "y": 0, "width": 0, "height": 0}
+                  var new_rect = {"x": 0, "y": 0, "width": 0, "height": 0, "total":0}
                   buffer.data.forEach(function(r) {
                     new_rect.x += r.x;
                     new_rect.y += r.y;
                     new_rect.width += r.width;
                     new_rect.height += r.height;
+                    new_rect.total += r.total;
                   });
                   for(var key in new_rect) {
                     new_rect.key /= buffer.size;
