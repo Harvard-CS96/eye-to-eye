@@ -13,6 +13,11 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
 }
 
+h7 {
+    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+}
+
 header.masthead {
     position: relative;
     background-color: #343a40;
@@ -119,6 +124,24 @@ header.masthead h1 {
     top: 0;
     left: 0;
     opacity: 0.3;
+}
+
+.btn-toolbar {
+  margin-left:-5px;
+}
+
+.btn-toolbar .btn, .btn-toolbar .btn-group, .btn-toolbar {
+  text-align:center;
+  align-content:center;
+}
+
+.btn-group {
+   margin:0 auto;
+   display:block;
+}
+
+.btn-primary {
+    margin-right: 20px;
 }
 
 footer.footer {

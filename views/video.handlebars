@@ -1,8 +1,14 @@
 
 <style>
     video,
+    .web-cam { 
+        width: 500px;
+        height: 300px;
+        border-radius: 25%;
+        -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+    }
     canvas {
-        width: 320px;
+        width: 400px;
         height: 240px;
         margin-top: 5px;
         position: absolute;
@@ -17,39 +23,45 @@
     .local_column canvas {
         margin-left: 5px;
     }
+
 </style>
 
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
     <a class="navbar-brand" href="#">Discourse</a>
     <a href="/logout" class="btn btn-outline-danger my-2 my-sm-0">Sign Out</a>
 </nav>
-<div class="container mt-5">
+<div class="container mt-5" style="width:1200px;height:400px;">
     <div class="row text-center">
         <div class="col-md-12" style="height:100%;">
-            <h1>Discourse</h1>
+            <br>
+            <h7 id="disagree-statement">You disagree about {pull from db}</h7>
+            <br>
+            <br>
+            <br>
             <p id="identity"></p>
             <!-- where the messages will apend in -->
             <div id="notice"></div>
-            <div id="chat" class="border bg-light text-left p-3" style="min-height:20em;overflow:scroll;">
+            <div id="chat" style="min-height:20em;overflow:scroll;height:350px;">
                 <div class="local_column">
-                    <video id="localVideo"></video>
-                </div>
+                    <div class="web-cam">
+                        <video id="localVideo"></video>
+                    </div>
                 <div class="remote_column">
-                    <span id="remoteVideos"></span>
+                        <span id="remoteVideos"></span>
                     <canvas id="canvas" width="320" height="240"></canvas>
                 </div>
             </div>
 
             <!-- form and input box to submit messages -->
-            <div class="row">
-                <div class="col-md-12">
-                    <button id="end-conversation" class="btn btn-danger" style="width:100%;" disabled="true">End Conversation</button>
-                </div>
-            </div>
 
-            <a href="/updateStance">Update Your Stances</a>
+            <!-- <a href="/updateStance">Return to Profile</a> -->
         </div>
     </div>
+</div>
+<br>
+<br>
+<div style="text-align: center;">
+    <button id="end-conversation" class="btn btn-success"style="width:50%;" disabled="true">End Conversation</button>
 </div>
 
 <script src="/static/js/simplewebrtc.js"></script>
@@ -85,6 +97,7 @@
         url: host,
         debug: true
     });
+
 
     function matchPartner() {
         // leave current room, if any

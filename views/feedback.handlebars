@@ -50,7 +50,7 @@
 	 <div class="container mt-5">
       <div class="row text-center">
           <div class="col-md-12" style="height:100%;">
-              <h1>Textroulette Preferences</h1>
+              <h1>Thanks for Chatting!</h1>
               <p id="identity"></p>
               <!-- where the questions will append in -->
 
@@ -81,13 +81,13 @@
                 qid: 'badges',
                 text: 'Award a badge?', 
                 type: 'multiple',
-                options: ['funny', 'creative', 'friendly']
+                options: ['Creative', 'Funny', 'Friendly']
               },
               {
                 qid: 'improvements',
                 text: 'Anything to improve?',
                 type: 'multiple',
-                options: ['Listening', 'Volume']
+                options: ['Politeness', 'Listening', 'Cooperation', 'Respect']
               }];
 
               // CONSTRUCTING HTML SECTION (TODO: REACT)
@@ -109,14 +109,16 @@
 
               function constructDiv(names, qID, buttonType, idx){
                 var s = '';
-                var start = ('<div class="btn-group" id="question' + (idx + 1) + '" ' +
-                             ' data-toggle="buttons"' + 
+                var start = ('<div class="btn-toolbar" id="question' + (idx + 1) + '" ' +
+                             ' data-toggle="buttons"' +
                              '>');
                 var end = '</div>';
                 s += start;
+                s += '<div role="group" class="btn-group">';
                 names.forEach(function(name, qid, idx){
                   s += constructLabel(name, qID, buttonType, idx);
                 })
+                s += '</div>'
                 return s + end;
               }
 
