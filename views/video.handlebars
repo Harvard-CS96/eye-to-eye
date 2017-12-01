@@ -23,7 +23,7 @@
 
             .local_column video, .local_column canvas {
               margin-left: 5px;
-              border-radius: 100%;
+              /*border-radius: 100%;*/
             }
 
             /*.local_column, .remote_column video {
@@ -50,7 +50,7 @@
                     <div id="chat" class="border bg-light text-left p-3" style="height:20em;overflow:scroll;">
                       <div class="local_column">
                         <video id="localVideo"></video>
-                        <!-- <canvas id=""></canvas> -->
+                        <canvas id="local_canvas" width="320" height="240"></canvas>
                       </div>
                         <div class="remote_column">
                           <span id="remoteVideos"></span>
@@ -3284,6 +3284,41 @@
                 url: 'https://signaling.tk',
                 debug: true
             });
+
+            function makeLocalOval() {
+              var canvas_local = document.getElementById('local_canvas');
+              // draw the oval in center of local video
+              var local_center = {"x": 160, "y": 120, "width": 120, "height": 100};
+              var context_local = canvas_local.getContext('2d');
+              // Our oval-creating part
+              context_local.globalCompositeOperation = 'destination-out';
+              context_local.filter = "blur(5px)";
+              context_local.beginPath();
+
+              var local_centerX = local_center.x;
+              var local_centerY = local_center.y;
+              // Add some wiggle room to the rect width and height
+              var local_height = local_center.height;
+              var local_width = local_center.width;
+
+              context_local.moveTo(local_centerX, local_centerY - local_height/2); // A1
+
+              context_local.bezierCurveTo(
+                local_centerX + local_width/2, local_centerY - local_height/2, // C1
+                local_centerX + local_width/2, local_centerY + local_height/2, // C2
+                local_centerX, local_centerY + local_height/2); // A2
+
+              context_local.bezierCurveTo(
+                local_centerX - local_width/2, local_centerY + local_height/2, // C3
+                local_centerX - local_width/2, local_centerY - local_height/2, // C4
+                local_centerX, local_centerY - local_height/2); // A1
+
+              context_local.fill();
+              context_local.closePath();
+              context_local.globalCompositeOperation = 'source-over';
+            };
+
+            makeLocalOval();
 
             // we have to wait until it's ready
             webrtc.on('readyToCall', function() {
