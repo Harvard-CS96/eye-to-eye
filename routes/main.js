@@ -48,11 +48,30 @@ router.get('/text', isLoggedIn, (req, res) => {
     res.render("text", hbsData)
 })
 
-// Get a user document from the db by uuid
-router.get('/profile', (req, res) => {
-    users.findById(req.body.uuid, (results) => {
+// Get a user's profile page
+router.get('/profile', isLoggedIn, (req, res) => {
+    const hbsData = req.isAuthenticated() === true ?
+        {
+            isAuthenticated: 'true',
+            user: JSON.stringify(req.user),
+        } :
+        {
+            isAuthenticated: 'false',
+            user: JSON.stringify({}),
+        }
+    res.render("profile", hbsData)
+});
+
+// Get the user's JSON representation
+router.get('/profile/user', isLoggedIn, (req, res) => {
+   res.send(req.user);
+});
+
+// Get a user's leaderboard
+router.get('/profile/leaderboard', isLoggedIn, (req, res) => {
+    users.getLeaderboard(req.user.uuid, (results) => {
         res.send(results);
-    });
+    })
 });
 
 // Either find specific questions or all questions.
@@ -72,7 +91,7 @@ router.post('/chats', (req, res) => {
 });
 
 // Update survey responses of a particular user.
-router.post('/updateStance', (req, res) => {
+router.post('/updateStance', isLoggedIn, (req, res) => {
     users.updateStance(req.body.uuid, req.body.questions_answered);
 });
 
