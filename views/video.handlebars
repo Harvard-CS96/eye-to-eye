@@ -21,10 +21,12 @@
         margin-left: 5px;
     }
     .video-circle {
+        width: 300px;
+        height: 300px;
         border-radius: 50%;
         object-fit: cover;
     }
-    
+
 </style>
 
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
@@ -44,15 +46,15 @@
             <div id="notice"></div>
 
             <div id="chat" class="text-left" style="height:20em;overflow:scroll;">
-                  <div class="local_column">
-                    <div id="container">
-                        <video id="localVideo" class="video-circle" width="200" height="200"></video>
-                    </div> 
-                  </div>
                     <div class="remote_column">
                       <span id="remoteVideos"></span>
                       <canvas id="canvas" width="320" height="240"></canvas>
                     </div>
+                    <div class="local_column">
+                    <div id="container">
+                        <video id="localVideo" class="video-circle" width="200" height="200"></video>
+                    </div> 
+                  </div>
                 </div>
 
             <!-- form and input box to submit messages -->
