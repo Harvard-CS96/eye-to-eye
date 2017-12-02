@@ -19,31 +19,49 @@
     }
 </style>
 
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-    <a class="navbar-brand" href="#">Discourse</a>
-    <a href="/logout" class="btn btn-outline-danger my-2 my-sm-0">Sign Out</a>
-</nav>
-<div class="container mt-5">
-    <div class="row text-center">
-        <div class="col-md-12" style="height:100%;">
-            <h1>Discourse</h1>
-            <p id="identity"></p>
-            <!-- where the messages will apend in -->
-            <div id="notice"></div>
-            <div id="chat" class="border bg-light text-left p-3" style="min-height:20em;overflow:scroll;">
-                <div class="local_column">
-                    <video id="localVideo"></video>
-                </div>
-                <div class="remote_column">
-                    <span id="remoteVideos"></span>
-                    <canvas id="canvas" width="320" height="240"></canvas>
-                </div>
-            </div>
+        <style>
+            video {
+                width: 49.5%;
+            }
 
-            <!-- form and input box to submit messages -->
+            .btn {
+                margin-right: 10px;
+            }
+        </style>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+            <a class="navbar-brand" href="#">Discourse</a>
             <div class="row">
-                <div class="col-md-12">
-                    <button id="end-conversation" class="btn btn-danger" style="width:100%;" disabled="true">End Conversation</button>
+                <input class="btn btn-outline-primary pull-right" type="button" id="profile" value="Profile" />
+                <input class="btn btn-outline-danger pull-right" type="button" id="logout" value="Logout" />
+            </div>
+        </nav>
+        <div class="container mt-5">
+            <div class="row text-center">
+                <div class="col-md-12" style="height:100%;">
+                    <h1>Discourse</h1>
+                    <p id="identity"></p>
+                    <!-- where the messages will apend in -->
+                    <div id="notice"></div>
+                    <div id="chat" class="border bg-light text-left p-3" style="min-height:20em;overflow:scroll;">
+                        <video id="localVideo"></video>
+                        <span id="remoteVideos"></span>
+                    </div>
+
+                    <!-- form and input box to submit messages -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button id="end-conversation" class="btn btn-danger" style="width:100%;" disabled="true">End Conversation</button>
+                        </div>
+                    </div>
+                    </br>
+                    <a class="btn btn-primary" href="/updateStance" role="button">Update Stances</a>
+                    </br>
+                    </br>
                 </div>
             </div>
 
@@ -200,6 +218,10 @@
                 new_rect.height += r.height;
                 new_rect.total += r.total;
             });
+            // Got to profile page on clicking profile button
+            $("#profile").click(function() {
+                window.location.href = '/profile';
+            })
 
             new_rect.x /= buffer.data.length;
             new_rect.y /= buffer.data.length;

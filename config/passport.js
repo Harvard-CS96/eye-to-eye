@@ -30,8 +30,9 @@ module.exports = function(passport) {
         clientSecret    : configAuth.facebookAuth.clientSecret,
         callbackURL     : configAuth.facebookAuth.callbackURL,
 
-        // request access to user's friends list
-        scope: ['user_friends']
+        // request friend permissions
+        scope : ['user_friends'],
+        profileFields: ['friends']
 
     },
 
@@ -53,9 +54,10 @@ module.exports = function(passport) {
                 if (user) {
                     console.log("FBAuth: User found")
                     user.is_first_time = false;
+                    user.facebook.token = token;
                     user.save();
                     return done(null, user); // user found, return that user
-                } 
+                }
                 else {
                     console.log("FBAuth: User not found")
                     // if there is no user found with that facebook id, create them
@@ -63,25 +65,25 @@ module.exports = function(passport) {
                     newUser.uuid = uuid();
 
                     // set all of the facebook information in our user model
-                    newUser.facebook.id    = profile.id; // set the users facebook id                   
+                    newUser.facebook.id    = profile.id; // set the users facebook id
                     newUser.facebook.token = token; // we will save the token that facebook provides to the user
-                    
+
                     // promise to get user's first name from facebook, then save user to database
                     fb.api('me', {fields: 'first_name', access_token: token})
-                      .then( 
+                      .then(
                         (res) => {
-                            newUser.facebook.name  = res.first_name; 
+                            newUser.facebook.name  = res.first_name;
 
                             // save our user to the database
                             newUser.save(function(err) {
                                 if (err)
                                     throw err;
-        
+
                                 // if successful, return the new user
                                 return done(null, newUser);
                             });
                     });
-    
+
                 }
 
             });
