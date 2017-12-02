@@ -78,6 +78,8 @@
     const isAuthenticated = {{{isAuthenticated}}}
     const user = {{{user}}}
 
+    var just_talked = false
+
     // Identify the hostname for the signaling server, taking care to
     // include port number if necessary (for localhost debugging envs)
     var host;
@@ -107,6 +109,11 @@
         webrtc.connection.emit("request match")
     }
     webrtc.connection.on("waiting", function() {
+
+        if (just_talked) {
+            window.location.href = '/feedback';
+        }
+
         // Tell user matching is happening
         $("#notice").text("Matching you to another user...");
         // Disable End Conversation Button
@@ -116,6 +123,9 @@
         $("#identity").text("Hello, " + username);
     });
     webrtc.connection.on("pairing", function(partner, room) {
+
+        just_talked = true;
+
         // leave current room, if any
         webrtc.leaveRoom();
         // join new room
@@ -138,9 +148,9 @@
     // When user ends conversation, start a new match
     $("#end-conversation").click(function() {
         webrtc.connection.emit("hangup");
-        matchPartner();
+        window.location.href = '/feedback'
     });
-
+ 
     // TRACKING.JS VERSION OF FACETRACKING
 
     webrtc.on('videoAdded', function(video, peer) {
