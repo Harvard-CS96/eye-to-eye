@@ -41,11 +41,11 @@ badgesDict = {
 };
 function changeSelected(key){
     badgesDict[key] = !badgesDict[key];
-    if($('#' + key).hasClass('glyphicon-selected')){
-        $('#' + key).removeClass('glyphicon-selected')
+    if($('#' + key).hasClass('fa-selected')){
+        $('#' + key).removeClass('fa-selected')
     }
     else{
-        $('#' + key).addClass('glyphicon-selected')
+        $('#' + key).addClass('fa-selected')
     }
 }
 
