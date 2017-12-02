@@ -147,7 +147,6 @@ function logDisconnection(payload) {
     Chat.findOneAndUpdate(query, update).exec();
 }
 
-
 module.exports = {
     logConnection,
     logDisconnection,
