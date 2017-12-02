@@ -82,7 +82,8 @@ function getChatsForUUID(uuid, callback) {
         $or: [
             { user1: uuid },
             { user2: uuid }
-        ]
+        ],
+        "disconnected.is_disconnected": true,
     }
 
     Chat.find(query)
