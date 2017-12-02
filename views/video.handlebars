@@ -179,7 +179,8 @@
         // Variables to help with smoothing
         // Smoothing only occurs with one face in the frame though
         var frames_without_face = 0;
-        var frames_without_face_threshold = 5;
+        // 5 was too low, 20 is too high because it allows time for an attack
+        var frames_without_face_threshold = 10;
         var prior_data = [];
 
 
