@@ -43,6 +43,13 @@
               /*border-radius: 100%;*/
             }
 
+            #localVideo {
+              width: 300px;
+              height: 300px;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+
             /*.local_column, .remote_column video {
               width: 49.5%;
               position: relative;
@@ -67,7 +74,7 @@
                     <div id="chat" class="border bg-light text-left p-3" style="height:20em;overflow:scroll;">
                       <div class="local_column">
                         <video id="localVideo"></video>
-                        <canvas id="local_canvas" width="320" height="240"></canvas>
+                        <canvas id="local_canvas" width="300" height="300"></canvas>
                       </div>
                         <div class="remote_column">
                           <span id="remoteVideos"></span>
