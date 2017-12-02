@@ -83,25 +83,26 @@ router.get('/questions', (req, res) => {
     });
 });
 
-// Either find specific questions or all questions.
-router.post('/chats', (req, res) => {
-    chats.logFeedback(req.body, (results) => {
-        res.send(results);
-    });
-});
-
 // Update survey responses of a particular user.
 router.post('/updateStance', isLoggedIn, (req, res) => {
-    users.updateStance(req.body.uuid, req.body.questions_answered);
+    users.updateStance(req.user.uuid, req.body.questions_answered);
 });
 
 router.get('/updateStance', isLoggedIn, (req, res) => {
     res.render("updateStance", getAuthInfo(req));
 })
 
+// Get feedback page
 router.get('/feedback', isLoggedIn, (req, res) => {
     res.render("feedback", getAuthInfo(req));
 })
+
+// Submit new feedback
+router.post('/feedback', (req, res) => {
+    chats.logFeedback(req.body, (results) => {
+        res.send(results);
+    });
+});
 
 // Save new report
 router.post('/feedback/report', isLoggedIn, (req, res) => {

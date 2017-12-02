@@ -88,7 +88,7 @@ function formSubmit(){
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(json),
-            url: '/chats/',
+            url: '/feedback',
             success: function(data){
                 console.log(data);
             },
