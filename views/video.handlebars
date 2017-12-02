@@ -3285,40 +3285,6 @@
                 debug: true
             });
 
-            function makeLocalOval() {
-              var canvas_local = document.getElementById('local_canvas');
-              // draw the oval in center of local video
-              var local_center = {"x": 160, "y": 120, "width": 120, "height": 100};
-              var context_local = canvas_local.getContext('2d');
-              // Our oval-creating part
-              context_local.globalCompositeOperation = 'destination-out';
-              context_local.filter = "blur(5px)";
-              context_local.beginPath();
-
-              var local_centerX = local_center.x;
-              var local_centerY = local_center.y;
-              // Add some wiggle room to the rect width and height
-              var local_height = local_center.height;
-              var local_width = local_center.width;
-
-              context_local.moveTo(local_centerX, local_centerY - local_height/2); // A1
-
-              context_local.bezierCurveTo(
-                local_centerX + local_width/2, local_centerY - local_height/2, // C1
-                local_centerX + local_width/2, local_centerY + local_height/2, // C2
-                local_centerX, local_centerY + local_height/2); // A2
-
-              context_local.bezierCurveTo(
-                local_centerX - local_width/2, local_centerY + local_height/2, // C3
-                local_centerX - local_width/2, local_centerY - local_height/2, // C4
-                local_centerX, local_centerY - local_height/2); // A1
-
-              context_local.fill();
-              context_local.closePath();
-              context_local.globalCompositeOperation = 'source-over';
-            };
-
-            makeLocalOval();
 
             // we have to wait until it's ready
             webrtc.on('readyToCall', function() {
