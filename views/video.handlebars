@@ -3466,10 +3466,10 @@
                     // context.strokeRect(rect.x, rect.y, rect.width, rect.height);
 
                     // These lines draw the dot for center of face and text for width and height
-                    context.fillStyle = "#000";
-                    context.fillRect(center.x - 1, center.y - 1, 2, 2);
-                    context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
-                    context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+                    // context.fillStyle = "#000";
+                    context.fillRect(center.x - 4, center.y - 4, 5, 5);
+                    // context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+                    // context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
 
                     // Our oval-creating part
                     context.globalCompositeOperation = 'destination-out';
