@@ -101,7 +101,8 @@ function formSubmit(){
         window.location.href = '/profile';
     }
     else {
-        alert('Please add star rating');
+        // TODO: Say with whom the conversation was.
+        $('.error-warn').html('Please submit at least a star rating for your conversation.')
     }
 }
 $(document).ready(function(){
