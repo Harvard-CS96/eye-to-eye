@@ -1,8 +1,8 @@
 <style>
     video,
     canvas {
-        width: 500px;
-        height: 500px;
+        width: 450px;
+        height: 450px;
         margin-top: 5px;
         position: absolute;
     }
@@ -21,7 +21,8 @@
         object-fit: cover;
     }
     #end-conversation {
-        margin-left: 500px
+        margin-left: 500px;
+        width: 200px;
     }
 
 </style>
@@ -49,7 +50,7 @@
                 </div>
                     <div class="remote_column">
                       <span id="remoteVideos"></span>
-                      <canvas id="canvas" width="500" height="500"></canvas>
+                      <canvas id="canvas" width="450" height="450"></canvas>
                     </div>
                 </div>
 
@@ -145,8 +146,8 @@
         // Grab the ID of the peer video tag
         var video_id = '#' + peer['id'] + '_video_incoming';
         $(video_id).css({
-                  "width": "500px",
-                  "height": "500px",
+                  "width": "450px",
+                  "height": "450px",
                   "border-radius": "50%",
                   "object-fit": "cover"
                 })
