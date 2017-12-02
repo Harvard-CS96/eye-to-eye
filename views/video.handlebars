@@ -3463,11 +3463,11 @@
                     var center = {"x": rect.x + (0.5 * rect.width), "y": rect.y + (0.5 * rect.height)}
                     // console.log(center)
                     // Below line draws the rectangle for the face
-                    // context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+                    context.strokeRect(rect.x, rect.y, rect.width * 1.5, rect.height * 1.5);
 
                     // These lines draw the dot for center of face and text for width and height
                     // context.fillStyle = "#000";
-                    context.fillRect(center.x - 4, center.y - 4, 5, 5);
+                    // context.fillRect(center.x - 4, center.y - 4, 5, 5);
                     // context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
                     // context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
 
@@ -3479,8 +3479,8 @@
                     var centerX = center.x;
                     var centerY = center.y;
                     // Add some wiggle room to the rect width and height
-                    var height = rect.height;
-                    var width = rect.width;
+                    var height = rect.height * 1.5;
+                    var width = rect.width * 1.5;
 
                     context.moveTo(centerX, centerY - height/2); // A1
 
