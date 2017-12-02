@@ -48,7 +48,7 @@ function logFeedback(feedback) {
 
         users.applyFeedback(otherID, feedback);
     })
-    
+
 }
 
 function getMostRecent(uuid, callback) {
@@ -69,6 +69,24 @@ function getMostRecent(uuid, callback) {
             if (result) {
                 callback(result[0]) // A list was returned, must get element.
             }
+        })
+}
+
+function getChatsForUUID(uuid, callback) {
+    // Get all chats involving a user
+    var query = {
+        $or: [
+            { user1: uuid },
+            { user2: uuid }
+        ]
+    }
+
+    Chat.find(query)
+        .exec((err, result) => {
+            if (err) {
+                console.log(err);
+            }
+            callback(result);
         })
 }
 
@@ -129,5 +147,6 @@ function logDisconnection(payload) {
 module.exports = {
     logConnection,
     logDisconnection,
-    logFeedback
+    logFeedback,
+    getChatsForUUID
 }
