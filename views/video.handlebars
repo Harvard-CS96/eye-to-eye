@@ -3473,7 +3473,6 @@
                     // Our oval-creating part
                     context.globalCompositeOperation = 'destination-out';
                     context.filter = "blur(5px)";
-                    context.shadowBlur = 30;
                     context.beginPath();
 
                     var centerX = center.x;
@@ -3495,6 +3494,7 @@
                       centerX, centerY - height/2); // A1
 
                     context.fill();
+                    context.shadowBlur = 30;
                     context.closePath();
                     context.globalCompositeOperation = 'source-over';
                   }
