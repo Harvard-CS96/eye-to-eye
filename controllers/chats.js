@@ -48,6 +48,7 @@ function logFeedback(feedback) {
 
         users.applyFeedback(otherID, feedback);
     })
+    
 }
 
 function getMostRecent(uuid, callback) {
