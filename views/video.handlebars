@@ -1,14 +1,8 @@
 <style>
     video,
-    .web-cam { 
+    canvas {
         width: 300px;
         height: 300px;
-        border-radius: 25%;
-        -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
-    }
-    canvas {
-        width: 400px;
-        height: 240px;
         margin-top: 5px;
         position: absolute;
     }
@@ -20,7 +14,7 @@
     .local_column canvas {
         margin-left: 5px;
     }
-    .video-circle {
+    #localVideo, #canvas {
         width: 300px;
         height: 300px;
         border-radius: 50%;
@@ -37,7 +31,7 @@
     <div class="row text-center">
         <div class="col-md-12" style="height:100%;">
             <br>
-            <h7 id="disagree-statement">Find something out about your partner.</h7>
+            <h7 id="disagree-statement">Learn something out about your partner.</h7>
             <br>
             <br>
             <br>
@@ -46,15 +40,13 @@
             <div id="notice"></div>
 
             <div id="chat" class="text-left" style="height:20em;overflow:scroll;">
+                <div class="local_column">
+                    <video id="localVideo" class="video-circle" width="300" height="300"></video>
+                  </div>
                     <div class="remote_column">
                       <span id="remoteVideos"></span>
-                      <canvas id="canvas" width="320" height="240"></canvas>
+                      <canvas id="canvas" width="300" height="300"></canvas>
                     </div>
-                    <div class="local_column">
-                    <div id="container">
-                        <video id="localVideo" class="video-circle" width="200" height="200"></video>
-                    </div> 
-                  </div>
                 </div>
 
             <!-- form and input box to submit messages -->
@@ -147,7 +139,13 @@
     webrtc.on('videoAdded', function(video, peer) {
         // console.log('video added', peer['id']);
         // Grab the ID of the peer video tag
-        var video_id = '#' + peer['id'] + '_video_incoming'
+        var video_id = '#' + peer['id'] + '_video_incoming';
+        $(video_id).css({
+                  "width": "300px",
+                  "height": "300px",
+                  "border-radius": "50%",
+                  "object-fit": "cover"
+                })
         // Grab the canvas ID and getContext
         var canvas = document.getElementById('canvas');
         var context = canvas.getContext('2d');
