@@ -138,6 +138,8 @@ header.masthead h1 {
 .btn-group {
    margin:0 auto;
    display:block;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
 }
 
 .btn-primary {

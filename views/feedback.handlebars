@@ -46,6 +46,10 @@
 
 </head>
 
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <a class="navbar-brand" href="#">Discourse</a>
+    <a href="/logout" class="btn btn-outline-danger my-2 my-sm-0">Sign Out</a>
+</nav>
 <body>
 	 <div class="container mt-5">
       <div class="row text-center">
@@ -55,6 +59,7 @@
               <!-- where the questions will append in -->
 
               <div id="answer-questions"></div>
+              <br>
               <button id="submit" type="button" class="btn btn-outline-primary">
                 <a href='/'>Submit</a>
               </button>
@@ -75,18 +80,21 @@
                 qid: 'stars',
                 text: 'How was your conversation?',
                 type: 'one',
+                colortype: 'info',
                 options: [1, 2, 3, 4, 5]
               },
               {
                 qid: 'badges',
-                text: 'Award a badge?', 
+                text: 'Award your partner a compliment?', 
                 type: 'multiple',
+                colortype: 'success',
                 options: ['Creative', 'Funny', 'Friendly']
               },
               {
                 qid: 'improvements',
-                text: 'Anything to improve?',
+                text: 'Anything your partner could improve on?',
                 type: 'multiple',
+                colortype: 'warning',
                 options: ['Politeness', 'Listening', 'Cooperation', 'Respect']
               }];
 
@@ -129,7 +137,7 @@
                 s += start;
                 questions.forEach(function(question, idx){
                   s += '<h3>' + question.text + '</h3>';
-                  s += constructDiv(question['options'], question['qid'], question['type'], idx);
+                  s += constructDiv(question['options'], question['qid'], question['type'], colortype['colortype'], idx);
                 })
                 return s + end;
               }
