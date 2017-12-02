@@ -35,13 +35,10 @@
     <div class="row text-center">
         <div class="col-md-12" style="height:100%;">
             <br>
-            <h7 id="disagree-statement">Learn something out about your partner.</h7>
-            <br>
-            <br>
-            <br>
             <p id="identity"></p>
             <!-- where the messages will apend in -->
             <div id="notice"></div>
+            <br><br>
 
             <div id="chat" class="text-left" style="height:20em;overflow:scroll;">
 
@@ -121,7 +118,7 @@
         // join new room
         webrtc.joinRoom(room);
         // Update Notice Text
-        $("#notice").text("You are talking with " + partner);
+        $("#notice").text("You are talking with " + partner + ". Learn something from them.");
         // Enable the end conversation Button
         $("#end-conversation").prop('disabled', null);
     });
