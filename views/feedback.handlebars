@@ -19,7 +19,7 @@
                     <span id="star5" onmouseover="setHighlightStar(5)" onclick="setRatingStar(5)" class="fa icon-star"></span>
                 </div>
             </div>
-
+            <br>
             <div class="badge-area" style="align: center;">
                 <h4>Would you like to award any badges?</h4>
 
@@ -69,6 +69,11 @@
                         <input id='button-other' onclick="changeButton('other')" class="btn btn-outline-primary" type="button" value="Other">
                     </div>
                 </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <h4>Would you like to leave a message for your partner?</h4>
+                <textarea onchange="setText(this.value)" class="form-control" rows="5" id="comment"></textarea>
             </div>
 
             <button id="submit" type="button" class="btn btn-primary">Submit</button>
