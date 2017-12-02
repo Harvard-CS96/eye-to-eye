@@ -3333,10 +3333,10 @@
                 var video_id = '#' + peer['id'] + '_video_incoming'
 
                 $(video_id).css({
-                  "width": "300px";
-                  "height": "300px";
-                  "border-radius": "50%";
-                  "object-fit": "cover";
+                  "width": "300px",
+                  "height": "300px",
+                  "border-radius": "50%",
+                  "object-fit": "cover"
                 })
 
                 // Grab the canvas ID and getContext
@@ -3451,7 +3451,7 @@
                   // var grd = context.createRadialGradient(face.x, face.y, face.width, 90, 60, 100);
                   // grd.addColorStop(0, "red");
                   // grd.addColorStop(1, "white");
-                  context.fillStyle = "rgba(0, 0, 0, 0.2)";
+                  context.fillStyle = "white";
                   context.fillRect(0,0,canvas.width,canvas.height);
 
                   // Loop through the faces collected in rectangles variable
