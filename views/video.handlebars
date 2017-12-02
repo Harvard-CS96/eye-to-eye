@@ -3416,7 +3416,11 @@
                   // context.clearRect(0, 0, canvas.width, canvas.height);
 
                   // make everything white before finding a face
-                  context.fillStyle = "#fff";
+                  // make the radial gradient
+                  var grd = ctx.createRadialGradient(face.x, face.y, face.width, 90, 60, 100);
+                  grd.addColorStop(0, "red");
+                  grd.addColorStop(1, "white");
+                  context.fillStyle = grd;
                   context.fillRect(0,0,canvas.width,canvas.height);
 
                   // Loop through the faces collected in rectangles variable
