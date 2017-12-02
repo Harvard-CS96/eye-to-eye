@@ -11,8 +11,8 @@
 
         <style>
             video, canvas {
-              width: 600px;
-              height: 600px;
+              width: 300px;
+              height: 300px;
               margin-top: 5px;
               position: absolute;
             }
@@ -43,16 +43,9 @@
               /*border-radius: 100%;*/
             }
 
-            #localVideo {
+            #localVideo, #canvas{
               width: 300px;
               height: 300px;
-              border-radius: 50%;
-              object-fit: cover;
-            }
-
-            #canvas {
-              width: 600px;
-              height: 600px;
               border-radius: 50%;
               object-fit: cover;
             }
@@ -85,7 +78,7 @@
                       </div>
                         <div class="remote_column">
                           <span id="remoteVideos"></span>
-                          <canvas id="canvas" width="600" height="600"></canvas>
+                          <canvas id="canvas" width="300" height="300"></canvas>
                         </div>
                     </div>
 
