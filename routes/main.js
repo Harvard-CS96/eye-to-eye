@@ -74,6 +74,13 @@ router.get('/profile/leaderboard', isLoggedIn, (req, res) => {
     })
 });
 
+// Get a user's chats
+router.get('/profile/chats', isLoggedIn, (req, res) => {
+    chats.getChatsForUUID(req.user.uuid, (results) => {
+        res.send(results);
+    })
+})
+
 // Either find specific questions or all questions.
 router.get('/questions', (req, res) => {
     questions.findActive((questions) => {
