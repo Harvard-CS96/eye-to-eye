@@ -68,6 +68,10 @@ div.tab button.active {
     border: 1px solid #b6b6b6; */
 }
 
+#convo-button {
+    margin-bottom: 30px;
+}
+
 h1 {
     text-align: center;
     margin-left: auto;

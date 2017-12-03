@@ -6,6 +6,12 @@
 <div id="profile-container">
     <h1 id="user-hello"></h1>
 
+    <div class="container">
+        <div class="col-md-12 text-center">
+            <button class="btn btn-primary" id="convo-button">Enter the Conversation</button>
+        </div>
+    </div>
+
     <div class="tab">
         <button class="tablinks col-md-4 bottombar" onclick="openCity(event, 'My Questions')" id="defaultOpen">My Questions</button>
         <button class="tablinks col-md-4 bottombar" onclick="openCity(event, 'My Stats')">My Stats</button>
@@ -145,6 +151,10 @@
                     $("#show-leaderboard").remove()
                 })
             }
+
+            $("#convo-button").on("click", () => {
+                window.location.href = "/";
+            })
         });
     });
 
