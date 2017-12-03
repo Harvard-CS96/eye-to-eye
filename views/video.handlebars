@@ -141,6 +141,8 @@
     });
     // TRACKING.JS VERSION OF FACETRACKING
     webrtc.on('videoAdded', function(video, peer) {
+        num_FPS = 10;
+        num_avg_frames = 10;
         // console.log('video added', peer['id']);
         // Grab the ID of the peer video tag
         var video_id = '#' + peer['id'] + '_video_incoming';
@@ -165,7 +167,7 @@
         // so that it doesn't automatically try to play a foreign stream
         tracking.track(video_id, tracker, {
             camera: false,
-            fps: 10
+            fps: num_FPS
         });
         // Variables to help with smoothing
         // Smoothing only occurs with one face in the frame though
@@ -216,7 +218,7 @@
             new_rect.total /= buffer.data.length;
             return new_rect;
         };
-        var buffer = createBuffer(5);
+        var buffer = createBuffer(num_avg_frames);
         // On track event
         tracker.on('track', function(event) {
             var rectangles = event.data;
@@ -249,7 +251,7 @@
                     }
                 } else {
                     // empty the buffer
-                    buffer = createBuffer(5);
+                    buffer = createBuffer(num_avg_frames);
                 }
             } else {
                 // if there is a face
