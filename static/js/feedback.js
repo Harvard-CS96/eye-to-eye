@@ -119,7 +119,7 @@ function abuseFormSubmit(){
     }
     else {
         // TODO: Warn that an abuse type was not selected
-        $('.report-error-warn').html('Please select an abuse type.')                
+        $('.report-error-warn').html('Please select an abuse type.')
     }
 }
 
@@ -152,7 +152,7 @@ function formSubmit(){
     }
     else {
         // TODO: Say with whom the conversation was.
-        $('.error-warn').html('Please submit at least a star rating for your conversation.')
+        $('.error-warn').html('Please rate your conversation partner from one to five stars.')
     }
 }
 $(document).ready(function(){
