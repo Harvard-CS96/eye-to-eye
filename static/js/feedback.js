@@ -111,7 +111,7 @@ function formSubmit(){
     }
     else {
         // TODO: Say with whom the conversation was.
-        $('.error-warn').html('Please submit at least a star rating for your conversation.')
+        $('.error-warn').html('Please rate your conversation partner from one to five stars.')
     }
 }
 $(document).ready(function(){
