@@ -124,6 +124,11 @@
         $("#notice").text("You are talking with " + partner);
         // Enable the end conversation Button
         $("#end-conversation").prop('disabled', null);
+        // When user ends conversation, start a new match
+        $("#end-conversation").click(function() {
+            webrtc.connection.emit("hangup");
+            window.location.href = "/feedback";
+        });
     });
     // When the webSocket connection is ready, identify the users
     webrtc.on('connectionReady', function() {
@@ -135,11 +140,6 @@
     });
     // Wait until video capabilities are ready to perform first match
     webrtc.on('readyToCall', matchPartner);
-    // When user ends conversation, start a new match
-    $("#end-conversation").click(function() {
-        webrtc.connection.emit("hangup");
-        matchPartner();
-    });
 
     // TRACKING.JS VERSION OF FACETRACKING
 
