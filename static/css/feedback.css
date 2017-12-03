@@ -148,7 +148,7 @@ a {
 h1 {
     text-transform: uppercase;
     font-size: 3.6rem;
-    font-family: 'Fjalla One', sans-serif;
+    font-family: 'Raleway', sans-serif;
     padding: 1rem 0 0.5rem 0;
     margin: 0;
   }
@@ -166,8 +166,8 @@ p {
 } */
 
 .error-warn {
-    color: red;
-    font-weight: bold;
+    color: #373737;
+    font-size: 1rem;
 }
 
 /* #improvements-area tr {
@@ -176,9 +176,11 @@ p {
 } */
 
 #star-area .fa {
-    color: gray;
+    color: #d5d5d5;
     opacity: .5;
     font-size: 50px;
+    -webkit-transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .starred {
@@ -187,23 +189,44 @@ p {
 }
 
 .badge-area .fa {
-    background-color: rgb(128, 128, 128);
-    color: white;
+    cursor: pointer;
+    background-color: white;
+    color: #C0B283;
     font-size: 30px;
     opacity: .5;
     padding: 30px;
     border-radius: 50px;
+    background: -webkit-linear-gradient(left, rgba(192,178,131, 0) 25%, rgba(192,178,131, 0.8) 75%);
+    background: linear-gradient(to right, rgba(192,178,131, 0) 25%, rgba(192,178,131, 0.8) 75%);
+    background-position: 1% 50%;
+    background-size: 400% 300%;
+    border: 1px solid #C0B283;
+    -webkit-transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .badge-area .fa:hover {
-    border: 6px dashed red;
-    padding: 24px;
+    border: 1px solid #C0B283;
+    color: #C0B283;    
+    /* padding: 24px; */
+}
+.badge-area .fa:hover {
+    -webkit-transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.badge-area .fa:hover {
+    color: white;
+    color: #fff;
+    background-position: 99% 50%;
 }
 
 .badge-area .fa-selected {
-    border: 6px solid red;
-    padding: 24px;
+    border: 1px solid #C0B283;
+    /* padding: 24px; */
     opacity: 1;
+    background-color: #C0B283;
+    color: white;
+    background-position: 1% 50%;    
 }
 
 .badge-area tr {
@@ -212,6 +235,5 @@ p {
 }
 
 .badge-area {
-    align: center;
-}
-
+    align-content: center;
+}  
