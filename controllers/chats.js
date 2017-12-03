@@ -161,5 +161,6 @@ module.exports = {
     logConnection,
     logDisconnection,
     logFeedback,
+    getMostRecent,
     getChatsForUUID
 }

@@ -70,11 +70,47 @@
                 </div>
             </div>
             <br>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#reportModal" data-whatever="@mdo">Report User</button>
             <div class="form-group" style="padding-left:100px; padding-right:100px;">
                 <h4>Would you like to leave a message for your partner?</h4>
                 <textarea onchange="setText(this.value)" style="overflow:auto; resize:none" class="form-control" rows="5" id="comment"></textarea>
             </div>
 
+            <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" >
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="reportModal">Report User</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <p class="report-error-warn" style="color: red"></p>
+                        <div class="modal-body">
+                            <form>
+                            <div class="form-group">
+                                <label for="abuse-type" class="form-control-label">Abuse Type</label>
+                                <select id="abuse-type" class="form-control" onchange="logAbuseType(this.value)">
+                                    <option value="" disabled selected>Select abuse type...</option>
+                                    <option value="Abusive-language">Explicit language</option>
+                                    <option value="Explicit-imagery">Nudity</option>
+                                    <option value="Rudeness">Rudeness</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="form-control-label">Comments</label>
+                                <textarea class="form-control" id="message-text" onchange="logAbuseComment(this.value)"></textarea>
+                            </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button id="submitAbuse" type="button" class="btn btn-danger" >Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <button id="submit" type="button" class="btn btn-primary">Submit</button>
         </div>
     </div>
