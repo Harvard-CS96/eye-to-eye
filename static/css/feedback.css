@@ -9,7 +9,57 @@
 }
 
 /* Credit for button styles: John Heimer */
+.arrow-btn {
+    position: relative;
+    display: inline-block;
+    color: #C0B283;
+    margin-top: 2rem;
+    font-weight: bold;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    text-decoration: none;
+    -webkit-transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    padding-right: 2em;
+    border: none;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .arrow-btn:hover {
+    -webkit-transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  .arrow-btn:hover:after {
+    -webkit-transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    -webkit-transform: translateX(15px);
+            transform: translateX(15px);
+    opacity: 0;
+  }
+  .arrow-btn:hover:before {
+    -webkit-transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+  .arrow-btn:before, .arrow-btn:after {
+    content: '\27F6';
+    position: absolute;
+    right: 0;
+    /* top: 0%; */
+  }
+  .arrow-btn:before {
+    -webkit-transform: translateX(-15px);
+            transform: translateX(-15px);
+    opacity: 0;
+  }
+  .arrow-btn:after {
+    -webkit-transform: none;
+            transform: none;
+  }
 .gradient-btn {
+    cursor: pointer;    
     min-width:120px;
     display: inline-block;
     padding: 1em 1em;
@@ -78,9 +128,9 @@ html, body {
   background-color: white;
   width: 75%;
   max-width: 50rem;
-  margin-top: 20rem;
+  margin-top: 16rem;
   margin-bottom: 4rem;
-  padding: 7.5rem 3rem 7.5rem 3rem;
+  padding: 3rem 3rem 4rem 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
