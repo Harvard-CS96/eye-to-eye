@@ -130,6 +130,9 @@
             window.location.href = "/feedback";
         });
     });
+    webrtc.connection.on("disconnected", function() {
+        window.location.href = "/feedback";
+    });
     // When the webSocket connection is ready, identify the users
     webrtc.on('connectionReady', function() {
         // Identify user to matcher

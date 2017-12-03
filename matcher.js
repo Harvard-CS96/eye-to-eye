@@ -115,7 +115,7 @@ class Matcher {
         this.unpair(id, 'hangup')
         this.addBlacklist(id, this.connections[id].partner)
         this.connections[id].partner = null;
-        this._setStatus(id, WAITING);
+        this._setStatus(id, DISCONNECTED);
         this.checkForMatches(id);
     }
 
