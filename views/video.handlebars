@@ -1,31 +1,46 @@
-
 <style>
-    video,
     canvas {
-        width: 320px;
-        height: 240px;
+        width: 450px;
+        height: 450px;
         margin-top: 5px;
         position: absolute;
+        left: 0;
     }
 
-    .remote_column video,
+    .remote-column {
+      max-width: 800px;
+      margin-right: 20px;
+    }
+    .remote_column video {
+        margin-left: 20px;
+    }
+
     .remote_column canvas {
-        margin-left: 330px;
+        margin-left: 20px;
     }
 
-    .local_column video,
-    .local_column canvas {
-        margin-left: 5px;
+    #localVideo {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        object-fit: cover;
+        float: right;
+    }
+    #end-conversation {
+        position:fixed;
+        right: 10px;
+        bottom: 10px;
     }
 
     .btn {
         margin-right: 5px;
     }
+
 </style>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     </head>
-
+    
     <body>
         <div class="container mt-5">
             <div class="row text-center">
@@ -53,9 +68,12 @@
                     </br>
                 </div>
             </div>
+            <!-- form and input box to submit messages -->
 
+            <!-- <a href="/updateStance">Return to Profile</a> -->
         </div>
-    </div>
+<button id="end-conversation" class="btn btn-success" disabled="true">End Conversation</button>
+<br><br><br><br>
 </div>
 
 <script src="/static/js/simplewebrtc.js"></script>
@@ -71,7 +89,6 @@
     // Store user identity info
     const isAuthenticated = {{{isAuthenticated}}}
     const user = {{{user}}}
-
     // Identify the hostname for the signaling server, taking care to
     // include port number if necessary (for localhost debugging envs)
     var host;
@@ -91,7 +108,6 @@
         url: host,
         debug: true
     });
-
     function matchPartner() {
         // leave current room, if any
         webrtc.leaveRoom();
@@ -115,7 +131,7 @@
         // join new room
         webrtc.joinRoom(room);
         // Update Notice Text
-        $("#notice").text("You are talking with " + partner);
+        $("#notice").text("You are talking with " + partner + ". Learn something from them.");
         // Enable the end conversation Button
         $("#end-conversation").prop('disabled', null);
         // When user ends conversation, start a new match
@@ -137,19 +153,25 @@
     });
     // Wait until video capabilities are ready to perform first match
     webrtc.on('readyToCall', matchPartner);
-
     // TRACKING.JS VERSION OF FACETRACKING
-
     webrtc.on('videoAdded', function(video, peer) {
+        num_FPS = 10;
+        num_avg_frames = 10;
         // console.log('video added', peer['id']);
-
         // Grab the ID of the peer video tag
-        var video_id = '#' + peer['id'] + '_video_incoming'
-
+        var video_id = '#' + peer['id'] + '_video_incoming';
+        $(video_id).css({
+                  "width": "450px",
+                  "height": "450px",
+                  "border-radius": "50%",
+                  "object-fit": "cover",
+                  "margin-top": "5px",
+                  "position": "absolute",
+                  "left": "0"
+                })
         // Grab the canvas ID and getContext
         var canvas = document.getElementById('canvas');
         var context = canvas.getContext('2d');
-
         // Set the tracker up with default settings
         var tracker = new tracking.ObjectTracker('face');
         tracker.setInitialScale(4);
@@ -159,23 +181,19 @@
         // so that it doesn't automatically try to play a foreign stream
         tracking.track(video_id, tracker, {
             camera: false,
-            fps: 10
+            fps: num_FPS
         });
-
         // Variables to help with smoothing
         // Smoothing only occurs with one face in the frame though
         var frames_without_face = 0;
         var frames_without_face_threshold = 5;
         var prior_data = [];
-
-
         function createBuffer(size) {
             return {
                 "size": size,
                 "data": []
             };
         };
-
         function printBuffer(buffer) {
             buffer.data.forEach(function(rect) {
                 for (var key in rect) {
@@ -183,7 +201,6 @@
                 }
             });
         };
-
         function updateBuffer(rect, buffer) {
             console.log("the to be added rect is", rect);
             printBuffer(buffer);
@@ -193,7 +210,6 @@
             }
             return buffer;
         };
-
         function averageBuffer(buffer) {
             var new_rect = {
                 "x": 0,
@@ -219,20 +235,15 @@
             new_rect.width /= buffer.data.length;
             new_rect.height /= buffer.data.length;
             new_rect.total /= buffer.data.length;
-
             return new_rect;
         };
-
-        var buffer = createBuffer(5);
-
+        var buffer = createBuffer(num_avg_frames);
         // On track event
         tracker.on('track', function(event) {
             var rectangles = event.data;
-
             // find biggest face
             function largest_face(rectangles) {
                 if (rectangles.length == 0) {
-
                 }
                 var biggestArea = 0;
                 var biggestRect = null;
@@ -245,9 +256,7 @@
                 })
                 return biggestRect;
             }
-
             var face = largest_face(rectangles);
-
             // If statements to check whether last few frames had a face
             if (!face) {
                 // then increment
@@ -261,26 +270,22 @@
                     }
                 } else {
                     // empty the buffer
-                    buffer = createBuffer(5);
+                    buffer = createBuffer(num_avg_frames);
                 }
             } else {
                 // if there is a face
                 frames_without_face = 0;
                 buffer = updateBuffer(face, buffer);
             }
-
             // clear the canvas in case there are previous drawings there
             // context.clearRect(0, 0, canvas.width, canvas.height);
-
             // make everything white before finding a face
             context.fillStyle = "#fff";
             context.fillRect(0, 0, canvas.width, canvas.height);
-
             // Loop through the faces collected in rectangles variable
             if (buffer.data.length > 0) {
                 rect = averageBuffer(buffer);
                 // console.log(rect.x, rect.y)
-
                 // context.strokeStyle = '#a64ceb';
                 var center = {
                     "x": rect.x + (0.5 * rect.width),
@@ -289,41 +294,39 @@
                 // console.log(center)
                 // Below line draws the rectangle for the face
                 // context.strokeRect(rect.x, rect.y, rect.width, rect.height);
-
                 // These lines draw the dot for center of face and text for width and height
                 // context.fillStyle = "#000";
                 // context.fillRect(center.x - 1, center.y - 1, 2, 2);
                 // context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
                 // context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
-
                 // Our oval-creating part
                 context.globalCompositeOperation = 'destination-out';
                 context.filter = "blur(5px)";
                 context.beginPath();
-
                 var centerX = center.x;
                 var centerY = center.y;
                 // Add some wiggle room to the rect width and height
-                var height = rect.height * 1.5;
-                var width = rect.width * 1.5;
-
+                var height = rect.height * 2.0;
+                var width = rect.width * 2.0;
                 context.moveTo(centerX, centerY - height / 2); // A1
-
                 context.bezierCurveTo(
                     centerX + width / 2, centerY - height / 2, // C1
                     centerX + width / 2, centerY + height / 2, // C2
                     centerX, centerY + height / 2); // A2
-
                 context.bezierCurveTo(
                     centerX - width / 2, centerY + height / 2, // C3
                     centerX - width / 2, centerY - height / 2, // C4
                     centerX, centerY - height / 2); // A1
-
                 context.fill();
                 context.closePath();
                 context.globalCompositeOperation = 'source-over';
+            } else {
+              // context.globalCompositeOperation = 'source-over';
+              context.filter = "blur(0px)";
+              context.fillStyle = 'black';
+              context.font = '24pt Calibri';
+              context.fillText("No face found", 65, 150);
             }
         });
-
     });
 </script>
