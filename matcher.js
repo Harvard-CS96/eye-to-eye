@@ -116,7 +116,6 @@ class Matcher {
         this.addBlacklist(id, this.connections[id].partner)
         this.connections[id].partner = null;
         this._setStatus(id, DISCONNECTED);
-        this.checkForMatches(id);
     }
 
     addBlacklist(id, blacklisted) {
