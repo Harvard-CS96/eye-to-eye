@@ -66,10 +66,10 @@
         <div class="holder">
             <div id="history-area" style="align: center;">
                 Your past conversations:
-                <table>
+                <table id="history-table">
                     <tr>
                         <td>
-                            <p><strong>Date</strong></p>
+                            <p><strong>Name</strong></p>
                         </td>
                         <td>
                             <p><strong>Message</strong></p>
@@ -88,7 +88,7 @@
     var user = {{{ user }}};
 
     function paintStars(nStars) {
-        console.log(nStars);
+        // console.log(nStars);
         for (i = 1; i <= nStars; i++) {
             var elt = $('#star' + i.toString());
             elt.html('&#9733;');
@@ -149,16 +149,17 @@
                 }
 
                 // Populate history form
-                $('#history-area > table:eq(0)').append(
-                    "<tr>" 
-                        + "<td>"
-                            + "hey"
-                        + "</td>"
-                        + "<td>"
-                            + res
-                        + "</td>"
-                    + "</tr>"
-                )
+                var table_html = ""
+                res.forEach(row => {
+                    
+                    // Chat data and chat partner's name
+                    var [chat, name] = row
+                    var feedback = chat.feedback.filter(f => {f.from !== user.uuid})[0];
+                    
+                    // TODO: Build up html here
+                })
+
+                // TODO: append results to table
             }
         })
     }
