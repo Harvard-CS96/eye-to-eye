@@ -41,7 +41,7 @@
             <div id="notice"></div>
             <br><br>
 
-            <div id="chat" class="text-left" style="height:20em;overflow:scroll;">
+            <div id="chat" class="text-center" style="height:20em;overflow:scroll;">
 
                 <div class="local_column">
                     <video id="localVideo" class="video-circle" width="300" height="300"></video>
@@ -276,8 +276,8 @@
                 var centerX = center.x;
                 var centerY = center.y;
                 // Add some wiggle room to the rect width and height
-                var height = rect.height * 2;
-                var width = rect.width * 2;
+                var height = rect.height * 2.5;
+                var width = rect.width * 2.5;
                 context.moveTo(centerX, centerY - height / 2); // A1
                 context.bezierCurveTo(
                     centerX + width / 2, centerY - height / 2, // C1
