@@ -1,0 +1,64 @@
+
+table p {
+    margin-top: 30px;
+}
+
+#improvements-area table {
+    width: 400px;
+}
+
+.error-warn {
+    color: red;
+    font-weight: bold;
+}
+
+#improvements-area tr {
+    margin-top: 10px;
+    height: 40px;
+}
+
+#star-area .fa {
+    color: gray;
+    opacity: .5;
+    font-size: 50px;
+}
+
+.starred {
+    opacity: 1 !important;
+    color: rgb(255, 196, 0) !important;
+}
+
+.btn{
+    min-width: 130px;
+    border: solid rgb(108, 155, 209);
+    border-radius: 10px;
+}
+
+.badge-area .fa {
+    background-color: rgb(128, 128, 128);
+    color: white;
+    font-size: 30px;
+    opacity: .5;
+    padding: 30px;
+    border-radius: 50px;
+}
+
+.badge-area .fa:hover {
+    border: 6px dashed red;
+    padding: 24px;
+}
+
+.badge-area .fa-selected {
+    border: 6px solid red;
+    padding: 24px;
+    opacity: 1;
+}
+
+.badge-area tr {
+    margin-top: 10px;
+    height: 120px;
+}
+
+.badge-area {
+    align: center;
+}

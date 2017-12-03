@@ -1,218 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
+<script type="text/javascript">
+    const user = {{{user}}};
+</script>
 
-<head>
-  <title>Textroulette Feedback</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+<link rel="stylesheet" href="/static/css/feedback.css">
 
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<div class="container mt-5">
+    <div class="row text-center">
+        <div class="col-md-12" style="height:100%;">
+            <h1>Feedback from your Conversation</h1>
+            <h4 id="identity">Please Rate your Conversation</h4>
+            <div class="container">
+                <div onmouseout="paintStars(selectedStarCount)" id="star-area">
+                    <span id="star1" onmouseover="setHighlightStar(1)" onclick="setRatingStar(1)" class="fa icon-star"></span>
+                    <span id="star2" onmouseover="setHighlightStar(2)" onclick="setRatingStar(2)" class="fa icon-star"></span>
+                    <span id="star3" onmouseover="setHighlightStar(3)" onclick="setRatingStar(3)" class="fa icon-star"></span>
+                    <span id="star4" onmouseover="setHighlightStar(4)" onclick="setRatingStar(4)" class="fa icon-star"></span>
+                    <span id="star5" onmouseover="setHighlightStar(5)" onclick="setRatingStar(5)" class="fa icon-star"></span>
+                </div>
+            </div>
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-  <style>
-        div#holder {
-        background: #fff;
-        width: 100%;
-        margin: auto;
-        padding: 30px;
-        min-width: 320px;
-        max-width: 640px;
-        box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-        border-radius: 3px;
-        }
+            <div class="badge-area" style="align: center;">
+                <h4>Would you like to award any badges?</h4>
 
-        .inline-radio {
-          display: flex;
-          border-radius: 3px;
-          overflow: hidden;
-          border: 1px solid #b6b6b6;
+                <div class="row" style="margin:2em;">
+                    <div class="col-md-6">
+                        <span id="creative" style="display:block;" onclick="changeSelected('creative')" class="fa icon-wrench"></span>
+                        <p>Creative</p>
+                    </div>
+                    <div class="col-md-6">
+                        <span id="polite" style="display:block;" onclick="changeSelected('polite')" class="fa icon-heart"></span>
+                        <p>Polite</p>
+                    </div>
+                </div>
+                <div class="row" style="margin:2em;">
+                    <div class="col-md-6">
+                        <span id="knowledgeable" style="display:block;" onclick="changeSelected('knowledgeable')" class="fa icon-book"></span>
+                        <p>Knowledgeable</p>
+                    </div>
+                    <div class="col-md-6">
+                        <span id="empathetic" style="display:block;" onclick="changeSelected('empathetic')" class="fa icon-heart"></span>
+                        <p>Empathetic</p>
+                    </div>
+                </div>
+            </div>
 
-          label {
-            position: absolute;
-            top: 0; left: 0;
-            color: #b6b6b6;
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-            border-right: 1px solid #b6b6b6;
-          }
-        }
-      </style>
+            <div id="improvements-area" style="align: center;">
+                <h4>Do you have any suggestions for improvement?</h4>
+                <div class="row">
+                    <div class="col-md-4">
+                        <input id='button-listening' onclick="changeButton('listening')" class="btn btn-outline-primary" type="button" value="Listening">
+                    </div>
+                    <div class="col-md-4">
+                        <input id='button-respect' onclick="changeButton('respect')" class="btn btn-outline-primary" type="button" value="Respect">
+                    </div>
+                    <div class="col-md-4">
+                        <input id='button-civility' onclick="changeButton('civility')" class="btn btn-outline-primary" type="button" value="Civility">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <input id='button-cooperation' onclick="changeButton('cooperation')" class="btn btn-outline-primary" type="button" value="Cooperation">
+                    </div>
+                    <div class="col-md-4">
+                        <input id='button-snowflake' onclick="changeButton('snowflake')" class="btn btn-outline-primary" type="button" value="Snowflake">
+                    </div>
+                    <div class="col-md-4">
+                        <input id='button-other' onclick="changeButton('other')" class="btn btn-outline-primary" type="button" value="Other">
+                    </div>
+                </div>
+            </div>
 
-</head>
-
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-    <a class="navbar-brand" href="#">Discourse</a>
-    <a href="/logout" class="btn btn-outline-danger my-2 my-sm-0">Sign Out</a>
-</nav>
-<body>
-	 <div class="container mt-5">
-      <div class="row text-center">
-          <div class="col-md-12" style="height:100%;">
-              <h1>Thanks for Chatting!</h1>
-              <p id="identity"></p>
-              <!-- where the questions will append in -->
-
-              <div id="answer-questions"></div>
-              <br>
-              <button id="submit" type="button" class="btn btn-outline-primary">
-                <a href='/'>Submit</a>
-              </button>
-          </div>
-      </div>
+            <button id="submit" type="button" class="btn btn-primary">Submit</button>
+            <p class="error-warn"></p>
+        </div>
     </div>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"> </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-
-    <script type="text/javascript">
-      // load when jquery and page has be loaded
-      $(document).ready(function() {
-          jQuery(function() {
-              const user = {{{ user }}};
-
-              var feedback = [{
-                qid: 'stars',
-                text: 'How was your conversation?',
-                type: 'one',
-                colortype: 'info',
-                options: [1, 2, 3, 4, 5]
-              },
-              {
-                qid: 'badges',
-                text: 'Award your partner a compliment?', 
-                type: 'multiple',
-                colortype: 'success',
-                options: ['Creative', 'Funny', 'Friendly']
-              },
-              {
-                qid: 'improvements',
-                text: 'Anything your partner could improve on?',
-                type: 'multiple',
-                colortype: 'warning',
-                options: ['Politeness', 'Listening', 'Cooperation', 'Respect']
-              }];
-
-              // CONSTRUCTING HTML SECTION (TODO: REACT)
-              function constructLabel(name, qID, buttonType, idx){
-                if (buttonType == 'multiple'){
-                  var type = "checkbox";
-                }
-                else if(buttonType == 'one'){
-                  var type = "radio";
-                }
-                var start = ('<label class="btn btn-primary"' +
-                             '><input type="' + type + '" name="options"' +
-                             'qid= "' + qID + '" ' + 
-                             'response= "' + name + '" ' +
-                             'autocomplete="off">');
-                var end = '</label>'
-                return start + name + end;
-              }
-
-              function constructDiv(names, qID, buttonType, idx){
-                var s = '';
-                var start = ('<div class="btn-toolbar" id="question' + (idx + 1) + '" ' +
-                             ' data-toggle="buttons"' +
-                             '>');
-                var end = '</div>';
-                s += start;
-                s += '<div role="group" class="btn-group">';
-                names.forEach(function(name, qid, idx){
-                  s += constructLabel(name, qID, buttonType, idx);
-                })
-                s += '</div>'
-                return s + end;
-              }
-
-              function constructSet(questions){
-                var s = '';
-                var start = '<div id="holder">';
-                var end = '</div>';
-                s += start;
-                questions.forEach(function(question, idx){
-                  s += '<h3>' + question.text + '</h3>';
-                  s += constructDiv(question['options'], question['qid'], question['type'], colortype['colortype'], idx);
-                })
-                return s + end;
-              }
-
-              function populateQuestions(questions){
-                document.getElementById('answer-questions').innerHTML = constructSet(questions);
-              }
-
-              // READING RESPONSES CODE BELOW
-              function calcQID(parent, attr){
-                return Array.prototype.slice.call(parent.childNodes).map(function(elt){ 
-                  return !!(elt.className.split(" ").indexOf("active") > -1) ? elt.firstChild.getAttribute(attr) : '';
-                }).filter(function(elt){ return elt!== ''; })[0];  // Returns a list of active things, stringified.
-              }
-
-              // READING RESPONSES CODE BELOW
-              function calcResponse(parent, attr){
-                return Array.prototype.slice.call(parent.childNodes).map(function(elt){ 
-                  return !!(elt.className.split(" ").indexOf("active") > -1) ? elt.firstChild.getAttribute(attr) : '';
-                }).filter(function(elt){ return elt!== ''; });  // Returns a list of active things, stringified.
-              }
-
-              function getAnswer(questionNumber){
-                console.log('getAnswer called' + questionNumber);
-                var parent = $('#question' + questionNumber)[0];
-                console.log(parent);
-                return {
-                  question_id: calcQID(parent, 'qid'),
-                  response: calcResponse(parent, 'response')
-                };
-              }
-
-              // Reads form to get answers.  Stores in custom JSON.  We don't need you form built-ins.  Go away.
-              function getAnswersJSON(){
-                var numQuestions = document.getElementsByTagName('h3').length;
-                console.log('getting answeres for ' + numQuestions + 'questions');
-                var answers = [];
-                for (var i = 1; i <= numQuestions; i++){
-                  answers.push(getAnswer(i));
-                }
-                return answers;
-              }
-
-              function formSubmit(){
-                console.log('formsubmit called');
-                var question_responses = getAnswersJSON().filter(function(d){ return d.question_id != ''; });
-                console.log('about to ajax');
-                json = {
-                    from: user.uuid,
-                    stars: question_responses.filter(function(d){ return d.question_id == 'stars'; })[0].response[0],
-                    badges: question_responses.filter(function(d){ return d.question_id == 'badges'; })[0].response,
-                };
-                console.log(json);
-                $.ajax({
-                    type: 'POST',
-                    contentType: 'application/json; charset=utf-8',
-                    data: JSON.stringify(json),
-                    url: '/chats/',
-                    success: function(data){
-                      // On success, update questions.
-                      console.log(data);
-                    },
-                    failure: function(result){
-                      console.log('failure');
-                      error();
-                    }
-                });
-              }
-
-              // Set up the page.
-              populateQuestions(feedback);
-              document.getElementById("submit").onclick = function (){ formSubmit() };
-          })
-      })
-    </script>
-</body>
-
-</html>
+<script src="/static/js/feedback.js"></script>

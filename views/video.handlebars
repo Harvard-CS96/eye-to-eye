@@ -33,6 +33,9 @@
     }
 
 </style>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    </head>
 
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
     <a class="navbar-brand" href="#">Discourse</a>
@@ -211,6 +214,11 @@
                 new_rect.height += r.height;
                 new_rect.total += r.total;
             });
+            // Got to profile page on clicking profile button
+            $("#profile").click(function() {
+                window.location.href = '/profile';
+            })
+
             new_rect.x /= buffer.data.length;
             new_rect.y /= buffer.data.length;
             new_rect.width /= buffer.data.length;
