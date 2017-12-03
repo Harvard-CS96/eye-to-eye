@@ -91,8 +91,6 @@ class Matcher {
                 reason: reason
             })
 
-            // Check for a partner for the newly single ex-partner
-            this.checkForMatches(partner);
         }
 
         this._setStatus(id, DISCONNECTED, partner);
