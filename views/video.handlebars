@@ -284,8 +284,8 @@
                 var centerX = center.x;
                 var centerY = center.y;
                 // Add some wiggle room to the rect width and height
-                var height = rect.height * 2.5;
-                var width = rect.width * 2.5;
+                var height = rect.height * 1.5;
+                var width = rect.width * 1.5;
                 context.moveTo(centerX, centerY - height / 2); // A1
                 context.bezierCurveTo(
                     centerX + width / 2, centerY - height / 2, // C1
@@ -298,6 +298,12 @@
                 context.fill();
                 context.closePath();
                 context.globalCompositeOperation = 'source-over';
+            } else {
+              // context.globalCompositeOperation = 'source-over';
+              context.filter = "blur(0px)";
+              context.fillStyle = 'black';
+              context.font = '24pt Calibri';
+              context.fillText("No face found", 65, 150);
             }
         });
     });
