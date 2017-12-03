@@ -91,9 +91,11 @@ function setRatingStar(nStars){
 function abuseFormSubmit(){
     var json = {
         from: user.uuid,
-        kind: abuseType + ": " + abuseComment,
+        kind: abuseType,
+        comment: abuseComment,
     };
     console.log('reporting abuse');
+    console.log(json);
     $.ajax({
         type: 'POST',
         contentType: 'application/json; charset=utf-8',
