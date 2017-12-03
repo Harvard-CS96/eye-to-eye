@@ -27,6 +27,13 @@ function findActiveBadges(){
     return lst;
 }
 
+message = "";
+function setText(text){
+    message = text;
+    console.log(message)
+    return message;
+}
+
 function changeButton(name){
     $('#button-' + name).button('toggle');
     buttonStuff[name] = !buttonStuff[name];
@@ -81,14 +88,16 @@ function formSubmit(){
             from: user.uuid,
             stars: selectedStarCount,
             badges: findActiveBadges(),
-            improvements: findActiveButtons()
+            improvements: findActiveButtons(),
+            text: message,
         };
+        console.log(message);
         console.log(json);
         $.ajax({
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(json),
-            url: '/chats/',
+            url: '/feedback',
             success: function(data){
                 console.log(data);
             },
