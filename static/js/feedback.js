@@ -7,6 +7,20 @@ buttonStuff = {
     'other': false
 }
 
+abuseComment = "";
+function logAbuseComment(comment){
+    abuseComment = comment;
+    console.log(abuseComment);
+    return abuseComment;
+}
+
+abuseType = "";
+function logAbuseType(type){
+    abuseType = type;
+    console.log(abuseType);
+    return abuseType;
+}
+
 function findActiveButtons(){
     var lst = [];
     Object.keys(buttonStuff).forEach(function(d){
@@ -74,6 +88,28 @@ function setRatingStar(nStars){
     paintStars(nStars);
 }
 
+function abuseFormSubmit(){
+    var json = {
+        from: user.uuid,
+        kind: abuseType + ": " + abuseComment,
+    };
+    console.log('reporting abuse');
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(json),
+        url: '/feedback/report/',
+        success: function(data){
+            console.log(data);
+            console.log('success');
+        },
+        failure: function(result){
+            console.log('failure');
+        error();
+        }
+    });
+}
+
 function formSubmit(){
     console.log('about to ajax');
     if (selectedStarCount>0){
@@ -83,7 +119,6 @@ function formSubmit(){
             badges: findActiveBadges(),
             improvements: findActiveButtons()
         };
-        console.log(json);
         $.ajax({
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
@@ -108,5 +143,11 @@ function formSubmit(){
 $(document).ready(function(){
     document.getElementById("submit").onclick = function (){
         formSubmit()
+    };
+})
+
+$(document).ready(function(){
+    document.getElementById("submitAbuse").onclick = function (){
+        abuseFormSubmit()
     };
 })
