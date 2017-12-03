@@ -82,7 +82,7 @@ router.get('/profile/chats', isLoggedIn, (req, res) => {
 })
 
 // Either find specific questions or all questions.
-router.get('/questions', isLoggedIn, (req, res) => {
+router.get('/questions', (req, res) => {
     questions.findActive((questions) => {
         users.findById(req.user.uuid, (userData) => {
             res.send({questions: questions, userData: userData});

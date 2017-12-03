@@ -17,51 +17,51 @@
     </div>
 
     <div id="My Stats" class="tabcontent">
-        <div class="holder">
-            <hr>
-            <div id="star-area">
-                Average star rating:
-                <span id="star1">&#9733;</span></span>
-                <span id="star2">&#9733;</span></span>
-                <span id="star3">&#9733;</span></span>
-                <span id="star4">&#9733;</span></span>
-                <span id="star5">&#9733;</span></span>
-            </div>
-            <div>
-                Your conversation count: <span id="convo-count"></span>
-            </div>
-            <div id="badge-area" style="align: center;">
-                See your badges:
-                <table>
-                    <tr>
-                        <td>
-                            <span id="creative" onclick="changeSelected('creative')" class="fa fa-wrench"></span>
-                            <p>Creative<span id="creative-count"></span></p>
-                        </td>
-                        <td>
-                            <span id="polite" onclick="changeSelected('polite')" class="fa fa-handshake-o"></span>
-                            <p>Polite<span id="polite-count"></span></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span id="knowledgeable" onclick="changeSelected('knowledgeable')" class="fa fa-book"></span>
-                            <p>Knowledgeable<span id="knowledgeable-count"></span></p>
-                        </td>
-                        <td>
-                            <span id="empathetic" onclick="changeSelected('empathetic')" class="fa fa-heart"></span>
-                            <p>Empathetic<span id="empathetic-count"></span></p>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <br/>
-            <div>
-                Click to view your friends' leaderboards! (by clicking, you allow your friends to see your badges as well).
-                <div id="leaderboard"></div>
-            </div>
+    <div class="holder">
+        <hr>
+        <div id="star-area">
+            Average star rating:
+            <span id="star1">&#9733;</span></span>
+            <span id="star2">&#9733;</span></span>
+            <span id="star3">&#9733;</span></span>
+            <span id="star4">&#9733;</span></span>
+            <span id="star5">&#9733;</span></span>
+        </div>
+        <div>
+            Your conversation count: <span id="convo-count"></span>
+        </div>
+        <div id="badge-area" style="align: center;">
+            See your badges:
+            <table>
+                <tr>
+                    <td>
+                        <span id="creative" onclick="changeSelected('creative')" class="fa fa-wrench"></span>
+                        <p>Creative<span id="creative-count"></span></p>
+                    </td>
+                    <td>
+                        <span id="polite" onclick="changeSelected('polite')" class="fa fa-handshake-o"></span>
+                        <p>Polite<span id="polite-count"></span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="knowledgeable" onclick="changeSelected('knowledgeable')" class="fa fa-book"></span>
+                        <p>Knowledgeable<span id="knowledgeable-count"></span></p>
+                    </td>
+                    <td>
+                        <span id="empathetic" onclick="changeSelected('empathetic')" class="fa fa-heart"></span>
+                        <p>Empathetic<span id="empathetic-count"></span></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br/>
+        <div>
+            Click to view your friends leaderboards! (by clicking, you allow your friends to see your badges as well).
+            <div id="leaderboard"></div>
         </div>
     </div>
+
     <div id="My History" class="tabcontent">
         <div class="holder">
             <div id="history-area" style="align: center;">
@@ -100,7 +100,7 @@
     }
 
     function countBadges(badgeName, person) {
-        // console.log('badgename');
+        console.log('badgename');
         var count = 0;
         person.badges.forEach(function(d) {
             if (d.badge == badgeName) {
@@ -120,7 +120,7 @@
         });
         var end = '</table>';
         var final = start + s + end;
-        // console.log(final);
+        console.log(final);
         return final;
     }
 
@@ -130,7 +130,7 @@
             contentType: 'application/json; charset=utf-8',
             url: '/profile/leaderboard',
             success: res => {
-                // console.log(res);
+                console.log(res);
                 $('#leaderboard')[0].innerHTML = buildLeaderboard(res);
             }
         })
@@ -186,8 +186,6 @@
                     $("#show-leaderboard").remove()
                 })
             }
-            // populate the history table
-            getHistory()
         });
     });
 
