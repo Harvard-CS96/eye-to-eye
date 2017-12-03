@@ -3398,6 +3398,8 @@
                 };
 
                 var buffer = createBuffer(5);
+                context.fillStyle = 'white';
+                context.fillRect(0,0,canvas.width,canvas.height);
                 // On track event
                 tracker.on('track', function(event) {
                   var rectangles = event.data;
