@@ -3452,6 +3452,9 @@
                   // grd.addColorStop(1, "white");
                   context.fillStyle = 'white';
                   context.fillRect(0,0,canvas.width,canvas.height);
+                  context.fillStyle = "black";
+                  context.font = '26pt Calibri';
+                  context.fillText("No face found", 150, 150);
 
                   // Loop through the faces collected in rectangles variable
                   if(buffer.data.length > 0) {
@@ -3496,7 +3499,6 @@
                     context.fill();
                     context.closePath();
                     context.globalCompositeOperation = 'source-over';
-                    context.shadowBlur = 30;
                   }
                 });
 
