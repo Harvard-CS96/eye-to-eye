@@ -67,8 +67,21 @@
     </div>
 
     <div id="My History" class="tabcontent">
-    <h3>My History</h3>
-    <p>Tokyo is the capital of Japan.</p>
+        <div class="holder">
+            <div id="history-area" style="align: center;">
+                Your past conversations:
+                <table id="history-table">
+                    <tr>
+                        <td>
+                            <p><strong>Name</strong></p>
+                        </td>
+                        <td>
+                            <p><strong>Message</strong></p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 
 
@@ -79,7 +92,7 @@
     var user = {{{ user }}};
 
     function paintStars(nStars) {
-        console.log(nStars);
+        // console.log(nStars);
         for (i = 1; i <= nStars; i++) {
             var elt = $('#star' + i.toString());
             elt.html('&#9733;');
@@ -123,6 +136,34 @@
             success: res => {
                 console.log(res);
                 $('#leaderboard')[0].innerHTML = buildLeaderboard(res);
+            }
+        })
+    }
+
+    function getHistory() {
+        $.ajax({
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            url: '/profile/chats',
+            success: res => {
+
+                // Double-check conversation count
+                if (res.length > $("#convo-count").text) {
+                    $("#convo-count").text(res.length);
+                }
+
+                // Populate history form
+                var table_html = ""
+                res.forEach(row => {
+                    
+                    // Chat data and chat partner's name
+                    var [chat, name] = row
+                    var feedback = chat.feedback.filter(f => {f.from !== user.uuid})[0];
+                    
+                    // TODO: Build up html here
+                })
+
+                // TODO: append results to table
             }
         })
     }
