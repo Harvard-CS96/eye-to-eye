@@ -84,7 +84,6 @@ class Matcher {
             console.log(`Matcher: ${id} partner ${partner} is now single`)
 
             this._setStatus(partner, DISCONNECTED, id)
-            this._setStatus(partner, WAITING)
 
             this.fireCallbacks(DISCONNECTED, {
                 who: this.connections[id].user_id,
