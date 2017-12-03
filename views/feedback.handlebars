@@ -8,8 +8,8 @@
 <div class="container mt-5">
     <div class="row text-center">
         <div class="col-md-12" style="height:100%;">
-            <h1>Feedback from your Conversation</h1>
-            <h4 id="identity">Please Rate your Conversation</h4>
+            <h1>Rating</h1>
+            <h4 id="identity">Rate your conversation partner.</h4>
             <div class="container">
                 <div onmouseout="paintStars(selectedStarCount)" id="star-area">
                     <span id="star1" onmouseover="setHighlightStar(1)" onclick="setRatingStar(1)" class="fa icon-star"></span>
@@ -18,10 +18,11 @@
                     <span id="star4" onmouseover="setHighlightStar(4)" onclick="setRatingStar(4)" class="fa icon-star"></span>
                     <span id="star5" onmouseover="setHighlightStar(5)" onclick="setRatingStar(5)" class="fa icon-star"></span>
                 </div>
+                <br/>
             </div>
 
             <div class="badge-area" style="align: center;">
-                <h4>Would you like to award any badges?</h4>
+                <h4>Give a badge?</h4>
 
                 <div class="row" style="margin:2em;">
                     <div class="col-md-6">
@@ -46,7 +47,8 @@
             </div>
 
             <div id="improvements-area" style="align: center;">
-                <h4>Do you have any suggestions for improvement?</h4>
+                <h4>Any areas they could improve on?</h4>
+                <br/>
                 <div class="row">
                     <div class="col-md-4">
                         <input id='button-listening' onclick="changeButton('listening')" class="btn btn-outline-primary" type="button" value="Listening">
