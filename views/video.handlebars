@@ -3497,9 +3497,10 @@
                     context.closePath();
                     context.globalCompositeOperation = 'source-over';
                   } else {
+                    context.globalCompositeOperation = 'source-over';
                     context.fillStyle = 'black';
-                    context.font = '26pt Calibri';
-                    context.fillText("No face found", 100, 100);
+                    context.font = '24pt Calibri';
+                    context.fillText("No face found", 80, 100);
                   }
                 });
 
