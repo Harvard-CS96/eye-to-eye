@@ -189,10 +189,10 @@ p {
 
 .badge-area .fa {
     cursor: pointer;
+    max-width: 9.5rem;    
     background-color: white;
-    color: #C0B283;
+    color: #C0B283; 
     font-size: 30px;
-    opacity: .5;
     padding: 30px;
     border-radius: 50px;
     background: -webkit-linear-gradient(left, rgba(192,178,131, 0) 25%, rgba(192,178,131, 0.8) 75%);
@@ -202,6 +202,8 @@ p {
     border: 1px solid #C0B283;
     -webkit-transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
     transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .badge-area .fa:hover {
