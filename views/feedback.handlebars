@@ -9,6 +9,7 @@
     <div class="row text-center">
         <div class="col-md-12" style="height:100%;">
             <h1>Feedback from your Conversation</h1>
+            <p class="error-warn"></p>
             <h4 id="identity">Please Rate your Conversation</h4>
             <div class="container">
                 <div onmouseout="paintStars(selectedStarCount)" id="star-area">
@@ -71,22 +72,24 @@
                 </div>
             </div>
             <br>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Report User</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#reportModal" data-whatever="@mdo">Report User</button>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
+            <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" >
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Report User</h5>
+                            <h5 class="modal-title" id="reportModal">Report User</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                        <p class="report-error-warn" style="color: red"></p>
                         <div class="modal-body">
                             <form>
                             <div class="form-group">
                                 <label for="abuse-type" class="form-control-label">Abuse Type</label>
                                 <select id="abuse-type" class="form-control" onchange="logAbuseType(this.value)">
+                                    <option value="" disabled selected>Select abuse type...</option>
                                     <option value="Abusive-language">Explicit language</option>
                                     <option value="Explicit-imagery">Nudity</option>
                                     <option value="Rudeness">Rudeness</option>
@@ -101,7 +104,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button id="submitAbuse" type="button" class="btn btn-danger" data-dismiss="modal">Submit</button>
+                            <button id="submitAbuse" type="button" class="btn btn-danger" >Submit</button>
                         </div>
                     </div>
                 </div>

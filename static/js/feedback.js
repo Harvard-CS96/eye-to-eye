@@ -10,14 +10,12 @@ buttonStuff = {
 abuseComment = "";
 function logAbuseComment(comment){
     abuseComment = comment;
-    console.log(abuseComment);
     return abuseComment;
 }
 
 abuseType = "";
 function logAbuseType(type){
     abuseType = type;
-    console.log(abuseType);
     return abuseType;
 }
 
@@ -89,27 +87,33 @@ function setRatingStar(nStars){
 }
 
 function abuseFormSubmit(){
-    var json = {
-        from: user.uuid,
-        kind: abuseType,
-        comment: abuseComment,
-    };
-    console.log('reporting abuse');
-    console.log(json);
-    $.ajax({
-        type: 'POST',
-        contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify(json),
-        url: '/feedback/report/',
-        success: function(data){
-            console.log(data);
-            console.log('success');
-        },
-        failure: function(result){
-            console.log('failure');
-        error();
-        }
-    });
+    if (abuseType!==""){
+        var json = {
+            from: user.uuid,
+            kind: abuseType,
+            comment: abuseComment,
+        };
+        console.log('reporting abuse');
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(json),
+            url: '/feedback/report/',
+            success: function(data){
+                console.log(data);
+                console.log('success');
+            },
+            failure: function(result){
+                console.log('failure');
+            error();
+            }
+        });
+        $('#reportModal').modal('toggle');
+    }
+    else {
+        // TODO: Warn that an abuse type was not selected
+        $('.report-error-warn').html('Please select an abuse type.')                
+    }
 }
 
 function formSubmit(){
