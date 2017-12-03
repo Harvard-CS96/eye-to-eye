@@ -1,21 +1,129 @@
+/* @use postcss-nested;
+@use cssnext; */
+@import 'https://fonts.googleapis.com/css?family=Fjalla+One|Raleway';
 
-table p {
-    margin-top: 30px;
+*, *:before, *:after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#improvements-area table {
+/* Credit for button styles: John Heimer */
+.gradient-btn {
+    min-width:120px;
+    display: inline-block;
+    padding: 1em 1em;
+    border-radius: 0;
+    color: #C0B283;
+    margin-top: 2rem;
+    font-weight: bold;
+    font-size: 0.678rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: -webkit-linear-gradient(left, rgba(192,178,131, 0) 25%, rgba(192,178,131, 0.8) 75%);
+    background: linear-gradient(to right, rgba(192,178,131, 0) 25%, rgba(192,178,131, 0.8) 75%);
+    background-position: 1% 50%;
+    background-size: 400% 300%;
+    border: 1px solid #C0B283;
+    -webkit-transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  .gradient-btn:hover {
+    -webkit-transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  .gradient-btn:hover {
+    color: white;
+    color: #fff;
+    background-position: 99% 50%;
+  }
+.active {
+    display: inline-block;
+    padding: 1em 2em;
+    border-radius: 0;
+    color: #fff;
+    margin-top: 2rem;
+    font-weight: bold;
+    font-size: 0.678rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #C0B283;
+    background-position: 1% 50%;
+    background-size: 400% 300%;
+    border: 1px solid #C0B283;
+}
+/* .btn{
+    min-width: 100px;
+    border: solid rgb(108, 155, 209);
+    border-radius: 10px;
+} */
+html {
+  font-size: 62.7%;
+}
+
+html, body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* flex-direction: column; */
+  width: 100%;
+  height: 100%;
+  background-color: #f2f2f2;
+  font-family: 'Raleway', sans-serif;
+}
+  
+.layer {
+  background-color: white;
+  width: 75%;
+  max-width: 50rem;
+  margin-top: 20rem;
+  margin-bottom: 4rem;
+  padding: 7.5rem 3rem 7.5rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0 3rem 5rem -2rem rgba(0, 0, 0, 0.2);
+}
+
+/* Other styling */
+a {
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-size: 3.6rem;
+    font-family: 'Fjalla One', sans-serif;
+    padding: 1rem 0 0.5rem 0;
+    margin: 0;
+  }
+
+p {
+  font-size: 1.6rem;
+  line-height: 1.7;
+  text-align: center;
+  margin: 0.8rem 0 0 0;
+  padding: 0;
+}
+
+/* #improvements-area table {
     width: 400px;
-}
+} */
 
 .error-warn {
     color: red;
     font-weight: bold;
 }
 
-#improvements-area tr {
+/* #improvements-area tr {
     margin-top: 10px;
     height: 40px;
-}
+} */
 
 #star-area .fa {
     color: gray;
@@ -26,12 +134,6 @@ table p {
 .starred {
     opacity: 1 !important;
     color: rgb(192,178,131) !important;
-}
-
-.btn{
-    min-width: 130px;
-    border: solid rgb(108, 155, 209);
-    border-radius: 10px;
 }
 
 .badge-area .fa {
@@ -62,3 +164,4 @@ table p {
 .badge-area {
     align: center;
 }
+
