@@ -1,5 +1,4 @@
 <style>
-    video,
     canvas {
         width: 450px;
         height: 450px;
@@ -7,12 +6,13 @@
         position: absolute;
     }
     .remote_column video {
-        margin-left: 200px;
-    },
-    .remote_column canvas {
+        margin-left: 20px;
     }
-    .local_column video,
-    .local_column canvas,
+    
+    .remote_column canvas {
+        margin-left: 20px;
+    }
+
     #localVideo {
         width: 300px;
         height: 300px;
@@ -141,7 +141,9 @@
                   "width": "450px",
                   "height": "450px",
                   "border-radius": "50%",
-                  "object-fit": "cover"
+                  "object-fit": "cover",
+                  "margin-top": "5px",
+                  "position": "absolute"
                 })
         // Grab the canvas ID and getContext
         var canvas = document.getElementById('canvas');
