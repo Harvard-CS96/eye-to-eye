@@ -192,12 +192,44 @@
         })
     }
 
+    function makePrettyDate(seconds){
+        const minutes = Math.floor((seconds) / 60);
+        const extraSeconds = Math.floor(seconds - minutes * 60) % 60;
+        return minutes + ':' + extraSeconds;
+    }
+
+    function extraInfoFromChat(row){
+        var [chat, name] = row
+
+        var info = {};
+        info.otherName = name;
+        info.connectedDate = chat.connected.time; 
+        info.disconnectedDate = chat.disconnected.time;
+        info.disconnectedReason = chat.disconnected.reason; 
+        info.duration = makePrettyDate((new Date(info.disconnectedDate) - new Date(info.connectedDate))/1000)
+
+        info.feedbackReceived = {};
+        info.feedbackSent = {};
+
+        for (var i = 0; i < chat.feedback.length; i++){
+            if (chat.feedback[i].from == user.uuid)
+                info.feedbackSent = chat.feedback[i];
+            else
+                info.feedbackReceived = chat.feedback[i];
+        }
+
+        console.log("CHAT INFO: ", info)
+        return info;
+
+    }
+
     function getHistory() {
         $.ajax({
             type: 'GET',
             contentType: 'application/json; charset=utf-8',
             url: '/profile/chats',
             success: res => {
+                console.log(res)
 
                 // Double-check conversation count
                 if (res.length > $("#convo-count").text) {
@@ -205,14 +237,50 @@
                 }
 
                 // Populate history form
-                var table_html = ""
+                
                 res.forEach(row => {
+
+                    var table_html = ""
                     
-                    // Chat data and chat partner's name
-                    var [chat, name] = row
-                    var feedback = chat.feedback.filter(f => {f.from !== user.uuid})[0];
-                    
-                    // TODO: Build up html here
+                    const info = extraInfoFromChat(row)
+
+                    // Build up html here
+                    table_html += 
+                        '<li class="list-group-item">' +
+                            '<div class="col-md-12">' +
+                                '<span class="name">' + info.otherName + '</span><br/>' + 
+                                '<span class="fa fa-calendar text-muted c-info" data-toggle="tooltip" title="Date"></span>' +
+                                '<span class="visible-xs"> <span class="text-muted">Date</span></span>' + 
+                                '<span> ' + Date(info.connectedDate) + '</span><br/>' +
+                               
+                                '<span> Duration: ' + info.duration + '</span><br/>';
+                            
+
+                    if (!$.isEmptyObject(info.feedbackSent)){
+                        table_html += 
+                            '<span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="Feedback Sent"></span>' + 
+                            '<span class="visible-xs"> <span class="text-muted">Feedback Sent</span><br/></span>' + 
+                            '<span> Stars: ' + info.feedbackSent.stars + '</span></br>' + 
+                            '<span> Badges: ' + info.feedbackSent.badges + '</span></br>' +
+                            '<span> Text: ' + info.feedbackSent.text + '</span>';
+                    }
+                    if (!$.isEmptyObject(info.feedbackReceived)){
+                        table_html += 
+                             '<br/><span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="Feedback Received"></span>' +
+                            '<span class="visible-xs"> <span class="text-muted">Feedback Received</span><br/></span>' +
+                            '<span> Stars: ' + info.feedbackReceived.stars + '</span></br>' + 
+                            '<span> Badges: ' + info.feedbackReceived.badges + '</span></br>' +
+                            '<span> Text: ' + info.feedbackReceived.text + '</span>';
+                    }
+                                  
+                    table_html +=
+                            '</div>' +
+                            '<div class="clearfix"></div>' +
+                        '</li>';
+
+                    // append table_html string to the html
+                    $("#contact-list").append(table_html);
+
                 })
 
                 // TODO: append results to table
@@ -246,6 +314,8 @@
             $("#convo-button").on("click", (e) => {
                 window.location.href= '/';
             })
+
+            getHistory();
         });
     });
 
