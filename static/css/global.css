@@ -3,14 +3,29 @@
  * Copyright 2013-2017 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-landing-page/blob/master/LICENSE)
  */
+ @import 'https://fonts.googleapis.com/css?family=Fjalla+One|Raleway';
 
 body {
-    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Raleway', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 700;
+    text-align: center;
+    /*text-transform: uppercase;
+    font-family: 'Open Sans', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+	  font-family: "Open Sans", sans-serif;
+	  color: #444;
+    text-align: center;*/
+
+}
+
+h7 {
+    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
 }
 
 header.masthead {
@@ -119,6 +134,26 @@ header.masthead h1 {
     top: 0;
     left: 0;
     opacity: 0.3;
+}
+
+.btn-toolbar {
+  margin-left:-5px;
+}
+
+.btn-toolbar .btn, .btn-toolbar .btn-group, .btn-toolbar {
+  text-align:center;
+  align-content:center;
+}
+
+.btn-group {
+   margin:0 auto;
+   display:block;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.btn-primary {
+    margin-right: 20px;
 }
 
 footer.footer {
