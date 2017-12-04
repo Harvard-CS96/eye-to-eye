@@ -29,10 +29,23 @@ function getAuthInfo(req){
 
 router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
-        res.render("video", getAuthInfo(req));
+        const hbsData = req.isAuthenticated() === true ?
+            {
+                isAuthenticated: 'true',
+                user: JSON.stringify(req.user),
+            } :
+            {
+                isAuthenticated: 'false',
+                user: JSON.stringify({}),
+            };
+        res.render("profile", hbsData);
     } else {
         res.render("landing");
     }
+})
+
+router.get('/chat', isLoggedIn, (req, res) => {
+    res.render('video');
 })
 
 router.get('/text', isLoggedIn, (req, res) => {
@@ -50,16 +63,7 @@ router.get('/text', isLoggedIn, (req, res) => {
 
 // Get a user's profile page
 router.get('/profile', isLoggedIn, (req, res) => {
-    const hbsData = req.isAuthenticated() === true ?
-        {
-            isAuthenticated: 'true',
-            user: JSON.stringify(req.user),
-        } :
-        {
-            isAuthenticated: 'false',
-            user: JSON.stringify({}),
-        }
-    res.render("profile", hbsData)
+    res.redirect('/');
 });
 
 // Get the user's JSON representation
