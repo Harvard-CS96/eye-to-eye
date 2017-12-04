@@ -29,23 +29,14 @@ function getAuthInfo(req){
 
 router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
-        const hbsData = req.isAuthenticated() === true ?
-            {
-                isAuthenticated: 'true',
-                user: JSON.stringify(req.user),
-            } :
-            {
-                isAuthenticated: 'false',
-                user: JSON.stringify({}),
-            };
-        res.render("profile", hbsData);
+        res.render("profile", getAuthInfo(req));
     } else {
         res.render("landing");
     }
 })
 
 router.get('/chat', isLoggedIn, (req, res) => {
-    res.render('video');
+    res.render('video', getAuthInfo(req));
 })
 
 router.get('/text', isLoggedIn, (req, res) => {
