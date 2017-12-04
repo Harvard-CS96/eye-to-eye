@@ -306,10 +306,20 @@
                 context.beginPath();
                 var centerX = center.x;
                 var centerY = center.y;
+                // turn the oval into a circle because Anjali is a psychopath
+                abs_difference = abs(rect.height - rect.width);
+                if (rect.height > rect.width) {
+                  rect.width = rect.width + abs_difference;
+                } else if (rect.height < rect.width){
+                  rect.height = rect.height + abs_difference;
+                } else {
+
+                }
                 // Add some wiggle room to the rect width and height
                 var padding_oval = 200;
-                var height = (rect.height * 2.0) + padding_oval;
-                var width = (rect.width * 2.0) + padding_oval;
+                var height = (rect.height * 2.0);
+                var width = (rect.width * 2.0);
+
                 context.moveTo(centerX, centerY - height / 2); // A1
                 context.bezierCurveTo(
                     centerX + width / 2, centerY - height / 2, // C1
