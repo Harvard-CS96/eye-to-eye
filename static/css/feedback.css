@@ -6,11 +6,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* .btn{
-    min-width: 100px;
-    border: solid rgb(108, 155, 209);
-    border-radius: 10px;
-} */
 html {
   font-size: 62.7%;
 }
@@ -101,19 +96,10 @@ p {
   padding: 0;
 }
 
-/* #improvements-area table {
-    width: 400px;
-} */
-
 .error-warn {
     color: #373737;
     font-size: 1rem;
 }
-
-/*#improvements-area tr {
-    margin-top: 10px;
-    height: 40px;
-}*/
 
 #star-area .fa {
     color: #d5d5d5;
@@ -180,3 +166,4 @@ p {
 .badge-area {
     align: center;
 }
+
