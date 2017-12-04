@@ -40,7 +40,7 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     </head>
-    
+
     <body>
         <div class="container mt-5">
             <div class="row text-center">
@@ -49,13 +49,13 @@
                     <p id="identity"></p>
                     <!-- where the messages will apend in -->
                     <div id="notice"></div>
-                    <div id="chat" class="border bg-light text-left p-3" style="min-height:20em;overflow:scroll;">
+                    <div id="chat" class="text-left p-3" style="min-height:20em;">
                         <div class="local_column">
-                        <video id="localVideo"></video>
-                      </div>
+                          <video id="localVideo"></video>
+                        </div>
                         <div class="remote_column">
                           <span id="remoteVideos"></span>
-                          <canvas id="canvas" width="320" height="240"></canvas>
+                          <canvas id="canvas" width="450" height="450"></canvas>
                         </div>
                     </div>
 
@@ -72,7 +72,6 @@
 
             <!-- <a href="/updateStance">Return to Profile</a> -->
         </div>
-<button id="end-conversation" class="btn btn-success" disabled="true">End Conversation</button>
 <br><br><br><br>
 </div>
 
@@ -131,7 +130,7 @@
         // join new room
         webrtc.joinRoom(room);
         // Update Notice Text
-        $("#notice").text("You are talking with " + partner + ". Learn something from them.");
+        $("#notice").text("You are talking with " + partner + ". Try to learn something from them!");
         // Enable the end conversation Button
         $("#end-conversation").prop('disabled', null);
         // When user ends conversation, start a new match
@@ -186,7 +185,8 @@
         // Variables to help with smoothing
         // Smoothing only occurs with one face in the frame though
         var frames_without_face = 0;
-        var frames_without_face_threshold = 5;
+        // 5 was too low, 20 is too high because it allows time for an attack
+        var frames_without_face_threshold = 10;
         var prior_data = [];
         function createBuffer(size) {
             return {
@@ -305,9 +305,19 @@
                 context.beginPath();
                 var centerX = center.x;
                 var centerY = center.y;
+                // turn the oval into a circle because Anjali is a psychopath
+                // var abs_difference = Math.abs(rect.height - rect.width);
+                // var circle = rect;
+                // if (rect.height > rect.width) {
+                //   rect.width = rect.width + abs_difference;
+                // } else if (rect.height < rect.width){
+                //   rect.height = rect.height + abs_difference;
+                // }
                 // Add some wiggle room to the rect width and height
-                var height = rect.height * 2.0;
-                var width = rect.width * 2.0;
+                var padding_oval = 100;
+                var height = (rect.height * 2.0) + padding_oval;
+                var width = (rect.width * 2.0) + padding_oval;
+
                 context.moveTo(centerX, centerY - height / 2); // A1
                 context.bezierCurveTo(
                     centerX + width / 2, centerY - height / 2, // C1
