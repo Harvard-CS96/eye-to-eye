@@ -306,7 +306,7 @@
                 var centerX = center.x;
                 var centerY = center.y;
                 // turn the oval into a circle because Anjali is a psychopath
-                abs_difference = abs(rect.height - rect.width);
+                abs_difference = Math.abs(rect.height - rect.width);
                 if (rect.height > rect.width) {
                   rect.width = rect.width + abs_difference;
                 } else if (rect.height < rect.width){
