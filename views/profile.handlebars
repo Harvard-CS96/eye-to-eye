@@ -22,7 +22,7 @@
         <div class="holder">
             <hr>
             <div id="star-area">
-                Average star rating:
+                Your rating:
                 <span id="star1">&#9733;</span></span>
                 <span id="star2">&#9733;</span></span>
                 <span id="star3">&#9733;</span></span>
@@ -30,10 +30,10 @@
                 <span id="star5">&#9733;</span></span>
             </div>
             <div>
-                Your conversation count: <span id="convo-count"></span>
+                Your conversation count: <span id="convo-count"></span></br></br>
             </div>
             <div id="badge-area" style="align: center;">
-                See your badges:
+                Badges received:
                 <table>
                     <tr>
                         <td>
@@ -59,7 +59,7 @@
             </div>
             <br/>
             <div>
-                Click to view your friends leaderboards! (by clicking, you allow your friends to see your badges as well).
+                View the leaderboard of your friends
                 <div id="leaderboard"></div>
             </div>
         </div>
@@ -243,8 +243,7 @@
 
                 })
 
-                console.log("WHOLE CONTACT LIST", document.getElementById('contact-list'));
-
+                // make the history list searchable
                 $('#contact-list').searchable({
                     searchField: '#contact-list-search',
                     selector: 'li',
