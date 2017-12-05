@@ -63,7 +63,6 @@ div.tab button.active {
     color: #fff !important;
     border-bottom: 6px solid !important;
     border-bottom-color: var(--secondary) !important;
-    
 }
 
 /* Style the tab content */
