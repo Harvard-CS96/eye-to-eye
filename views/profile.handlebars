@@ -105,85 +105,10 @@
                             </div>
                         </div>
                         <ul class="list-group row" id="contact-list">
-                            <li class="list-group-item">
-                                <div class="col-md-12">
-                                    <img src="http://api.randomuser.me/portraits/men/97.jpg" alt="Jacob" class="img-responsive rounded-circle" />
-                                </div>
-                                <div class="col-md-12">
-                                    <span class="name">Jacob</span>
-                                    <br/>
-                                    <span class="fa fa-calendar text-muted c-info" data-toggle="tooltip" title="Date"></span>
-                                    <span class="visible-xs">
-                                        <span class="text-muted">Date</span>
-                                        <br/>
-                                    </span>
-                                    <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="Feedback Given"></span>
-                                    <span class="visible-xs">
-                                        <span class="text-muted">Feedback Given</span>
-                                        <br/>
-                                    </span>
-                                    <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="Feedback Received"></span>
-                                    <span class="visible-xs">
-                                        <span class="text-muted">Feedback Received</span>
-                                        <br/>
-                                    </span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="col-md-12">
-                                    <img src="http://api.randomuser.me/portraits/men/24.jpg" alt="Sam" class="img-responsive rounded-circle" />
-                                </div>
-                                <div class="col-md-12 col-sm-9">
-                                    <span class="name">Sam</span>
-                                    <br/>
-                                    <span class="fa fa-calendar text-muted c-info" data-toggle="tooltip" title="Date"></span>
-                                    <span class="visible-xs">
-                                        <span class="text-muted">Date</span>
-                                        <br/>
-                                    </span>
-                                    <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="Feedback Given"></span>
-                                    <span class="visible-xs">
-                                        <span class="text-muted">Feedback Given</span>
-                                        <br/>
-                                    </span>
-                                    <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="Feedback Received"></span>
-                                    <span class="visible-xs">
-                                        <span class="text-muted">Feedback Received</span>
-                                        <br/>
-                                    </span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="col-md-12">
-                                    <img src="http://api.randomuser.me/portraits/women/34.jpg" alt="Alex" class="img-responsive rounded-circle" />
-                                </div>
-                                <div class="col-md-12">
-                                    <span class="name">Lisa</span>
-                                    <br/>
-                                    <span class="fa fa-calendar text-muted c-info" data-toggle="tooltip" title="Date"></span>
-                                    <span class="visible-xs">
-                                        <span class="text-muted">Date</span>
-                                        <br/>
-                                    </span>
-                                    <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="Feedback Given"></span>
-                                    <span class="visible-xs">
-                                        <span class="text-muted">Feedback Given</span>
-                                        <br/>
-                                    </span>
-                                    <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="Feedback Received"></span>
-                                    <span class="visible-xs">
-                                        <span class="text-muted">Feedback Received</span>
-                                        <br/>
-                                    </span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </li>
                         </ul>
                     </div>
                 </div>
-            </div>
+        	</div>
         </div>
     </div>
 </div>
@@ -195,19 +120,17 @@
     var user = {{{ user }}};
 
     function paintStars(nStars) {
-        // console.log(nStars);
-        for (i = 1; i <= nStars; i++) {
+        for (var i = 1; i <= nStars; i++) {
             var elt = $('#star' + i.toString());
             elt.html('&#9733;');
         };
-        for (i = nStars + 1; i <= 5; i++) {
+        for (var i = nStars + 1; i <= 5; i++) {
             var elt = $('#star' + i.toString());
             elt.html('&#x2606');
         };
     }
 
     function countBadges(badgeName, person) {
-        console.log('badgename');
         var count = 0;
         person.badges.forEach(function (d) {
             if (d.badge == badgeName) {
@@ -221,13 +144,16 @@
         var start = '<table><tr><th>Friend</th><th>Empathetic</th><th>Polite</th><th>Knowledgeable</th><th>Creative</th><tr>';
         var s = '';
         leaders.forEach(friend => {
-            s += '<tr><td>' + friend.name + '</td><td>' + countBadges('empathetic', friend) + '</td><td>' +
-                countBadges('polite', friend) + '</td><td>' + countBadges('knowledgeable', friend) + '</td><td>' +
-                countBadges('creative', friend) + '</td></tr>';
+            s += '<tr>' +
+                 '<td>' + friend.name + '</td>' + 
+                 '<td>' + countBadges('empathetic', friend) + '</td>' + 
+                 '<td>' + countBadges('polite', friend) + '</td>'
+                 '<td>' + countBadges('knowledgeable', friend) + '</td>' + 
+                 '<td>' + countBadges('creative', friend) + '</td>' + 
+                 '</tr>';
         });
         var end = '</table>';
         var final = start + s + end;
-        console.log(final);
         return final;
     }
 
@@ -257,8 +183,7 @@
         info.connectedDate = chat.connected.time;
         info.disconnectedDate = chat.disconnected.time;
         info.disconnectedReason = chat.disconnected.reason;
-        info.duration = makePrettyDate((new Date(info.disconnectedDate) - new Date(info.connectedDate)) / 1000)
-
+        info.duration = makePrettyDate((new Date(info.disconnectedDate) - new Date(info.connectedDate))/1000)
         info.feedbackReceived = {};
         info.feedbackSent = {};
 
@@ -280,69 +205,54 @@
             contentType: 'application/json; charset=utf-8',
             url: '/profile/chats',
             success: res => {
-                console.log(res)
-
-                // Double-check conversation count
-                if (res.length > $("#convo-count").text) {
-                    $("#convo-count").text(res.length);
-                }
-
                 // Populate history form
-
                 res.forEach(row => {
-
-                    var table_html = ""
-
+                    var tableHtml = ""
                     const info = extraInfoFromChat(row)
-
                     // Build up html here
-                    table_html +=
+                    var tableHtml +=
                         '<li class="list-group-item">' +
                             '<div class="col-md-12">' +
-                                '<span class="name">' + info.otherName + '</span><br/>' + 
+                                '<span class="name">' + info.otherName + '</span><br/>' +
                                 '<span class="fa fa-calendar text-muted c-info" data-toggle="tooltip" title="Date"></span>' +
                                 '<span> ' + new Date(info.connectedDate) + '</span><br/>' +
                                '<span class="fa fa-clock-o text-muted c-info" data-toggle="tooltip" title="Duration"></span>' +
                                 '<span>' + info.duration + '</span><br/></br>';
 
-                            
 
                     if (!$.isEmptyObject(info.feedbackSent)){
-                        table_html += 
+                        tableHtml += 
                         '<div class="row">' + 
                             '<div class="col-6">' + 
-
-                             
                             '<span class="visible-xs"> <span class="text-muted">Feedback Sent</span><br/></span>' + 
                             '<span class="fa fa-star text-muted c-info" data-toggle="tooltip" title="Stars"></span>' + 
                             '<span>' + info.feedbackSent.stars + '</span></br>' + 
                             '<span class="fa fa-trophy text-muted c-info" data-toggle="tooltip" title="Badges"></span>' +
                             '<span> ' + info.feedbackSent.badges.toString().replace(",", ", ") + '</span></br>' +
                             '<span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="Feedback Sent"></span>' +
-                            '<span> ' + info.feedbackSent.text + '</span>' + 
+                            '<span> ' + info.feedbackSent.text + '</span>' +
                         '</div>';
                     }
                     if (!$.isEmptyObject(info.feedbackReceived)){
-                        table_html += 
+                        tableHtml += 
                             '<div class="col-6">' + 
                             '<span class="visible-xs"> <span class="text-muted">Feedback Received</span><br/></span>' +
-                            '<span class="fa fa-star text-muted c-info" data-toggle="tooltip" title="Stars"></span>' + 
-                            '<span>' + info.feedbackReceived.stars + '</span></br>' + 
+                            '<span class="fa fa-star text-muted c-info" data-toggle="tooltip" title="Stars"></span>' +
+                            '<span>' + info.feedbackReceived.stars + '</span></br>' +
                             '<span class="fa fa-trophy text-muted c-info" data-toggle="tooltip" title="Badges"></span>' +
                             '<span>' + info.feedbackReceived.badges.toString().replace(",", ", ") + '</span></br>' +
                             '<span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="Feedback Received"></span>' +
-                            '<span>' + info.feedbackReceived.text + '</span>' + 
+                            '<span>' + info.feedbackReceived.text + '</span>' +
                             '</div>';
                     }
 
-                    table_html +=
+                    tableHtml +=
                         '</div>' +
                         '<div class="clearfix"></div>' +
                         '</li>';
 
-                    // append table_html string to the html
-                    $("#contact-list").append(table_html);
-
+                    // append tableHtml string to the html
+                    $("#contact-list").append(tableHtml);
                 })
 
                 // make the history list searchable
@@ -395,20 +305,21 @@
             }
 
             $("#convo-button").on("click", (e) => {
+                window.location.href= '/chat';
                 window.location.href = '/chat';
             })
 
             getHistory();
 
             // add search bar after creating list, so that everything is searchable
-            $("#search-bar").append('<div class="input-group c-search">' + 
-                '<input type="text" class="form-control" id="contact-list-search">' + 
-                '<span class="input-group-btn">' + 
-                    '<button class="btn btn-default" type="button"><span class="fa fa-search text-muted"></span></button>' + 
-                '</span>' + 
+            $("#search-bar").append('<div class="input-group c-search">' +
+                '<input type="text" class="form-control" id="contact-list-search">' +
+                '<span class="input-group-btn">' +
+                    '<button class="btn btn-default" type="button"><span class="fa fa-search text-muted"></span></button>' +
+                '</span>' +
             '</div>');
 
-            
+
         });
     });
 
@@ -433,22 +344,7 @@
         evt.currentTarget.className += " active";
     }
 
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
 </script>
 
-<script>
-    $(function () {
-        $('#contact-list').searchable({
-            searchField: '#contact-list-search',
-            selector: 'li',
-            childSelector: '.col-md-12',
-            show: function (elem) {
-                elem.slideDown(100);
-            },
-            hide: function (elem) {
-                elem.slideUp(100);
-            }
-        })
-    });
-</script>
