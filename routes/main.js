@@ -133,14 +133,9 @@ router.get('/logout', function(req, res) {
     res.redirect('/');
 })
 
-// route for terms of use 
+// route for logging out
 router.get('/terms-of-use', function(req, res) {
     res.render('termsOfUse');
-})
-
-// route for about 
-router.get('/about-us', function(req, res) {
-    res.render('about');
 })
 
 // route middleware to make sure a user is logged in
