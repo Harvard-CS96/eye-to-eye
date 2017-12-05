@@ -141,19 +141,27 @@
     }
 
     function buildLeaderboard(leaders) {
-        var start = '<table><tr><th>Friend</th><th>Empathetic</th><th>Polite</th><th>Knowledgeable</th><th>Creative</th><tr>';
+        var start = '<div id="leaderboard-table">' + 
+                        '<div class="row">' + 
+                            '<div class="col-md-4">Friend</div>' + 
+                            '<div class="col-md-2">Emp</div>' + 
+                            '<div class="col-md-2">Polite</div>' + 
+                            '<div class="col-md-2">Know</div>' + 
+                            '<div class="col-md-2">Creative</div>' + 
+                        '</div>';
         var s = '';
         leaders.forEach(friend => {
-            s += '<tr>' +
-                 '<td>' + friend.name + '</td>' + 
-                 '<td>' + countBadges('empathetic', friend) + '</td>' + 
-                 '<td>' + countBadges('polite', friend) + '</td>'
-                 '<td>' + countBadges('knowledgeable', friend) + '</td>' + 
-                 '<td>' + countBadges('creative', friend) + '</td>' + 
-                 '</tr>';
+            s += '<div class="row">' +
+                    '<div class="col-md-4">' + friend.name + '</div>' + 
+                    '<div class="col-md-2">' + countBadges('empathetic', friend) + '</div>' + 
+                    '<div class="col-md-2">' + countBadges('polite', friend) + '</div>'
+                    '<div class="col-md-2">' + countBadges('knowledgeable', friend) + '</div>' + 
+                    '<div class="col-md-2">' + countBadges('creative', friend) + '</div>' + 
+                 '</div>';
         });
-        var end = '</table>';
+        var end = '</div>';
         var final = start + s + end;
+        console.log(final);
         return final;
     }
 
@@ -210,9 +218,8 @@
                     var tableHtml = ""
                     const info = extraInfoFromChat(row)
                     // Build up html here
-                    var tableHtml +=
-                        '<li class="list-group-item">' +
-                            '<div class="col-md-12">' +
+                    tableHtml += '<li class="list-group-item">' +
+                                 '<div class="col-md-12">' +
                                 '<span class="name">' + info.otherName + '</span><br/>' +
                                 '<span class="fa fa-calendar text-muted c-info" data-toggle="tooltip" title="Date"></span>' +
                                 '<span> ' + new Date(info.connectedDate) + '</span><br/>' +
