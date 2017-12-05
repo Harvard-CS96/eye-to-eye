@@ -195,19 +195,17 @@
     var user = {{{ user }}};
 
     function paintStars(nStars) {
-        // console.log(nStars);
-        for (i = 1; i <= nStars; i++) {
+        for (var i = 1; i <= nStars; i++) {
             var elt = $('#star' + i.toString());
             elt.html('&#9733;');
         };
-        for (i = nStars + 1; i <= 5; i++) {
+        for (var i = nStars + 1; i <= 5; i++) {
             var elt = $('#star' + i.toString());
             elt.html('&#x2606');
         };
     }
 
     function countBadges(badgeName, person) {
-        console.log('badgename');
         var count = 0;
         person.badges.forEach(function (d) {
             if (d.badge == badgeName) {
@@ -221,13 +219,16 @@
         var start = '<table><tr><th>Friend</th><th>Empathetic</th><th>Polite</th><th>Knowledgeable</th><th>Creative</th><tr>';
         var s = '';
         leaders.forEach(friend => {
-            s += '<tr><td>' + friend.name + '</td><td>' + countBadges('empathetic', friend) + '</td><td>' +
-                countBadges('polite', friend) + '</td><td>' + countBadges('knowledgeable', friend) + '</td><td>' +
-                countBadges('creative', friend) + '</td></tr>';
+            s += '<tr>' +
+                 '<td>' + friend.name + '</td>' + 
+                 '<td>' + countBadges('empathetic', friend) + '</td>' + 
+                 '<td>' + countBadges('polite', friend) + '</td>'
+                 '<td>' + countBadges('knowledgeable', friend) + '</td>' + 
+                 '<td>' + countBadges('creative', friend) + '</td>' + 
+                 '</tr>';
         });
         var end = '</table>';
         var final = start + s + end;
-        console.log(final);
         return final;
     }
 
@@ -280,23 +281,12 @@
             contentType: 'application/json; charset=utf-8',
             url: '/profile/chats',
             success: res => {
-                console.log(res)
-
-                // Double-check conversation count
-                if (res.length > $("#convo-count").text) {
-                    $("#convo-count").text(res.length);
-                }
-
                 // Populate history form
-
                 res.forEach(row => {
-
-                    var table_html = ""
-
+                    var tableHtml = ""
                     const info = extraInfoFromChat(row)
-
                     // Build up html here
-                    table_html +=
+                    var tableHtml +=
                         '<li class="list-group-item">' +
                             '<div class="col-md-12">' +
                                 '<span class="name">' + info.otherName + '</span><br/>' + 
@@ -305,14 +295,10 @@
                                '<span class="fa fa-clock-o text-muted c-info" data-toggle="tooltip" title="Duration"></span>' +
                                 '<span>' + info.duration + '</span><br/></br>';
 
-                            
-
                     if (!$.isEmptyObject(info.feedbackSent)){
-                        table_html += 
+                        tableHtml += 
                         '<div class="row">' + 
                             '<div class="col-6">' + 
-
-                             
                             '<span class="visible-xs"> <span class="text-muted">Feedback Sent</span><br/></span>' + 
                             '<span class="fa fa-star text-muted c-info" data-toggle="tooltip" title="Stars"></span>' + 
                             '<span>' + info.feedbackSent.stars + '</span></br>' + 
@@ -323,7 +309,7 @@
                         '</div>';
                     }
                     if (!$.isEmptyObject(info.feedbackReceived)){
-                        table_html += 
+                        tableHtml += 
                             '<div class="col-6">' + 
                             '<span class="visible-xs"> <span class="text-muted">Feedback Received</span><br/></span>' +
                             '<span class="fa fa-star text-muted c-info" data-toggle="tooltip" title="Stars"></span>' + 
@@ -335,14 +321,13 @@
                             '</div>';
                     }
 
-                    table_html +=
+                    tableHtml +=
                         '</div>' +
                         '<div class="clearfix"></div>' +
                         '</li>';
 
-                    // append table_html string to the html
-                    $("#contact-list").append(table_html);
-
+                    // append tableHtml string to the html
+                    $("#contact-list").append(tableHtml);
                 })
 
                 // make the history list searchable
