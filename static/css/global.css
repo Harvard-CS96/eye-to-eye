@@ -5,6 +5,15 @@
  */
  @import 'https://fonts.googleapis.com/css?family=Fjalla+One|Raleway';
 
+ :root {
+     --main: #952777;
+     --secondary: #3c0069;
+     --main_r: 149;
+     --main_g: 39;
+     --main_b: 119;
+     --text-color: #fff;
+ }
+
 body {
     font-family: 'Raleway', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -31,7 +40,7 @@ h7 {
 header.masthead {
     position: relative;
     background-color: #343a40;
-    background: url("/static/img/family.jpg") no-repeat center center;
+    background: url("/static/img/speech.jpg") no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -154,9 +163,136 @@ header.masthead h1 {
 
 .btn-primary {
     margin-right: 20px;
+    color: var(--main) !important;
+    background: white;
+    border: 1px solid var(--main);
+    -webkit-transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.btn-primary:hover {
+    -webkit-transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    background: var(--main) !important;
+    border-color: var(--secondary) !important;
+  }
+.btn-primary:hover {
+    color: var(--text-color) !important;
 }
 
 footer.footer {
     padding-top: 4rem;
     padding-bottom: 4rem;
 }
+
+
+.badge-area .fa {
+    background-color: rgb(128, 128, 128);
+    color: white;
+    font-size: 30px;
+    opacity: .5;
+    padding: 30px;
+    border-radius: 50px;
+}
+
+.badge-area tr {
+    margin-top: 10px;
+    height: 120px;
+}
+
+.badge-area {
+    align: center;
+}
+
+/* Credit for button styles: John Heimer */
+.arrow-btn {
+    outline: none !important;
+      position: relative;
+      display: inline-block;
+      color: var(--main) !important;
+      margin-top: 2rem;
+      font-weight: bold;
+      font-size: 2rem;
+      letter-spacing: 2px;
+      text-decoration: none;
+      -webkit-transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+      transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+      padding-right: 2em;
+      border: none;
+      background:none;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .arrow-btn:hover {
+      -webkit-transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+      transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .arrow-btn:hover:after {
+      -webkit-transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+      transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+      -webkit-transform: translateX(15px);
+              transform: translateX(15px);
+      opacity: 0;
+    }
+    .arrow-btn:hover:before {
+      -webkit-transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+      transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+      opacity: 1;
+    }
+    .arrow-btn:before, .arrow-btn:after {
+      content: '\27F6';
+      position: absolute;
+      right: 0;
+      /* top: 0%; */
+    }
+    .arrow-btn:before {
+      -webkit-transform: translateX(-15px);
+              transform: translateX(-15px);
+      opacity: 0;
+    }
+    .arrow-btn:after {
+      -webkit-transform: none;
+              transform: none;
+    }
+  .gradient-btn {
+    outline: none !important;
+      cursor: pointer;
+      min-width:120px;
+      display: inline-block;
+      padding: 1em 1em;
+      border-radius: 0;
+      color: var(--main) !important;
+      margin-top: 2rem;
+      font-weight: bold;
+      font-size: 0.678rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      background: -webkit-linear-gradient(left, rgba(var(--main_r),var(--main_g),var(--main_b), 0) 25%, rgba(var(--main_r),var(--main_g),var(--main_b), 0.95) 75%);
+      background: linear-gradient(to right, rgba(var(--main_r),var(--main_g),var(--main_b), 0) 25%, rgba(var(--main_r),var(--main_g),var(--main_b), 0.95) 75%);
+      background-position: 1% 50%;
+      background-size: 400% 300%;
+      border: 1px solid var(--main);
+      -webkit-transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+      transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .gradient-btn:hover {
+      -webkit-transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+      transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .gradient-btn:hover {
+      color: var(--text-color) !important;
+      background-position: 99% 50%;
+    }
+    .active {
+        color: var(--text-color) !important;
+        text-decoration: none;
+        background: var(--main) !important;
+        border-color: var(--secondary) !important;
+        -webkit-box-shadow: none !important;
+        -moz-box-shadow: none !important;
+        box-shadow: none !important;
+    }
+

@@ -68,7 +68,7 @@ function getLeaderboard(uuid, callback) {
 
           // Count up badge totals
           public_friends = public_friends.map(f => {
-            f.badge_total = f.badges.reduce((acc, b) => { acc + b.count }, 0);
+            f.badge_total = f.badges.reduce((acc, b) => { return (acc + b.count) }, 0);
             return f
           })
 
