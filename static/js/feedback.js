@@ -3,8 +3,8 @@ buttonStuff = {
     'respect': false,
     'civility': false,
     'cooperation': false,
-    'snowflake': false,
-    'other': false
+    'attitude': false,
+    'effort': false
 }
 
 abuseComment = "";

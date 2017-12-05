@@ -133,6 +133,11 @@ router.get('/logout', function(req, res) {
     res.redirect('/');
 })
 
+// route for logging out
+router.get('/terms-of-use', function(req, res) {
+    res.render('termsOfUse');
+})
+
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on
