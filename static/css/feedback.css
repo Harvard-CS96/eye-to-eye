@@ -34,15 +34,6 @@ table p {
     border-radius: 10px;
 }
 
-.badge-area .fa {
-    background-color: rgb(128, 128, 128);
-    color: white;
-    font-size: 30px;
-    opacity: .5;
-    padding: 30px;
-    border-radius: 50px;
-}
-
 .badge-area .fa:hover {
     border: 6px dashed red;
     padding: 24px;
@@ -52,13 +43,4 @@ table p {
     border: 6px solid red;
     padding: 24px;
     opacity: 1;
-}
-
-.badge-area tr {
-    margin-top: 10px;
-    height: 120px;
-}
-
-.badge-area {
-    align: center;
 }

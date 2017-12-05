@@ -2,7 +2,8 @@
 
 div#star-area span {
     color: rgb(255, 230, 0);
-    font-size: 20px;
+    font-size: 50px;
+    text-align: center;
 }
 
 table {
@@ -132,6 +133,7 @@ ul.c-controls li a {
     font-size: 1.7em;
     padding: 11px 10px 6px;   
 }
+
 ul.c-controls li a i {
     min-width: 24px;
     text-align: center;
@@ -154,3 +156,34 @@ ul.c-controls li a:hover {
     padding: 5px 10px;
     font-size: 1.25em;
 }
+
+/*#star-section{
+    width: 170px;
+    margin: auto;
+}*/
+
+#conversation-text {
+    font-size: 10px;
+    color: gray;
+    float: right;
+}
+
+.badge-area .fa {
+    position: relative;
+    padding: 50px;
+    border-radius: 60px;
+}
+
+span.num {
+    position: absolute;
+    top: -17px;
+    right: -10px;
+    background-color: red;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    padding: 15px;
+    text-align: center;
+    line-height: font-size;
+}
+
