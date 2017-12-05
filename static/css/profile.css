@@ -3,6 +3,14 @@ div#star-area span {
     font-size: 20px;
 }
 
+div#banner {
+    /* Credit: https://maxoffsky.com/maxoffsky-blog/free-wallpapers-generator-delaunay-triangulation-patterns/ */
+    background-image: url("https://maxoffsky.com/word/wp-content/uploads/2014/04/andreasbg.png");
+    background-size: cover;
+    padding-bottom: 1.2em;
+    padding-top: 2.5em;
+}
+
 table {
     width: 100%;
 }
@@ -31,7 +39,6 @@ div.tab {
 
 /* Style the buttons inside the tab */
 div.tab button {
-    background-color: inherit;
     float: left;
     border: none;
     outline: none;
@@ -54,7 +61,9 @@ div.tab button.active {
     /* background-color: #ccc; */
     /* border-color:#373737!important; */
     color: #fff !important;
-    border-bottom: 6px solid #373737 !important;
+    border-bottom: 6px solid !important;
+    border-bottom-color: var(--secondary) !important;
+    
 }
 
 /* Style the tab content */
@@ -79,6 +88,7 @@ h1 {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 30px;
+    color: #fff;
 }
 
 h4 {

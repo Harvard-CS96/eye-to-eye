@@ -6,11 +6,11 @@
  @import 'https://fonts.googleapis.com/css?family=Fjalla+One|Raleway';
 
  :root {
-     --main: #C06014;
-     --secondary: #eddbcd;
-     --main_r: 192;
-     --main_g: 96;
-     --main_b: 20;
+     --main: #952777;
+     --secondary: #3c0069;
+     --main_r: 149;
+     --main_g: 39;
+     --main_b: 119;
      --text-color: #fff;
  }
 

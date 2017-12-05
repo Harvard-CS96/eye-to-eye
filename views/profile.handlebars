@@ -1,13 +1,18 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="static/css/profile.css"> {{> nav}}
+<link rel="stylesheet" href="static/css/profile.css"> 
 
 <div id="profile-container">
-    <h1 id="user-hello"></h1>
-    <div class="container">
-        <div class="col-md-12 text-center">
-            <button class="btn btn-primary btn-convo" id="convo-button">Talk with Someone</button>
+                {{> nav}}
+
+    <div id="banner">
+        <h1 id="user-hello"></h1>
+        <div class="container">
+            <div class="col-md-12 text-center">
+                <button class="btn btn-primary btn-convo" id="convo-button">Talk with Someone</button>
+            </div>
         </div>
     </div>
+
     <div class="tab">
         <button class="tablinks col-md-4 bottombar" onclick="openCity(event, 'My Questions')" id="defaultOpen">My Questions</button>
         <button class="tablinks col-md-4 bottombar" onclick="openCity(event, 'My Stats')">My Stats</button>
@@ -95,8 +100,8 @@
                                         </button>
                                     </span>
                                 </div>
-                                                        <div class="panel-heading c-list">
-                        </div>
+                                <div class="panel-heading c-list">
+                                </div>
                             </div>
                         </div>
                         <ul class="list-group row" id="contact-list">
