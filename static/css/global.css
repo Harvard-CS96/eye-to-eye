@@ -203,13 +203,9 @@ header.masthead h1 {
 }
 
 .btn-primary[disabled]:hover {
-    -webkit-transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
-    transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
-    background: var(--main) !important;
-    border-color: var(--secondary) !important;
-  }
-.btn-primary[]:hover {
     color: var(--text-color) !important;
+}
+
 
 footer.footer {
     padding-top: 4rem;
@@ -234,7 +230,6 @@ footer.footer {
 .badge-area {
     align: center;
 }
-
 
 /* Credit for button styles: John Heimer */
 .arrow-btn {
