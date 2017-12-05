@@ -184,6 +184,25 @@ footer.footer {
     padding-bottom: 4rem;
 }
 
+
+.badge-area .fa {
+    background-color: rgb(128, 128, 128);
+    color: white;
+    font-size: 30px;
+    opacity: .5;
+    padding: 30px;
+    border-radius: 50px;
+}
+
+.badge-area tr {
+    margin-top: 10px;
+    height: 120px;
+}
+
+.badge-area {
+    align: center;
+}
+
 /* Credit for button styles: John Heimer */
 .arrow-btn {
     outline: none !important;
@@ -276,3 +295,4 @@ footer.footer {
         -moz-box-shadow: none !important;
         box-shadow: none !important;
     }
+
