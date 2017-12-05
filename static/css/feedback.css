@@ -1,46 +1,167 @@
+@import 'https://fonts.googleapis.com/css?family=Fjalla+One|Raleway';
 
-table p {
-    margin-top: 30px;
+*, *:before, *:after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#improvements-area table {
-    width: 400px;
+html {
+  font-size: 62.7%;
+}
+.gradient-btn {
+  outline: none !important;
+    cursor: pointer;
+    min-width:125px;
+    display: inline-block;
+    padding: 1em 1em;
+    border-radius: 0;
+    color: var(--main);
+    margin-top: 2rem;
+    font-weight: bold;
+    font-size: 0.678rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: -webkit-linear-gradient(left, rgba(var(--main_r),var(--main_g),var(--main_b), 0) 25%, rgba(var(--main_r),var(--main_g),var(--main_b), .95) 75%);
+    background: linear-gradient(to right, rgba(var(--main_r),var(--main_g),var(--main_b), 0) 25%, rgba(var(--main_r),var(--main_g),var(--main_b), .95) 75%);
+    background-position: 1% 50%;
+    background-size: 400% 300%;
+    border: 1px solid var(--main);
+    -webkit-transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+.active {
+  display: inline-block;
+  padding: 1em 2em;
+  border-radius: 0;
+  color: var(--text-color);
+  margin-top: 2rem;
+  font-weight: bold;
+  font-size: 0.678rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: var(--main);
+  background-position: 1% 50%;
+  background-size: 400% 300%;
+  border: 1px solid var(--main);
+}
+
+html, body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* flex-direction: column; */
+  width: 100%;
+  height: 100%;
+  background-color: #f2f2f2;
+  font-family: 'Raleway', sans-serif;
+}
+
+.layer {
+  background-color: white;
+  width: 75%;
+  max-width: 50rem;
+  margin-top: 39rem;
+  margin-bottom: 4rem;
+  padding: 3rem 3rem 4rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0 3rem 5rem -2rem rgba(0, 0, 0, 0.2);
+}
+
+/* Other styling */
+a {
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+
+h1 {
+    text-transform: none;
+    font-size: 3.6rem;
+    font-family: 'Raleway', sans-serif;
+    padding: 1rem 0 0.5rem 0;
+    margin: 0;
+  }
+
+p {
+  font-size: 1.6rem;
+  line-height: 1.7;
+  text-align: center;
+  margin: 0.8rem 0 0 0;
+  padding: 0;
 }
 
 .error-warn {
-    color: red;
-    font-weight: bold;
-}
-
-#improvements-area tr {
-    margin-top: 10px;
-    height: 40px;
+    color: #373737;
+    font-size: 1rem;
 }
 
 #star-area .fa {
-    color: gray;
+    color: #d5d5d5;
     opacity: .5;
     font-size: 50px;
+    -webkit-transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: pointer;
 }
 
 .starred {
     opacity: 1 !important;
-    color: rgb(255, 196, 0) !important;
+    color: rgb(var(--main_r),var(--main_g),var(--main_b)) !important;
 }
 
-.btn{
-    min-width: 130px;
-    border: solid rgb(108, 155, 209);
-    border-radius: 10px;
+.badge-area .fa {
+    cursor: pointer;
+    max-width: 9.5rem;
+    background-color: white;
+    color: var(--main);
+    font-size: 30px;
+    padding: 30px;
+    border-radius: 50px;
+    background: -webkit-linear-gradient(left, rgba(var(--main_r),var(--main_g),var(--main_b), 0) 25%, rgba(var(--main_r),var(--main_g),var(--main_b), .95) 75%);
+    background: linear-gradient(to right, rgba(var(--main_r),var(--main_g),var(--main_b), 0) 25%, rgba(var(--main_r),var(--main_g),var(--main_b), .95) 75%);
+    background-position: 1% 50%;
+    background-size: 400% 300%;
+    border: 1px solid var(--main);
+    -webkit-transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .badge-area .fa:hover {
-    border: 6px dashed red;
-    padding: 24px;
+    border: 1px solid var(--main);
+    color: var(--main);
+    /* padding: 24px; */
+}
+.badge-area .fa:hover {
+    -webkit-transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.badge-area .fa:hover {
+    color: var(--text-color);
+    background-position: 99% 50%;
 }
 
 .badge-area .fa-selected {
-    border: 6px solid red;
-    padding: 24px;
+    border: 1px solid var(--main);
+    /* padding: 24px; */
     opacity: 1;
+    background-color: var(--main);
+    color: var(--text-color);
+    background-position: 1% 50%;
+}
+
+.badge-area tr {
+    margin-top: 10px;
+    height: 120px;
+}
+
+.badge-area {
+    align: center;
 }

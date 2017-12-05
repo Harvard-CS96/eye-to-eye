@@ -2,15 +2,18 @@
 <link rel="stylesheet" href="static/css/global.css">
 <link rel="stylesheet" href="static/css/profile.css">
 
-{{> nav}}
-
 <div id="profile-container">
-    <h1 id="user-hello"></h1>
-    <div class="container">
-        <div class="col-md-12 text-center">
-            <button class="btn btn-primary" id="convo-button">Talk with Someone</button>
+                {{> nav}}
+
+    <div id="banner">
+        <h1 id="user-hello"></h1>
+        <div class="container">
+            <div class="col-md-12 text-center">
+                <button class="btn btn-primary btn-convo" id="convo-button">Talk with Someone</button>
+            </div>
         </div>
     </div>
+
     <div class="tab">
         <button class="tablinks col-md-4 bottombar" onclick="openCity(event, 'My Questions')" id="defaultOpen">My Questions</button>
         <button class="tablinks col-md-4 bottombar" onclick="openCity(event, 'My Stats')">My Stats</button>
@@ -80,22 +83,107 @@
     </div>
 
     <div id="My History" class="tabcontent">
-        <div class="container">
+        <div class="holder">
+            <h4>Previous Conversations</h4>
+            <hr>
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading c-list">
-                            <h4>Previous Conversations</h4>
-                        </div>
                         <div class="row">
-                            <div class="col-md-12" id="search-bar"></div>
+
+                            <div class="col-md-12">
+                                <div class="input-group c-search">
+                                    <input type="text" class="form-control" id="contact-list-search">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">
+                                            <span class="fa fa-search text-muted"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <div class="panel-heading c-list">
+                                </div>
+                            </div>
                         </div>
                         <ul class="list-group row" id="contact-list">
-                            
+                            <li class="list-group-item">
+                                <div class="col-md-12">
+                                    <img src="http://api.randomuser.me/portraits/men/97.jpg" alt="Jacob" class="img-responsive rounded-circle" />
+                                </div>
+                                <div class="col-md-12">
+                                    <span class="name">Jacob</span>
+                                    <br/>
+                                    <span class="fa fa-calendar text-muted c-info" data-toggle="tooltip" title="Date"></span>
+                                    <span class="visible-xs">
+                                        <span class="text-muted">Date</span>
+                                        <br/>
+                                    </span>
+                                    <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="Feedback Given"></span>
+                                    <span class="visible-xs">
+                                        <span class="text-muted">Feedback Given</span>
+                                        <br/>
+                                    </span>
+                                    <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="Feedback Received"></span>
+                                    <span class="visible-xs">
+                                        <span class="text-muted">Feedback Received</span>
+                                        <br/>
+                                    </span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="col-md-12">
+                                    <img src="http://api.randomuser.me/portraits/men/24.jpg" alt="Sam" class="img-responsive rounded-circle" />
+                                </div>
+                                <div class="col-md-12 col-sm-9">
+                                    <span class="name">Sam</span>
+                                    <br/>
+                                    <span class="fa fa-calendar text-muted c-info" data-toggle="tooltip" title="Date"></span>
+                                    <span class="visible-xs">
+                                        <span class="text-muted">Date</span>
+                                        <br/>
+                                    </span>
+                                    <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="Feedback Given"></span>
+                                    <span class="visible-xs">
+                                        <span class="text-muted">Feedback Given</span>
+                                        <br/>
+                                    </span>
+                                    <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="Feedback Received"></span>
+                                    <span class="visible-xs">
+                                        <span class="text-muted">Feedback Received</span>
+                                        <br/>
+                                    </span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="col-md-12">
+                                    <img src="http://api.randomuser.me/portraits/women/34.jpg" alt="Alex" class="img-responsive rounded-circle" />
+                                </div>
+                                <div class="col-md-12">
+                                    <span class="name">Lisa</span>
+                                    <br/>
+                                    <span class="fa fa-calendar text-muted c-info" data-toggle="tooltip" title="Date"></span>
+                                    <span class="visible-xs">
+                                        <span class="text-muted">Date</span>
+                                        <br/>
+                                    </span>
+                                    <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="Feedback Given"></span>
+                                    <span class="visible-xs">
+                                        <span class="text-muted">Feedback Given</span>
+                                        <br/>
+                                    </span>
+                                    <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="Feedback Received"></span>
+                                    <span class="visible-xs">
+                                        <span class="text-muted">Feedback Received</span>
+                                        <br/>
+                                    </span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
                         </ul>
                     </div>
                 </div>
-        	</div> 
+            </div>
         </div>
     </div>
 </div>
@@ -121,7 +209,7 @@
     function countBadges(badgeName, person) {
         console.log('badgename');
         var count = 0;
-        person.badges.forEach(function(d) {
+        person.badges.forEach(function (d) {
             if (d.badge == badgeName) {
                 count = d.count;
             }
@@ -155,26 +243,26 @@
         })
     }
 
-    function makePrettyDate(seconds){
+    function makePrettyDate(seconds) {
         const minutes = Math.floor((seconds) / 60);
         const extraSeconds = Math.floor(seconds - minutes * 60) % 60;
         return minutes + ':' + extraSeconds;
     }
 
-    function extraInfoFromChat(row){
+    function extraInfoFromChat(row) {
         var [chat, name] = row
 
         var info = {};
         info.otherName = name;
-        info.connectedDate = chat.connected.time; 
+        info.connectedDate = chat.connected.time;
         info.disconnectedDate = chat.disconnected.time;
-        info.disconnectedReason = chat.disconnected.reason; 
-        info.duration = makePrettyDate((new Date(info.disconnectedDate) - new Date(info.connectedDate))/1000)
+        info.disconnectedReason = chat.disconnected.reason;
+        info.duration = makePrettyDate((new Date(info.disconnectedDate) - new Date(info.connectedDate)) / 1000)
 
         info.feedbackReceived = {};
         info.feedbackSent = {};
 
-        for (var i = 0; i < chat.feedback.length; i++){
+        for (var i = 0; i < chat.feedback.length; i++) {
             if (chat.feedback[i].from == user.uuid)
                 info.feedbackSent = chat.feedback[i];
             else
@@ -200,15 +288,15 @@
                 }
 
                 // Populate history form
-                
+
                 res.forEach(row => {
 
                     var table_html = ""
-                    
+
                     const info = extraInfoFromChat(row)
 
                     // Build up html here
-                    table_html += 
+                    table_html +=
                         '<li class="list-group-item">' +
                             '<div class="col-md-12">' +
                                 '<span class="name">' + info.otherName + '</span><br/>' + 
@@ -246,10 +334,10 @@
                             '<span>' + info.feedbackReceived.text + '</span>' + 
                             '</div>';
                     }
-                                  
+
                     table_html +=
-                            '</div>' +
-                            '<div class="clearfix"></div>' +
+                        '</div>' +
+                        '<div class="clearfix"></div>' +
                         '</li>';
 
                     // append table_html string to the html
@@ -298,7 +386,7 @@
             } else {
                 // add button for showing leaderboard for the first time
                 $("#leaderboard").append(
-                    '<button class="btn btn-outline-primary" id="show-leaderboard">Authorize Facebook Friends to See Leaderboard</button>'
+                    '<button class="gradient-btn" id="show-leaderboard">Authorize Facebook Friends to See Leaderboard</button>'
                 )
                 $("#show-leaderboard").on("click", e => {
                     getLeaderboard()
@@ -307,7 +395,7 @@
             }
 
             $("#convo-button").on("click", (e) => {
-                window.location.href= '/';
+                window.location.href = '/chat';
             })
 
             getHistory();
@@ -345,6 +433,22 @@
         evt.currentTarget.className += " active";
     }
 
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+
+<script>
+    $(function () {
+        $('#contact-list').searchable({
+            searchField: '#contact-list-search',
+            selector: 'li',
+            childSelector: '.col-md-12',
+            show: function (elem) {
+                elem.slideDown(100);
+            },
+            hide: function (elem) {
+                elem.slideUp(100);
+            }
+        })
+    });
 </script>

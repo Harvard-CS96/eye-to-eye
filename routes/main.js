@@ -29,10 +29,14 @@ function getAuthInfo(req){
 
 router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
-        res.render("video", getAuthInfo(req));
+        res.render("profile", getAuthInfo(req));
     } else {
         res.render("landing");
     }
+})
+
+router.get('/chat', isLoggedIn, (req, res) => {
+    res.render('video', getAuthInfo(req));
 })
 
 router.get('/text', isLoggedIn, (req, res) => {
@@ -50,16 +54,7 @@ router.get('/text', isLoggedIn, (req, res) => {
 
 // Get a user's profile page
 router.get('/profile', isLoggedIn, (req, res) => {
-    const hbsData = req.isAuthenticated() === true ?
-        {
-            isAuthenticated: 'true',
-            user: JSON.stringify(req.user),
-        } :
-        {
-            isAuthenticated: 'false',
-            user: JSON.stringify({}),
-        }
-    res.render("profile", hbsData)
+    res.redirect('/');
 });
 
 // Get the user's JSON representation
@@ -136,6 +131,11 @@ router.get('/auth/error', (req, res) => { res.end('Auth failure :(') })
 router.get('/logout', function(req, res) {
     req.logout()
     res.redirect('/');
+})
+
+// route for logging out
+router.get('/terms-of-use', function(req, res) {
+    res.render('termsOfUse');
 })
 
 // route middleware to make sure a user is logged in
