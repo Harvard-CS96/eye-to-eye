@@ -226,6 +226,14 @@
                     $("#convo-count").text(res.length);
                 }
 
+                // Sort the results by recency
+                res.sort((a, b) => {
+                    a_info = extraInfoFromChat(a);
+                    b_info = extraInfoFromChat(b);
+
+                    return a_info.connectedDate - b_info.connectedDate;
+                }).reverse()
+
                 // Populate history form
 
                 res.forEach(row => {
