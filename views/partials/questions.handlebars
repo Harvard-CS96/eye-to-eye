@@ -20,14 +20,20 @@
             // On success, update questions.
             var questionsWithUserAnswers = getQuestionsWithUserAnswers(data);
             populateQuestions(questionsWithUserAnswers);
-            document.getElementById("submit").onclick = function () { formSubmit(); alert("Thanks for updating!");};
+            document.getElementById("submit").onclick = function(){ 
+              if(!formSubmit()){
+                alert('Please click on some answers to be match eligible');
+              } 
+              else{
+                alert("Thanks for updating!");};
+              }
             document.getElementById("call").onclick = function () {
               // if form submit returned true, redirect to home
               if (!formSubmit()){
-                alert('Please fill out at least one question');
+                alert('Please fill out at least one question.');
               }
               else {
-                window.location.href = '/'
+                window.location.href = '/chat';
               }
             };
 
@@ -140,8 +146,6 @@
 
         function getAnswer(questionNumber) {
           var parent = $('#question' + questionNumber)[0];
-          console.log('#question' + questionNumber);
-          console.log(parent);
           var response = calcAttribute(parent, 'response');
           if (response == '')
               response = null;
@@ -167,11 +171,8 @@
             isEmpty = isEmpty & !d.response;
           })
           if(isEmpty){
-            alert('Please fill out at least one question');
             return false;
           } else{
-              console.log('about to ajax');
-              console.log(json);
               $.ajax({
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
@@ -184,7 +185,6 @@
                   // We get no notification of success right now
                 },
                 failure: function (result) {
-                  console.log('failure');
                   error();
                 }
               });
