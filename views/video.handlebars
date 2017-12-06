@@ -28,7 +28,7 @@
     }
     #end-conversation {
         position:fixed;
-        right: 10px;
+        right: 25%;
         bottom: 10px;
     }
 
@@ -39,6 +39,8 @@
 </style>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link rel="stylesheet" href="static/css/global.css">
+        
     </head>
 
     <body>
@@ -62,7 +64,7 @@
                     <!-- form and input box to submit messages -->
                     <div class="row">
                         <div class="col-md-12">
-                            <button id="end-conversation" class="btn btn-danger" style="width:100%;" disabled="true">End Conversation</button>
+                            <button id="end-conversation" class="btn btn-primary" style="width:50%;" disabled="true">End Conversation</button>
                         </div>
                     </div>
                     </br>
@@ -130,7 +132,7 @@
         // join new room
         webrtc.joinRoom(room);
         // Update Notice Text
-        $("#notice").text("You are talking with " + partner + ". Try to learn something from them!");
+        $("#notice").text("You are talking with " + partner + ". Try to learn something from your conversation!");
         // Enable the end conversation Button
         $("#end-conversation").prop('disabled', null);
         // When user ends conversation, start a new match
