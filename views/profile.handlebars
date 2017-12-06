@@ -231,6 +231,10 @@
                     a_info = extraInfoFromChat(a);
                     b_info = extraInfoFromChat(b);
 
+                    if (a_info === undefined || b_info === undefined) {
+                        return 0
+                    }
+
                     return a_info.connectedDate - b_info.connectedDate;
                 }).reverse()
 
