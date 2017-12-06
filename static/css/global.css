@@ -316,3 +316,12 @@ footer.footer {
   border-bottom: solid gray;
   line-height: 45px;
 }
+
+.pull-right .dropdown-menu:after {
+    left: auto;
+    right: 13px;
+}
+.pull-right .dropdown-menu {
+    left: auto;
+    right: 0;
+}
