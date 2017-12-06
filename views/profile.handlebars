@@ -20,7 +20,9 @@
         <button class="tablinks col-md-4 bottombar" onclick="openCity(event, 'My History')">My History</button>
     </div>
 
-    <div id="My Questions" class="tabcontent"> {{> questions }} </div>
+    <div id="My Questions" class="tabcontent">
+     {{> questions }}
+    </div>
 
     <div id="My Stats" class="tabcontent">
         <div class="holder">
@@ -192,8 +194,6 @@
             else
                 info.feedbackReceived = chat.feedback[i];
         }
-
-        console.log("CHAT INFO: ", info)
         return info;
 
     }
@@ -319,9 +319,10 @@
             }
 
             $("#convo-button").on("click", (e) => {
-                window.location.href= '/chat';
-                window.location.href = '/chat';
-            })
+                // This is a hack, see questions code for this onclick function.
+                // Needed to do this so we could use function internal to questions.handlebars' script.
+                $('#call')[0].onclick(); 
+            });
 
             getHistory();
 
