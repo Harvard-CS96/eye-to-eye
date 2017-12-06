@@ -143,19 +143,19 @@
     function buildLeaderboard(leaders) {
         var start = '<div id="leaderboard-table">'
         var tHead = '<div class="row header-row">' + 
-                        '<div class="col-md-4">Friend</div>'    + 
+                        '<div class="col-md-3">Friend</div>'    + 
                         '<div class="col-md-2">Empathetic</div>'       + 
                         '<div class="col-md-2">Polite</div>'    + 
-                        '<div class="col-md-2">Knowledgeable</div>'      + 
+                        '<div class="col-md-3">Knowledgeable</div>'      + 
                         '<div class="col-md-2">Creative</div>'  + 
                     '</div>';
         var cols = '';
         leaders.forEach(friend => {
             var friendStats = ('<div class="row data-row">' +
-                                   '<div class="col-md-4">' + friend.name                           + '</div>' +  
+                                   '<div class="col-md-3">' + friend.name                           + '</div>' +  
                                    '<div class="col-md-2">' + countBadges('empathetic'   , friend)  + '</div>' + 
                                    '<div class="col-md-2">' + countBadges('polite'       , friend)  + '</div>' +
-                                   '<div class="col-md-2">' + countBadges('knowledgeable', friend)  + '</div>' + 
+                                   '<div class="col-md-3">' + countBadges('knowledgeable', friend)  + '</div>' + 
                                    '<div class="col-md-2">' + countBadges('creative'     , friend)  + '</div>' + 
                                '</div>');
             cols += friendStats;
