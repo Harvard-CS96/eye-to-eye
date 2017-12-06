@@ -145,17 +145,27 @@
     }
 
     function buildLeaderboard(leaders) {
-        var start = '<table><tr><th>Friend</th><th>Empathetic</th><th>Polite</th><th>Knowledgeable</th><th>Creative</th><tr>';
-        var s = '';
+        var start = '<div id="leaderboard-table">'
+        var tHead = '<div class="row header-row">' + 
+                        '<div class="col-md-3">Friend</div>'    + 
+                        '<div class="col-md-2">Empathetic</div>'       + 
+                        '<div class="col-md-2">Polite</div>'    + 
+                        '<div class="col-md-3">Knowledgeable</div>'      + 
+                        '<div class="col-md-2">Creative</div>'  + 
+                    '</div>';
+        var cols = '';
         leaders.forEach(friend => {
-            s += '<tr><td>' + friend.name + '</td><td>' + countBadges('empathetic', friend) + '</td><td>' +
-                countBadges('polite', friend) + '</td><td>' + countBadges('knowledgeable', friend) + '</td><td>' +
-                countBadges('creative', friend) + '</td></tr>';
+            var friendStats = ('<div class="row data-row">' +
+                                   '<div class="col-md-3">' + friend.name                           + '</div>' +  
+                                   '<div class="col-md-2">' + countBadges('empathetic'   , friend)  + '</div>' + 
+                                   '<div class="col-md-2">' + countBadges('polite'       , friend)  + '</div>' +
+                                   '<div class="col-md-3">' + countBadges('knowledgeable', friend)  + '</div>' + 
+                                   '<div class="col-md-2">' + countBadges('creative'     , friend)  + '</div>' + 
+                               '</div>');
+            cols += friendStats;
         });
-        var end = '</table>';
-        var final = start + s + end;
-        console.log(final);
-        return final;
+        var end = '</div>';
+        return start + tHead + cols + end;
     }
 
     function getLeaderboard() {
@@ -215,14 +225,13 @@
 
                 res.forEach(row => {
 
-                    var table_html = ""
+                    var tableHtml = ""
 
                     const info = extraInfoFromChat(row)
 
                     // Build up html here
-                    table_html +=
-                        '<li class="list-group-item">' +
-                            '<div class="col-md-12">' +
+                    tableHtml += '<li class="list-group-item">' +
+                                 '<div class="col-md-12">' +
                                 '<span class="name">' + info.otherName + '</span><br/>' +
                                 '<span class="fa fa-calendar text-muted c-info" data-toggle="tooltip" title="Date"></span>' +
                                 '<span> ' + new Date(info.connectedDate) + '</span><br/>' +
@@ -232,7 +241,7 @@
 
 
                     if (!$.isEmptyObject(info.feedbackSent)){
-                        table_html +=
+                        tableHtml +=
                         '<div class="row">' +
                             '<div class="col-6">' +
 
@@ -247,7 +256,7 @@
                         '</div>';
                     }
                     if (!$.isEmptyObject(info.feedbackReceived)){
-                        table_html +=
+                        tableHtml +=
                             '<div class="col-6">' +
                             '<span class="visible-xs"> <span class="text-muted">Feedback Received</span><br/></span>' +
                             '<span class="fa fa-star text-muted c-info" data-toggle="tooltip" title="Stars"></span>' +
@@ -259,13 +268,13 @@
                             '</div>';
                     }
 
-                    table_html +=
+                    tableHtml +=
                         '</div>' +
                         '<div class="clearfix"></div>' +
                         '</li>';
 
-                    // append table_html string to the html
-                    $("#contact-list").append(table_html);
+                    // append tableHtml string to the html
+                    $("#contact-list").append(tableHtml);
 
                 })
 
