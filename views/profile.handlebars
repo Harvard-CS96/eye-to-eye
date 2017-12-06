@@ -141,28 +141,27 @@
     }
 
     function buildLeaderboard(leaders) {
-        var start = '<div id="leaderboard-table">' + 
-                        '<div class="row">' + 
-                            '<div class="col-md-4">Friend</div>' + 
-                            '<div class="col-md-2">Emp</div>' + 
-                            '<div class="col-md-2">Polite</div>' + 
-                            '<div class="col-md-2">Know</div>' + 
-                            '<div class="col-md-2">Creative</div>' + 
-                        '</div>';
-        var s = '';
+        var start = '<div id="leaderboard-table">'
+        var tHead = '<div class="row header-row">' + 
+                        '<div class="col-md-4">Friend</div>'    + 
+                        '<div class="col-md-2">Emp</div>'       + 
+                        '<div class="col-md-2">Polite</div>'    + 
+                        '<div class="col-md-2">Know</div>'      + 
+                        '<div class="col-md-2">Creative</div>'  + 
+                    '</div>';
+        var cols = '';
         leaders.forEach(friend => {
-            s += '<div class="row">' +
-                    '<div class="col-md-4">' + friend.name + '</div>' + 
-                    '<div class="col-md-2">' + countBadges('empathetic', friend) + '</div>' + 
-                    '<div class="col-md-2">' + countBadges('polite', friend) + '</div>'
-                    '<div class="col-md-2">' + countBadges('knowledgeable', friend) + '</div>' + 
-                    '<div class="col-md-2">' + countBadges('creative', friend) + '</div>' + 
-                 '</div>';
+            var friendStats = ('<div class="row data-row">' +
+                                   '<div class="col-md-4">' + friend.name                           + '</div>' +  
+                                   '<div class="col-md-2">' + countBadges('empathetic'   , friend)  + '</div>' + 
+                                   '<div class="col-md-2">' + countBadges('polite'       , friend)  + '</div>' +
+                                   '<div class="col-md-2">' + countBadges('knowledgeable', friend)  + '</div>' + 
+                                   '<div class="col-md-2">' + countBadges('creative'     , friend)  + '</div>' + 
+                               '</div>');
+            cols += friendStats;
         });
         var end = '</div>';
-        var final = start + s + end;
-        console.log(final);
-        return final;
+        return start + tHead + cols + end;
     }
 
     function getLeaderboard() {
