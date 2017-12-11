@@ -1,3 +1,4 @@
+# Database
 
 Connecting to the Database
 --------------------------

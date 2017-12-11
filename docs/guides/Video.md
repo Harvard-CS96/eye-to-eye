@@ -1,3 +1,5 @@
+# Video
+
 ## Overview of Video
 
 We use [WebRTC](https://webrtc.org/), a Google tool, for sending video along the peer to peer connections. A company called AndYet has open-sourced their library [SimpleWebRTC](https://github.com/andyet/SimpleWebRTC), which is what we use to do a lot of the heavy lifting of WebRTC.

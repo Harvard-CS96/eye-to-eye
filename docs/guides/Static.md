@@ -1,1 +1,3 @@
+# Static Assets
+
 Images and CSS are stored in `/static/img` and `/static/css`. `/static/js` contains the *SimpleWebRTC* and *tracking.js* libraries as well as a face-detection plugin for *tracking.js*. Complex AJAX requests for transmitting user opinions and post-conversation feedback are powered by `/static/js/stances.js` and `/static/js/feedback.js`, respectively.

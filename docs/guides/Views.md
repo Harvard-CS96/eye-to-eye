@@ -1,3 +1,5 @@
+# Views 
+
 Views are contained in `/views` and are powered by Handlebars. Similar to PHP, Handlebars is a superset of HTML syntax that allows accessing JSON-formatted variables with `{{{variable}}}`. All views begin with the `/views/layouts/main.handlebars` layout and may utilize the partial views in `/views/partials`. HTML elements in views generally are styled using *Bootstrap* classes, while *jQuery* is used for interactivity. The view */views/video.handlebars* extensively utilizes *Socket.io* and *SimpleWebRTC* to communicate with the server for pairing and disconnection. 
 
 During video chat, *SimpleWebRTC* uses an existing *<video>* tag to display local video and any specified element as a container to render remote video. Then, *tracking.js* and a *<canvas>* element are used such that either only a face with an obscured background or the text "No face found" are displayed. Further logic is used to make that effect more performant and robust to frame drops.

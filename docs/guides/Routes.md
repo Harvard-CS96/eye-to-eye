@@ -1,7 +1,8 @@
+# Routes
 
 Understanding What Routing Is
 -----------------------------
-This first section explains what routing is and how it works in node.js.  It does so by disecting specific examples within our codebase, but it isn't compact or complete.  It is intended to get you thinking about routing in a productive way so that you can get meaning out of the second section of this documentation, which goes into detail about specific routes in this project.
+This first section explains what routing is and how it works in node.js.  It does so by dissecting specific examples within our codebase, but it isn't compact or complete.  It is intended to get you thinking about routing in a productive way so that you can get meaning out of the second section of this documentation, which goes into detail about specific routes in this project.
 
 Routing is perhaps one of the most intuitive ways to start understanding and building within a server's backend because internet users are familiar with the idea of different addressses serving different data.  Node.js makes routing easy.  Let's see why by disecting an example.
 
