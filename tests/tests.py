@@ -23,3 +23,13 @@ def test_no_anonymous_chat():
     """ Tests that users must be logged in to chat """
     client = sess.get("https://eyetoeye.video/chat")
     assert "facebook.com" in client.url
+
+def test_no_connections_util():
+    """ Tests that https://eyetoeye.video/connections is unavailable"""
+    connections = sess.get("https://eyetoeye.video/connections")
+    assert connections.status_code == 404
+
+def test_no_matcher_log_util():
+    """ Tests that https://eyetoeye.video/matcher-log is unavailable"""
+    matcher_log = sess.get("https://eyetoeye.video/matcher-log")
+    assert matcher_log.status_code == 404
