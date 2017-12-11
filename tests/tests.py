@@ -18,3 +18,8 @@ def test_tou():
     """ Tests the TOU page response """
     tou = sess.get("https://eyetoeye.video/terms-of-use")
     assert tou.status_code == 200 and tou.text
+
+def test_no_anonymous_chat():
+    """ Tests that users must be logged in to chat """
+    client = sess.get("https://eyetoeye.video/chat")
+    assert "facebook.com" in client.url
