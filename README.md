@@ -24,7 +24,7 @@ Before running, please ensure that you have a `.env` file in the root directory 
 * DB_URI: an complete MongoDB connection URI
 * FB_ID: a valid Facebook Developer App ID
 * FB_SECRET: a valid Facebook Developer App Secret
-* FB_CALLBACK: by default, `http://localhost:3000/auth/facebook/callback`; you should change the host and port of `FB_CALLBACK` according to the deployment configuration.
+* FB_CALLBACK: by default, `http://localhost:3000/auth/facebook/callback`; you should change the host and port of `FB_CALLBACK` to reflect actual the configuration in production. 
 
 Then, run `npm install`. Finally, run `npm start`.
 
