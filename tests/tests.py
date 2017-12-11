@@ -29,7 +29,22 @@ def test_no_anonymous_chat():
     client = sess.get("https://eyetoeye.video/chat")
     assert "www.facebook.com" in client.url
 
-def test_no_profile_before_login():
+def test_no_profile():
     """ Tests that trying to go to profile before login redirects to facebook """
     profile = sess.get("https://eyetoeye.video/profile")
+    assert "www.facebook.com" in profile.url
+
+def test_no_leaderboard():
+    """ Tests that trying to get the leaderboard before login redirects to facebook """
+    profile = sess.get("https://eyetoeye.video/profile/leaderboard")
+    assert "www.facebook.com" in profile.url
+
+def test_no_history():
+    """ Tests that getting chat history before login redirects to facebook """
+    profile = sess.get("https://eyetoeye.video/profile/chats")
+    assert "www.facebook.com" in profile.url
+
+def test_no_profile_info():
+    """ Tests that getting user's profile details before login redirects to facebook """
+    profile = sess.get("https://eyetoeye.video/profile/user")
     assert "www.facebook.com" in profile.url
