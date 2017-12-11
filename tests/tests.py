@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
+import pytest
+from requests import Session
 
-def main():
-    """ Main function run from CLI """
+sess = Session()
 
-if __name__ == '__main__':
-    main()
+def test_landing():
+    """ Tests the landing page response """
+    landing = sess.get("https://eyetoeye.video/")
+    assert landing.status_code == 200 and landing.text
