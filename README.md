@@ -28,7 +28,7 @@ Before running, please ensure that you have a `.env` file in the root directory 
 
 Then, run `npm install`. Finally, run `npm start`.
 
-To run on a port other than `3000`, chaneg the `PORT` and `FB_CALLBACK`environment variables as well as the configuration in Facebook Developer.
+To run on a port other than `3000`, change the `PORT` and `FB_CALLBACK`environment variables as well as the configuration in Facebook Developer.
 
 # Technical Documentation
 
