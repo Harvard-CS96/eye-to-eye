@@ -8,3 +8,13 @@ def test_landing():
     """ Tests the landing page response """
     landing = sess.get("https://eyetoeye.video/")
     assert landing.status_code == 200 and landing.text
+
+def test_about():
+    """ Tests the about page response """
+    about = sess.get("https://eyetoeye.video/about")
+    assert about.status_code == 200 and about.text
+
+def test_tou():
+    """ Tests the TOU page response """
+    tou = sess.get("https://eyetoeye.video/terms-of-use")
+    assert tou.status_code == 200 and tou.text
