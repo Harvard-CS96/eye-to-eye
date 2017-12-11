@@ -27,10 +27,9 @@ def test_tou():
 def test_no_anonymous_chat():
     """ Tests that users must be logged in to chat """
     client = sess.get("https://eyetoeye.video/chat")
-    assert "facebook.com" in client.url
+    assert "www.facebook.com" in client.url
 
 def test_no_profile_before_login():
     """ Tests that trying to go to profile before login redirects to facebook """
     profile = sess.get("https://eyetoeye.video/profile")
-    last_request = profile.history[-1]
-    assert "www.facebook.com" in last_request.url
+    assert "www.facebook.com" in profile.url
