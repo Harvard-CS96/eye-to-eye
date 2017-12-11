@@ -13,7 +13,7 @@ Eye to Eye is a nonpartisan web application that enables you to have face-to-fac
     * [Views](#views)
     * [Controllers](#controllers)
     * [Matcher](#matcher)
-    * [Socket Logic](#socket-logic)
+    * [WebSockets](#websockets)
     * [Static Assets](#static-assets)
 3. [About](#about)
 
@@ -115,7 +115,7 @@ The matching engine is powered by `/matcher.js`. The matcher is completely modul
 
 The `Matcher` class exposed by `/matcher.js` accepts new users when they `connect()` to the matcher. Each time a new user `connect`s, the matcher iterates over all users until a suitable match is found, or it is determined that no user can be matched to this user. When users `hangup` (either that user or their partner voluntarily ends the conversation), they are marked as single once again and a search for matches begins again. When a user is `disconnect`ed, is are removed from the dictionary of active users and a match search begins for its former partner. A blacklist ensures that users are not matched with their last `maxBlacklist` matches, where `maxBlacklist` is by default 1 but can be set to any number in the constructor call to `Matcher`. Finally, `addCallback` allows attaching callbacks to whenever a user changes state between `WAITING`, `PAIRING`, and `DISCONNECTED`; this is used to communicate to that user over `WebSocket`.
 
-## Socket Logic
+## WebSockets
 
 The server communicates over *WebSocket* using *Socket.io* routes in `/sockets.js`. Routes in this file are used initially to communicate to the matching engine to facilitate matching users who are online and waiting to find a video chat partner. After the matching engine has paired users, the other routes in this file are used to generate a unique room ID for those users to join, sending credentials for the STUN servers as well as a room ID.
 
