@@ -1,22 +1,16 @@
-
 # TextRoulette Documentation
 
 ## Table of Contents
 
-* [Tutorial](Tutorial.md)
-* [Introduction](Introduction.md)
-
-* Backend
-    * [Connections](guides/Connections.md)
-    * [Video](guides/Video.md)
-    * [Routes](guides/Routes.md)
-    * [Database](guides/Database.md)
-    * [Matching Users](guides/MatchingUsers.md)
-
-* FrontEnd
-    * [React](guides/React.md)
-    * [Redux](guides/Redux.md)
-* [Troubleshooting](Troubleshooting.md)
 
 
-* [Glossary](Glossary.md)
+* [Overview](Overview.md)
+* [Configuration](guides/Configuration.md)
+* [Database](guides/Database.md)
+* [Routes](guides/Routes.md)
+* [Views](guides/Views.md)
+* [Video](guides/Video.md)
+* [Controllers](guides/Controllers.md)
+* [Matching Users](guides/Matcher.md)
+* [Socket Logic](guides/Socket.md)
+* [Static Assets](guides/Static.md)
