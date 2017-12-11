@@ -1,4 +1,5 @@
 # Eye to Eye 
+
 Eye to Eye is a nonpartisan web application that enables you to have face-to-face conversations with strangers who have different views from your own. 
 
 # Table of Contents
@@ -47,8 +48,18 @@ Finally, in auto-deployment, shell scripts in `/scripts` are used to start/resta
 
 ## Configuration
 
-Node packages *dotenv* and *getconfig* are used for configuration. *getconfig* uses JSON to store configuration and *dotenv* uses key-value pairs. Data stored in `/config/default.json` 
-is inevitably passed to the client side and is thus not secret, meaning that it can be safely committed. Data stored in `/.env` is not committed because it contains sensitive API keys.
+The npm packages *dotenv* and *getconfig* are used for configuration. *getconfig* uses JSON to store configuration in `/config/default.json`  and *dotenv* uses key-value pairs stored in `/.env`. 
+
+Data stored in `/config/default.json` is inevitably passed to the client side and is thus not secret, meaning that it can be safely committed. Data stored in `/.env` is not committed (and blacklisted by `/.gitignore`) because it contains sensitive API keys.
+
+To load this configuration, the following code is run in `/server.js`:
+
+```
+require('dotenv').config();
+var config = require('getconfig');
+```
+
+This stores the environment variables in `/.env` in `process.env` and the JSON in `/config/default.json` into the variable `config`.
 
 ## Database
 
@@ -60,11 +71,39 @@ Most routes are contained in `/routes/main.js`. Routes often use  the `isLoggedI
 
 Routes that render *Handlebars* views in `/views` pass the data returned by the `getAuthInfo` function to the frontend, which allows the frontend to access user account data. API routes are powered by controllers in `/controllers`.
 
+### List of Routes
+
+| Route                       | Requires Authentication | Type     | Description                          |
+|-----------------------------|-------------------------|----------|--------------------------------------|
+| `GET /` (unauthenticated)     | No                      | View     | Landing page                         |
+| `GET /` (authenticated)       | Yes                     | View     | User profile                         |
+| `GET /chat`                   | Yes                     | API      | Video chat                           |
+| `GET /about`                  | Yes                     | View     | About                                |
+| `GET /text`                   | Yes                     | View     | Text chat (legacy)                   |
+| `GET /profile`                | Yes                     | Redirect | /                                    |
+| `GET /profile/user`           | Yes                     | API      | Return req.user as JSON              |
+| `GET /profile/leaderboard`    | Yes                     | API      | Returns user's leaderboard           |
+| `GET /profile/chats`          | Yes                     | API      | Returns user's past chats            |
+| `GET /questions`              | No                      | API      | Returns active questions             |
+| `GET /updateStance`           | Yes                     | View     | Update opinions                      |
+| `POST /updateStance`          | Yes                     | API      | Set user's opinions                  |
+| `GET /feedback`               | No                      | View     | Submit conversation feedback         |
+| `POST /feedback`              | Yes                     | API      | Submit conversation feedback         |
+| `POST /feedback/report`       | Yes                     | API      | Submit report against user           |
+| `GET /login`                  | No                      | Redirect | /auth/facebook                       |
+| `GET /auth/facebook`          | No                      | Redirect | Facebook (for authentication)        |
+| `GET /auth/facebook/callback` | No                      | Redirect | / if success, /auth/error if failure |
+| `GET /auth/error`             | No                      | Text     | "Auth failure :("                    |
+| `GET /logout`                 | No                      | Redirect | / after loging out                   |
+| `GET /terms-of-use`           | No                      | View     | TOS                                  |
+
+Note in particular that there is no route for modifying active questions. In the current implementation, questions are manually modified in the database. 
+
 ## Views
 
 Views are contained in `/views` and are powered by Handlebars. Similar to PHP, Handlebars is a superset of HTML syntax that allows accessing JSON-formatted variables with `{{{variable}}}`. All views begin with the `/views/layouts/main.handlebars` layout and may utilize the partial views in `/views/partials`. HTML elements in views generally are styled using *Bootstrap* classes, while *jQuery* is used for interactivity. The view */views/video.handlebars* extensively utilizes *Socket.io* and *SimpleWebRTC* to communicate with the server for pairing and disconnection. 
 
-During video chat, *SimpleWebRTC* uses an existing *<video>* tag to display local video and any specified element as a container to render remote video. Then, *tracking.js* and a *<canvas>* element are used such that either only a face with an obscured background or the text "No face found" are displayed. Further logic is used to make that effect more performant and robust to frame drops.
+During video chat, *SimpleWebRTC* uses an existing *<video>* tag to display local video and any specified element as a container to render remote video. Then, *tracking.js* and a *<canvas>* element are used such that either only a face with an obscured background or the text "No face found" are displayed. Further logic is used to make that effect more performant and robust to frame drops in the facial tracking.
 
 ## Controllers
 
@@ -74,9 +113,13 @@ Controllers reside in `/controllers` and work closely with models in `/db/models
 
 The matching engine is powered by `/matcher.js`. The matcher is completely modular from the server-side routing so that it can be separately tested. Currently, the matcher utilizes a dictionary, one entry per user, to match users and store their connection status (single or paired) in real time. In the future, the matcher may utilize a real-time in-memory database such as *Redis* for scale.
 
+The `Matcher` class exposed by `/matcher.js` accepts new users when they `connect()` to the matcher. Each time a new user `connect`s, the matcher iterates over all users until a suitable match is found, or it is determined that no user can be matched to this user. When users `hangup` (either that user or their partner voluntarily ends the conversation), they are marked as single once again and a search for matches begins again. When a user is `disconnect`ed, is are removed from the dictionary of active users and a match search begins for its former partner. A blacklist ensures that users are not matched with their last `maxBlacklist` matches, where `maxBlacklist` is by default 1 but can be set to any number in the constructor call to `Matcher`. Finally, `addCallback` allows attaching callbacks to whenever a user changes state between `WAITING`, `PAIRING`, and `DISCONNECTED`; this is used to communicate to that user over `WebSocket`.
+
 ## Socket Logic
 
 The server communicates over *WebSocket* using *Socket.io* routes in `/sockets.js`. Routes in this file are used initially to communicate to the matching engine to facilitate matching users who are online and waiting to find a video chat partner. After the matching engine has paired users, the other routes in this file are used to generate a unique room ID for those users to join, sending credentials for the STUN servers as well as a room ID.
+
+`/socket.js` exports a function that accepts an node HTTP server, an initialized `Socket.io` server attached to an HTTP server, a `Matcher` from `/matcher.js`, and a `config` object loaded from `getconfig`. Because we use the `express-socket.io-session` package, we can use the `socket.handshake.session` variable to access persistable session data individual to each socket. 
 
 ## Static Assets
 
